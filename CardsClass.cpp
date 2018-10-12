@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <string>
 
 using namespace std;
 
@@ -271,10 +272,10 @@ public:
 	}
 
 	string toString(Cards* card) {
-		string name = card->getName;
-		string cost = card->getCost;
+		string name = card->getName();
+		string cost = to_string(card->getCost());
 		string effect = card->effect;
-		string type = card->getCardType;
+		string type = card->getCardType();
 
 		string description = "Card name: " + name + "\nEnergy Cost: " + cost + "\nCard Type: " + type + "\nEffect: " + effect;
 		
