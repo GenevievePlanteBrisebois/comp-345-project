@@ -13,14 +13,6 @@ public:
 	
 
 
-	//making a constructor
-	Monsters monsters() {
-		string name = "";
-		int health = 10;
-		int victory_points = 0;
-	}
-
-	
 	//making getters and setters for the elements of the monsters
 	string getName() {
 		return name;
@@ -42,31 +34,66 @@ public:
 	void setVictoryPoints(int victory_point) {
 		this->victory_point = victory_point;
 	}
+	//function to verify that the name is part of the name array and as such a valid monster name
 
-};
+	bool is_monster_real(string a) {
 
-class Active_Monsters : public Monsters {
-private:
-	string name;
-	int health;
-	int victory_point;
-	Monsters active_monsters[6];
+		bool real;
 
+		for (int i = 0; i < sizeof(name_monsters); i++) {
+			if (name_monsters[i] == a) {
+				real = true;
+				break;
+			}
+			else {
+				real = false;
+
+			}
+
+		}return real;
+
+	}
+
+	Monsters monsters() {
+		string name = "";
+		int health = 10;
+		int victory_points = 0;
+	}
 
 	//a monster constructor in order to get the 
 	Monsters monsters(string a) {
 		if (is_monster_real(a) == true) {
-			if (is_monster_active(a) == false) {
-			name = a;
-			health = 10;
-			victory_point = 0;
+			
+				name = a;
+				health = 10;
+				victory_point = 0;			
 		}
-			else
-				throw invalid_argument("Monster already used, pick another monster.");
-	}else 
-		throw invalid_argument("Name is not a valid Monster Name. Pick from the available names");
+		else
+			throw invalid_argument("Name is not a valid Monster Name. Pick from the available names");
 
 	}
+};
+//making a constructor
+//Monsters :: Monsters() {
+	
+//}
+
+
+
+
+
+
+
+class Active_Monsters : public Monsters {
+public:
+	string name;
+	int health;
+	int victory_point;
+	Monsters active_monsters[6];
+	Monsters* active_monsters_head_pointer = &active_monsters[0];
+
+
+	
 
 	
 
@@ -81,7 +108,7 @@ private:
 			}
 		}
 
-
+		//make sure to verify that the monster is not already active first so that it is valid to take that monster
 		//making a method in order to add a monster to the array of active monsters
 		void addActive(string name) {
 			bool keepGoing = true;
@@ -92,7 +119,8 @@ private:
 				if (active_monsters[i].getName() != "")
 					i++;
 				else {
-					Monsters newbie = new Monsters;
+					Monsters newbie = monsters();
+					Monsters* newb = &newbie;
 					newbie = monsters(name);
 					active_monsters[i] = newbie;
 				}
@@ -122,36 +150,18 @@ bool verifyDeath(Monsters a) {
 
 }
 
-//function to verify that the name is part of the name array and as such a valid monster name
 
-bool is_monster_real(string a) {
-
-	bool real;
-
-	for (int i = 0; i < sizeof(name_monsters); i++) {
-		if (name_monsters[i] == a) {
-			real = true;
-			break;
-		}
-		else {
-			real = false;
-		
-		}
-
-	}return real;
-
-}
 
 //making a function to take away health
-void damageHealth(int i, Monsters monster) {
+void damageHealth(int i, Monsters monster, Monsters* pointer) {
 	int  health = monster.getHealth();
 
 	health = health - i;
 
 	monster.setHealth(health);
 
-	if (verifyDeath(monster)== true)
-		death(monster);
+	if (verifyDeath(monster) == true)
+		death(pointer);
 
 }
 //making function to heal
@@ -188,13 +198,13 @@ void loseVictoryPoint(int i, Monsters monster) {
 	monster.setVictoryPoints(vp);
 }
 //destructor(monster died)
-void death(Monsters a) {
+void death(Monsters* a) {
 	
 	delete a;
 
 }
 //destructor(to erase a monster)
-void eraseMonster(Monsters a) {
+void eraseMonster(Monsters*  a) {
 
 	delete a;
 }
