@@ -290,7 +290,9 @@ public:
 //constructors and destructors
 Cards_Deck::Cards_Deck()
 {
-	
+
+	Cards* regular_deck[64];
+	Cards* special_cards[2];
 }
 
 
