@@ -4,6 +4,7 @@
 using namespace std;
 // making a class for the monsters. there are 6 monsters and they all start with the same stats
 //class monster is the parent and ActiveMonster is the child class. When calling to the monsters the other classes should call to the ActiveMonster Class.  
+
 class Monsters {
 public:
 	string name_monsters[6] = { "Mantis", "Captain Fish", "Dragonis", "Kong", "Sheriff", "Rob" };
@@ -133,7 +134,7 @@ public:
 bool verifyVictory(Monsters a) {
 	bool victory;
 
-	if (a.getVictoryPoint >= 20)
+	if (a.getVictoryPoint() >= 20)
 		return victory = true;
 	else
 		return victory = false;
@@ -143,7 +144,7 @@ bool verifyVictory(Monsters a) {
 
 bool verifyDeath(Monsters a) {
 	bool dead;
-	if (a.getHealth <= 0)
+	if (a.getHealth() <= 0)
 		return dead = true;
 	else
 		return dead = false;
@@ -166,7 +167,7 @@ void damageHealth(int i, Monsters monster, Monsters* pointer) {
 }
 //making function to heal
 void heal(int i, Monsters monster) {
-	int health = monster.getHealth;
+	int health = monster.getHealth();
 
 	health = health + i;
 
