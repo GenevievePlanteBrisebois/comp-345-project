@@ -32,7 +32,7 @@ Map::Map() {
 Since this is a vector of strings, the source takes the location of the region within the array of regions.
 It pushes a string of the destination within the vector of strings. 
 */
-void Map::addEdge(vector<string> adjList[], int src, string dest)
+void Map::addEdge(vector<string> adj[], int src, string dest)
 {
 	adjList[src].push_back(dest);
 }
@@ -42,7 +42,7 @@ void Map::addEdge(vector<string> adjList[], int src, string dest)
 void Map::printMap(vector<string> adj[], int N, string nodeList[]) {
 	for (int i = 0; i < N; i++) {
 		cout << "The regions connected to " << nodeList[i] << " are: " << endl;
-		for (auto v : adj[i]) {
+		for (auto v : adjList[i]) {
 			cout << v;
 			cout << endl;
 		}
@@ -55,14 +55,13 @@ void Map::printMap(vector<string> adj[], int N, string nodeList[]) {
 Map::~Map() {
 	adjList = NULL;
 	delete[] adjList;
+	//vector<string>().swap(adjList);
 }
 
 //
 void Map::mapLoader(string filename, vector<string> adj[]) {
 
-	int count = 0;
 	string line;
-
 	ifstream file(filename);
 
 	//store the entire line in an array
@@ -100,8 +99,9 @@ void Map::mapLoader(string filename, vector<string> adj[]) {
 	}
 
 	vector<string> splittedEdges;
+
 	for (unsigned i = 0; i < firstElements.size(); i++) {
-		
+		cout << "The regions connected to " << firstElements[i] << " are:" << endl;
 		stringstream data(edgesList[i]);
 		string edge;
 		splittedEdges.clear();
@@ -111,26 +111,30 @@ void Map::mapLoader(string filename, vector<string> adj[]) {
 		}
 
 		for (unsigned j = 0; j < splittedEdges.size(); j++) {
-			addEdge(adj, i, splittedEdges[j]);	
+			addEdge(adjList, i, splittedEdges[j]);	
+			for (auto v : adjList[i]) {
+				cout << v;
+				cout << endl;
+			}
 		}
 
 		
 	}
 
-	
+	//vector<string>().swap(splittedEdges);
 	//so now the entire file is saved into an array
 	//NEXT STEP: create a list of all the first elements in the array
 	//and then, for every element that isn't zero, add them into the adjacency list
 		//print the whole thing
 	
-	for (unsigned i = 0; i < firstElements.size(); i++) {
+/*	for (unsigned i = 0; i < firstElements.size(); i++) {
 		cout << "The regions connected to " << firstElements[i] << " are: " << endl;
 		for (auto v : adj[i]) {
 			cout << v;
 			cout << endl;
 		}
 		cout << endl;
-	}
+	} */
 }
 
 

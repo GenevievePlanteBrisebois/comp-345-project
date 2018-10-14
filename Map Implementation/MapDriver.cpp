@@ -10,34 +10,13 @@
 using namespace std;
 
 const int N = 7;
-
 vector<string> adjacencyList[N];
-vector<string> adjList[];
 
 int main() {
 	string buroughList[7] = { "Staten Island", "Lower Manhattan", "Bronx", "Queens", "Brooklyn", "Mid Manhattan", "Upper Manhattan" };
-	//vector<string> buroughList = { "Staten Island", "Lower Manhattan", "Bronx", "Queens", "Brooklyn", "Mid Manhattan", "Upper Manhattan" };
-	//creation of a map object with 7 nodes, each representing a region
+	//creation of a map with seven nodes
 	Map m(7);
 
-	int count = 0;
-	string fileName;
-	string line;
-	ifstream file("map.txt");
-	
-	while (getline(file, line)) {
-		count++;
-	}
-	Map m2(count);
-
-	cout << count;
-	//m.mapLoader("map.txt", adjList);
-
-
-
-	
-	/*
-	
 	//Adding edges to Staten Island.
 	m.addEdge(adjacencyList, 0, buroughList[1]);
 
@@ -72,15 +51,8 @@ int main() {
 	m.addEdge(adjacencyList, 6, buroughList[3]);
 	m.addEdge(adjacencyList, 6, buroughList[4]);
 	
-	//m.mapLoader("map.txt", adjacencyList);
-	//m.printMap(adjacencyList, N, buroughList);
-	*/
+	//print map
+	m.printMap(adjacencyList, N, buroughList);
 	
-	//m.~Map();
-	m2.mapLoader("map.txt", adjList);
-	//m2.~Map();
-	
-
-
 	return 0;
 }
