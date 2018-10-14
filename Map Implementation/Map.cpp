@@ -5,12 +5,14 @@
 #include <fstream>
 #include <istream>
 #include <sstream>
-#include <list>
 
-
+/*
+	Map class that contains graph data structure and map loader
+	By: Batoul Yehia
+	ID: 40010912
+*/
 using namespace std;
 using std::string;
-
 
 int numNodes;
 vector<string> *adjList;
@@ -30,7 +32,7 @@ Map::Map() {
 //Adds an edge to the adjacency list of a node.
 /*
 Since this is a vector of strings, the source takes the location of the region within the array of regions.
-It pushes a string of the destination within the vector of strings. 
+It pushes a string of the destination within the vector of strings.
 */
 void Map::addEdge(vector<string> adj[], int src, string dest)
 {
@@ -55,10 +57,10 @@ void Map::printMap(vector<string> adj[], int N, string nodeList[]) {
 Map::~Map() {
 	adjList = NULL;
 	delete[] adjList;
-	//vector<string>().swap(adjList);
 }
 
-//
+
+//converts a map text file into a graph data structure
 void Map::mapLoader(string filename, vector<string> adj[]) {
 
 	string line;
@@ -67,16 +69,20 @@ void Map::mapLoader(string filename, vector<string> adj[]) {
 	//store the entire line in an array
 	vector <string> firstElements;
 
+	//first space in every line
 	int firstEl = NULL;
 	string firstWord;
 
+	//looks for the first space as well, in order to retain the rest of the string
+	int secondEl = NULL;
 
+	//first word in every line
 	int lengthOfLine;
 	string restOfString;
 	vector <string> edgesList;
 
-	int secondEl = NULL;
-
+	//read the text file, store the first word in a vector
+	//also while reading the file, store the rest of the string in another vector
 	while (getline(file, line)) {
 		//storing the first word in an array (aka the nodes)
 		firstEl = line.find(" ");
@@ -85,21 +91,19 @@ void Map::mapLoader(string filename, vector<string> adj[]) {
 
 		secondEl = line.find(" ");
 		if (secondEl != -1) {
-
 			lengthOfLine = line.length();
-
 			restOfString = line.substr(secondEl + 1, lengthOfLine - 1);
 			edgesList.push_back(restOfString);
 		}
 		else {
-
 			edgesList.push_back("none");
 		}
-
 	}
 
 	vector<string> splittedEdges;
 
+	//splits the rest of the string and stores them in the Adjacency List
+	//Also prints out the node-edge connections
 	for (unsigned i = 0; i < firstElements.size(); i++) {
 		cout << "The regions connected to " << firstElements[i] << " are:" << endl;
 		stringstream data(edgesList[i]);
@@ -111,31 +115,11 @@ void Map::mapLoader(string filename, vector<string> adj[]) {
 		}
 
 		for (unsigned j = 0; j < splittedEdges.size(); j++) {
-			addEdge(adjList, i, splittedEdges[j]);	
+			addEdge(adjList, i, splittedEdges[j]);
 			for (auto v : adjList[i]) {
 				cout << v;
 				cout << endl;
 			}
 		}
-
-		
 	}
-
-	//vector<string>().swap(splittedEdges);
-	//so now the entire file is saved into an array
-	//NEXT STEP: create a list of all the first elements in the array
-	//and then, for every element that isn't zero, add them into the adjacency list
-		//print the whole thing
-	
-/*	for (unsigned i = 0; i < firstElements.size(); i++) {
-		cout << "The regions connected to " << firstElements[i] << " are: " << endl;
-		for (auto v : adj[i]) {
-			cout << v;
-			cout << endl;
-		}
-		cout << endl;
-	} */
 }
-
-
-

@@ -3,7 +3,11 @@
 #include <vector>
 #include <iostream>
 
-
+/*
+	Map class header
+	By: Batoul Yehia
+	ID: 40010912
+*/
 using namespace std;
 class Map
 {
@@ -14,9 +18,4 @@ public:
 	void printMap(vector<string> adj[], int N, string nodeList[]);
 	void mapLoader(string filename, vector <string> adj[]);
 	~Map();
-	//void openFile(string filename);
 };
-
-
-
-
