@@ -50,93 +50,88 @@ void Map::printMap(vector<string> adj[], int N, string nodeList[]) {
 	}
 }
 
+
 //Destructor
 Map::~Map() {
+	adjList = NULL;
 	delete[] adjList;
 }
 
 //
 void Map::mapLoader(string filename, vector<string> adj[]) {
-	//ifstream file;
-	//string fileName;
+
 	int count = 0;
 	string line;
-	//string arr[];
-	
 
 	ifstream file(filename);
-	/*try {
-		file.open(filename);
-	}
-	catch (exception e) {
-		cout << "Could not open file.";
-	}*/
-	
+
 	//store the entire line in an array
 	vector <string> firstElements;
-	
+
 	int firstEl = NULL;
 	string firstWord;
 
-	//int count = 0;
-	//int cont = 0;
+
 	int lengthOfLine;
 	string restOfString;
 	vector <string> edgesList;
 
 	int secondEl = NULL;
 
-	while (getline(file,line)) {
-			//storing the first word in an array (aka the nodes)
-			firstEl = line.find(" ");
-			firstWord = line.substr(0, firstEl);
-			firstElements.push_back(firstWord);
+	while (getline(file, line)) {
+		//storing the first word in an array (aka the nodes)
+		firstEl = line.find(" ");
+		firstWord = line.substr(0, firstEl);
+		firstElements.push_back(firstWord);
 
-			secondEl = line.find(" ");
-			if (secondEl != -1) {
-				
-				lengthOfLine = line.length();
+		secondEl = line.find(" ");
+		if (secondEl != -1) {
 
-				restOfString = line.substr(secondEl + 1, lengthOfLine - 1);
-				edgesList.push_back(restOfString);
-			}
-			else {
+			lengthOfLine = line.length();
 
-				edgesList.push_back("none");
-			}
+			restOfString = line.substr(secondEl + 1, lengthOfLine - 1);
+			edgesList.push_back(restOfString);
+		}
+		else {
+
+			edgesList.push_back("none");
+		}
+
+	}
+
+	vector<string> splittedEdges;
+	for (unsigned i = 0; i < firstElements.size(); i++) {
+		
+		stringstream data(edgesList[i]);
+		string edge;
+		splittedEdges.clear();
+
+		while (getline(data, edge, ' ')) {
+			splittedEdges.push_back(edge);
+		}
+
+		for (unsigned j = 0; j < splittedEdges.size(); j++) {
+			addEdge(adj, i, splittedEdges[j]);	
+		}
+
 		
 	}
 
-		vector<string> splittedEdges;
-		for (int i = 0; i < sizeof(firstElements); i++) {
-			//for (auto x : firstElements[i]) {
-				stringstream data(edgesList[i]);
-				string edge;
-				splittedEdges.clear();
-
-				while (getline(data, edge, ' ')) {
-					splittedEdges.push_back(edge);
-				}
-
-				for (int j = 0; j < sizeof(splittedEdges); ++j) {
-					//for (auto y : splittedEdges[j]) {
-						addEdge(adj, i, splittedEdges[j]);
-					//}
-				}
-
-			//}
-		}
+	
 	//so now the entire file is saved into an array
 	//NEXT STEP: create a list of all the first elements in the array
 	//and then, for every element that isn't zero, add them into the adjacency list
+		//print the whole thing
 	
-	
-	
-
+	for (unsigned i = 0; i < firstElements.size(); i++) {
+		cout << "The regions connected to " << firstElements[i] << " are: " << endl;
+		for (auto v : adj[i]) {
+			cout << v;
+			cout << endl;
+		}
+		cout << endl;
+	}
 }
-
-
-
 
 
 
