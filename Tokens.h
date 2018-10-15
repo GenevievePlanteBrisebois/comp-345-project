@@ -10,7 +10,7 @@ public:
 	Tokens();
 	Tokens(string type);
 	~Tokens();
-
+	string getType();
 	Tokens* create_carapace();
 	Tokens* create_souvenir();
 	Tokens* create_jinx();

@@ -133,8 +133,7 @@ using namespace std;
 
 BU::BU()
 {
-	Buildings* start_set[45];
-	Units* unit_set[45];
+	
 }
 
 BU ::~BU()

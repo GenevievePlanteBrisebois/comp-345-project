@@ -31,7 +31,10 @@ souvenir:"Place a Souvenir token in your current borough, and in each borough yo
 	string types_token[4] = { "carapace", "souvenir", "jinx", "web" };
 	string token_type;
 	Tokens* tokens;
+	string Tokens::getType() {
 
+		return token_type;
+	}
 	Tokens* Tokens::create_carapace() {
 		Tokens* carapace = new Tokens(types_token[0]);
 		return carapace;
