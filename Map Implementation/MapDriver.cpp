@@ -2,18 +2,21 @@
 #include "Map.h"
 #include <iostream>
 #include <vector>
-#include <list>
 #include <string>
 
+/*
+	A driver to test the graph data structure for the maps
+	By: Batoul Yehia
+	ID: 40010912
+*/
 using namespace std;
 
 const int N = 7;
-
 vector<string> adjacencyList[N];
 
 int main() {
 	string buroughList[7] = { "Staten Island", "Lower Manhattan", "Bronx", "Queens", "Brooklyn", "Mid Manhattan", "Upper Manhattan" };
-	//creation of a map object with 7 nodes, each representing a region
+	//creation of a map with seven nodes
 	Map m(7);
 
 	//Adding edges to Staten Island.
@@ -50,6 +53,7 @@ int main() {
 	m.addEdge(adjacencyList, 6, buroughList[3]);
 	m.addEdge(adjacencyList, 6, buroughList[4]);
 
+	//print map
 	m.printMap(adjacencyList, N, buroughList);
 
 	return 0;
