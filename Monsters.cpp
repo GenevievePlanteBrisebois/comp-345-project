@@ -11,14 +11,18 @@ using namespace std;
 	string monster_name;
 	int monster_health;
 	int monster_victory_point;
+	int energy_point;
 
 
 
 	//making getters and setters for the elements of the monsters
+
 	string Monsters::getName() {
 		return monster_name;
 	}
-
+	string Monsters::getNameFromList(int i) {
+		return name_monsters[i];
+	}
 	int Monsters::getVictoryPoint() {
 		return monster_victory_point;
 
@@ -27,6 +31,9 @@ using namespace std;
 	int  Monsters::getHealth() {
 		return monster_health;
 	}
+	int Monsters::getEnergy() {
+		return energy_point;
+	}
 
 	void  Monsters::setHealth(int health) {
 		monster_health = health;
@@ -34,6 +41,9 @@ using namespace std;
 
 	void  Monsters::setVictoryPoints(int victory_point) {
 		monster_victory_point = victory_point;
+	}
+	void Monsters::setEnergy(int e) {
+		energy_point = e;
 	}
 	//function to verify that the name is part of the name array and as such a valid monster name
 
@@ -65,6 +75,7 @@ using namespace std;
 			monster_name = a;
 			monster_health = 10;
 			monster_victory_point = 0;
+			energy_point = 0;
 		}
 		else
 			throw invalid_argument("Name is not a valid Monster Name. Pick from the available names");

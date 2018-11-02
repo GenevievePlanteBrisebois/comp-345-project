@@ -135,7 +135,26 @@ using namespace std;
 		delete[] active_monsters;
 
 	}
+	Active_Monsters::Active_Monsters() {
+	
+	}
 
 
+	void Active_Monsters::addEnergyPoint(int e, Monsters* pointer) {
+		int tempEnergy = pointer->getEnergy();
+		tempEnergy += e;
+		pointer->setEnergy(tempEnergy);
+	}
+	void Active_Monsters::removeEnergyPoint(int e, Monsters* pointer) {
+		int tempEnergy = pointer->getEnergy();
+		tempEnergy -= e;
+		if (tempEnergy < 0) {
+			cout << "Not enough Energy to spend. Cannot remove more than the available amount of energy:" << pointer->getEnergy();
+		}
+		else {
+			pointer->setEnergy(tempEnergy);
+			cout << "You have " << pointer->getEnergy() << " energy points left";
 
+		}
+	}
 

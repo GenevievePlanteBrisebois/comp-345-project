@@ -16,26 +16,28 @@ using namespace std;
 
 	//method to damage the building. when a building is destroyed it produces a unit
 	//the effect of destroying the building will have to be done in another class to call on the heal, add vp methods of monsters
-	Units* BU::destroy_building(int damage, Buildings* building) {
+	void BU::destroy_building(int damage, Buildings* building, int index) {
 
 		int dur = building->getDurability();
 		int bu = dur - damage;
+		Units* new_unit;
 
 		if (building->getDurability() == 1) {
-			Units* new_unit = create_infantry();
+			new_unit = create_infantry();
 			delete building;
-			return new_unit;
+			
 		}
 		else if (building->getDurability() == 2) {
-			Units* new_unit = create_jet();
-			return new_unit;
+			new_unit = create_jet();
+			
 			delete building;
 		}
 		else {
-			Units* new_unit = create_tank();
-			return new_unit;
+			new_unit = create_tank();
+			
 			delete building;
 		}
+		unit_set[index] = new_unit;
 
 	}
 	//the reward will have to be given according to the unit type in the driver
@@ -43,6 +45,11 @@ using namespace std;
 	void BU::destroy_unit(Units* a) {
 		delete a;
 	}
+
+	void BU::destroy_unit(int i) {
+		delete unit_set[i];
+	}
+
 
 	//suffle method for to mix the buildings before we put them on the board
 	void BU::shuffle() {
@@ -85,6 +92,7 @@ using namespace std;
 		}
 
 		delete[] * temp;
+		
 
 	}
 	//method to build the deck of the buildings
@@ -140,4 +148,11 @@ BU ::~BU()
 {
 	delete[] * start_set;
 	delete[] * unit_set;
+}
+
+Buildings* BU::get_building_from_set(int i) {
+	return start_set[i];
+}
+Units* BU:: get_unit_from_set(int i) {
+	return unit_set[i];
 }

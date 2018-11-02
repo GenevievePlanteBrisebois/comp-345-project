@@ -19,5 +19,8 @@ public:
 	void death(Monsters* a);
 	void eraseMonster(Monsters* a);
 	void destroyAllMonsters(Monsters* a[]);
+	void addEnergyPoint(int e, Monsters* a);
+	void removeEnergyPoint(int e, Monsters* a);
 	~Active_Monsters();
+	Active_Monsters();
 };

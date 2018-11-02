@@ -9,9 +9,13 @@ public:
 	 Monsters();
 	 Monsters(string a);
 	string getName();
+	string getNameFromList(int i);
 	int getVictoryPoint();
 	int getHealth();
+	int getEnergy();
 	bool is_monster_real(string a);
 	void setHealth(int health);
 	void setVictoryPoints(int victory_point);
+	void setEnergy(int e);
+
 };

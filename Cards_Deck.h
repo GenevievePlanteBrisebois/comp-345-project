@@ -8,13 +8,14 @@ using namespace std;
 
 class Cards_Deck :public Cards {
 public:
+	
 	Cards_Deck();
 	~Cards_Deck();
 	Cards* getRegularCard(int i);
 	Cards* getSpecialCards(int i);
 	void shuffle(Cards* regular_deck[]);
-	void build_regular_deck();
-	void build_special_deck();
+	//void build_regular_deck();
+	//void build_special_deck();
 
 
 };

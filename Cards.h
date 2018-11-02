@@ -9,16 +9,19 @@ class Cards
 {
 public:
 	Cards();
-	Cards(string name, int cost, string card_type, string effect);
+	//if the status is false the card is not being used by a player if the status is true the card is being used by a player
+	Cards(string name, int cost, string card_type, string effect, bool status);
 	~Cards();
 	string getName();
 	string getEffect();
 	string getCardType();
 	int getCost();
+	bool getStatus();
 	void setName(string name);
 	void setEffect(string effect);
 	void setCost(int cost);
 	void setCardType(string cardType);
+	void setStatus(bool stat);
 	string toString();
 
 
