@@ -4,38 +4,55 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 
 using namespace std;
 
-string *diceList;
 
-string diceFace; 
+string *faceList;
+
+string diceFace;
+
+
 
 Dice::Dice()
 {
-	diceList = new string[6];
-	diceList[0] = "Energy";
-	diceList[1] = "Attack";
-	diceList[2] = "Destruction";
-	diceList[3] = "Heal";
-	diceList[4] = "Celebrity";
-	diceList[5] = "Ouch!";
-
+	faceList = new string[6];
+	faceList[0] = "Energy";
+	faceList[1] = "Attack";
+	faceList[2] = "Destruction";
+	faceList[3] = "Heal";
+	faceList[4] = "Celebrity";
+	faceList[5] = "Ouch!";
 }
 
-Dice::~Dice()
-{
-	diceList = NULL;
-	delete[] diceList;
-}
 
-string Dice::rollDice(int faceNum) {
-	srand((int)time(0));
+
+void Dice::rollDice(int faceNum) {
+	//srand((int)time(0));
 	//int face = rand() % 5;
-	cout << "You rolled: " << diceList[faceNum] << endl;
-	setDiceFace(diceList[faceNum]);
-	return diceList[faceNum];
+	//string dList[] = { "Energy", "Attack", "Destruction", "Heal", "Celebrity", "Ouch!" };
+	cout << "You rolled: " << faceList[faceNum] << endl;
+	setDiceFace(faceList[faceNum]);
+	//return faceList[faceNum];
 }
+
+void Dice::rollAgain(int randNum, Dice d) {
+	string ans;
+	string done;
+
+	cout << "Would you like to reroll " << d.getDiceFace() << "?";
+	cin >> ans;
+	if (ans == "y") {
+		cout << "You rolled: " << faceList[randNum] << endl;
+		setDiceFace(faceList[randNum]);
+	}
+
+
+}
+
+
+
 
 void Dice::setDiceFace(string chosenFace) {
 	diceFace = chosenFace;
@@ -44,3 +61,9 @@ void Dice::setDiceFace(string chosenFace) {
 string Dice::getDiceFace() {
 	return diceFace;
 }
+Dice::~Dice()
+{
+	faceList = NULL;
+	delete[] faceList;
+}
+
