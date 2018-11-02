@@ -14,28 +14,26 @@ using namespace std;
 int main() {
 	cout << "Start building deck of regular cards \n";
 	Cards_Deck* decks = new Cards_Deck();
-	decks->build_regular_deck();
-	decks->build_special_deck();
-
-	Cards* regular_deck[64];
+	
 	string description1;
 	string description2;
 
 	for (int i = 0; i < 64;  i++) {
-		regular_deck[i] = decks->getRegularCard(i);
-		description1=( regular_deck[i]->toString());
+		
+		Cards* pointer = decks->getRegularCard(i);
+		description1=( pointer->toString());
 		cout << description1 << "\n\n";
 	}
-	Cards* special_deck[2];
+	
 	cout << "Building deck of special cards\n";
 	for (int i = 0; i < 2; i++) {
-		special_deck[i] = decks->getSpecialCards(i);
-		description2=(special_deck[i]->toString());
+		
+		description2=(decks->getSpecialCards(i)->toString());
 		cout << description2 << "\n\n";
 	}
 
 	cout << "shuffling the cards of the regular deck";
-
+	
 
 
 
@@ -64,6 +62,30 @@ int main() {
 		cout << jinx[i]->getType()<<"\n";
 	}
 	cout << "GETTING THE BUILDINGS FOR STARTING THE GAME \n";
+
+	BU* bu = new BU();
+	Buildings* start_set[45];
+
+	bu->build_building_deck();
+
+
+	cout << "list of possible monsters a player can take\n";
+
+	Active_Monsters * monsters = new Active_Monsters();
+	cout<<monsters->getNameFromList(0)<<"\n";
+	cout << monsters->getNameFromList(1) << "\n";
+	cout << monsters->getNameFromList(2) << "\n";
+	cout << monsters->getNameFromList(3) << "\n";
+	cout << monsters->getNameFromList(4) << "\n";
+	cout << monsters->getNameFromList(5) << "\n";
+
+
+
+
+	return 0;
+
+
+
 
 
 
