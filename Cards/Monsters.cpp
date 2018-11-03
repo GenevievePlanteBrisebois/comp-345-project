@@ -85,5 +85,99 @@ using namespace std;
 
 
 
+	void Monsters::addEnergyPoint(int e, Monsters* pointer) {
+		int tempEnergy = pointer->getEnergy();
+		tempEnergy += e;
+		pointer->setEnergy(tempEnergy);
+	}
+	void Monsters::removeEnergyPoint(int e, Monsters* pointer) {
+		int tempEnergy = pointer->getEnergy();
+		tempEnergy -= e;
+		if (tempEnergy < 0) {
+			cout << "Not enough Energy to spend. Cannot remove more than the available amount of energy:" << pointer->getEnergy();
+		}
+		else {
+			pointer->setEnergy(tempEnergy);
+			cout << "You have " << pointer->getEnergy() << " energy points left";
+
+		}
+	}
+	//making functions that verify the various components (death, victory, if monster is available)
+
+			//verifying if the monster has the required number of victory points to win the game
+	bool Monsters::verifyVictory(Monsters* a) {
+		bool victory;
+
+		if (a.getVictoryPoint() >= 20)
+			return victory = true;
+		else
+			return victory = false;
+
+	}
+	//verifying if the monster has depleated all of its health and needs to be destroyed
+
+	bool Monsters::verifyDeath(Monsters* a) {
+		bool dead;
+		if (a.getHealth() <= 0)
+			return dead = true;
+		else
+			return dead = false;
+
+	}
+
+
+
+	//making a function to take away health
+	void Monsters::damageHealth(int i,  Monsters* pointer) {
+		int  health = pointer.getHealth();
+
+		health = health - i;
+
+		pointer.setHealth(health);
+
+		if (verifyDeath(pointer) == true)
+			death(pointer);
+
+	}
+	//making function to heal
+	void Monsters::heal(int i, Monsters* monster) {
+		int health = monster.getHealth();
+
+		health = health + i;
+
+		if (health > 10)
+			health = 10;
+
+		monster.setHealth(health);
+		
+
+	}
+	//making function to add victory points
+	void Monsters::addVictoryPoint(int i, Monsters* monster) {
+		int vp = monster.getVictoryPoint();
+
+		vp = vp + i;
+
+		monster.setVictoryPoints(vp);
+
+		verifyVictory(monster);
+	}
+	//making function to take away victory points
+	void Monsters::loseVictoryPoint(int i, Monsters* monster) {
+		int vp = monster.getVictoryPoint();
+
+		vp = vp - i;
+
+		if (vp <= 0)
+			vp = 0;
+
+		monster.setVictoryPoints(vp);
+	}
+	//destructor(monster died)
+	void Monsters::death(Monsters* a) {
+
+		delete a;
+
+	}
 
 

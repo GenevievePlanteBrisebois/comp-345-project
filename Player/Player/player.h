@@ -14,9 +14,17 @@ class player {
 	void setMonster(Monsters* a);
 	void setTokens(Tokens* t, int i);
 	void setTokens(Tokens* a);
+	void setCard(Cards* a);
+	Cards* getCard(Cards* a);
+	
 	Monsters* getMonster();
 	Tokens* getToken(int i);
 	void addToken(Tokens* token);
 	void removeToken(Tokens* token);
+	void rollDice();
+	void resolveDice();
+	void useCard(Cards* a);
+	void buyCard(int cost, Cards* a);
+
 
 };

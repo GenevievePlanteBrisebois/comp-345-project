@@ -17,5 +17,15 @@ public:
 	void setHealth(int health);
 	void setVictoryPoints(int victory_point);
 	void setEnergy(int e);
+	void addEnergyPoint(int e, Monsters* a);
+	void removeEnergyPoint(int e, Monsters* a);
 
+
+	bool verifyVictory(Monsters* a);
+	bool verifyDeath(Monsters* a);
+	void damageHealth(int i,  Monsters* pointer);
+	void heal(int i, Monsters* monster);
+	void addVictoryPoint(int i, Monsters* monster);
+	void loseVictoryPoint(int i, Monsters* monster);
+	void death(Monsters* a);
 };
