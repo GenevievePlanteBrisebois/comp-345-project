@@ -49,4 +49,3 @@ Dice::~Dice()
 	faceList = NULL;
 	delete[] faceList;
 }
-
