@@ -15,4 +15,3 @@ public:
 	void setDiceFace(string chosenFace);
 	string getDiceFace();
 };
-
