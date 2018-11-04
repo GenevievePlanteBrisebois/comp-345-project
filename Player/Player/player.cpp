@@ -282,8 +282,46 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards
 	
 	}
 	else if (ouch == 2) {
-	
-	
+		int count = 0;
+		string area = m.getBorough(position)->getName();
+		//counting the number of units in the borough of the player
+		for (int i = 0; i < 7; i++) {
+			if (bu->get_unit_from_set(i, area) != nullptr)
+				count++;
+		}
+		
+		string player2name;
+		//verify if there are more monsters in the borough
+		for (int i = 0; i < 11; i++) {
+			Borough * maparea = m.getBorough(i);
+			if (maparea->getName() == area && maparea->getPlayerName() != player_monster->getName()) {
+				player2name = maparea->getPlayerName();
+			
+			}else
+				player2name = "";
+			//clean up pointer
+			delete maparea;
+		}
+		//get the second player
+
+		
+		//if there is another player in the area, damage health of both
+		if (player2name != "") {
+			player* player2area;
+			for (int i = 0; i < 6; i++) {
+				if (players[i]->getMonster()->getName() == player2name)
+					player2area = players[i];
+				else
+					player2area = nullptr;
+			}
+			player2area->getMonster()->damageHealth(count, player2area->getMonster());
+			player_monster->damageHealth(count, player_monster);
+			//clean up pointer created for the execution of this block
+			delete player2area;
+		}//if there is no other player in the area damage only self
+		else 
+			player_monster->damageHealth(count, player_monster);
+		
 	}
 	else if (ouch >= 3) {
 		//adding the card to the 
@@ -306,6 +344,35 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards
 				}
 			}
 		//doing the effect of the ouch on all monsters
+		//doing a for loop to affect each monster one at the time
+			for (int i = 0; i < 11; i++) {
+			//if borough occupied execute else move on
+				if (m.getBorough(i)->getStatus() == true) {
+					player * player1;
+					string player1name = m.getBorough(i)->getPlayerName();
+					string areaName = m.getBorough(i)->getName();
+					int count = 0;
+					//counting the number of units in the borough of the player
+					for (int i = 0; i < 7; i++) {
+						if (bu->get_unit_from_set(i, areaName) != nullptr)
+							count++;
+					}
+					//getting the player
+					for (int i = 0; i < 6; i++) {
+						if (players[i]->getMonster()->getName() == player1name)
+							player1 = players[i];
+					}
+					//doing damage to the player
+					player1->getMonster()->damageHealth(count, player_monster);
+					
+					//clean up the pointer
+					delete player1;
+
+
+				}
+			
+			}
+
 
 		}
 	}
