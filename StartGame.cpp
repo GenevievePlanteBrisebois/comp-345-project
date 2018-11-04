@@ -24,7 +24,7 @@ the right number of players is created, a deck with the right number of cards is
 
 using namespace std;
 
-int num;
+int numPlayers;
 player* p1;
 player* p2;
 player* p3;
@@ -38,9 +38,9 @@ Cards_Deck* deck;
 StartGame::StartGame(player* player1, player* player2) {
 	p1 = player1;
 	p2 = player2;
-	
+
 	deck = new Cards_Deck();
-	
+
 
 }
 
@@ -81,7 +81,8 @@ void StartGame::SelectPlayers() {
 	player* p4 = new player();
 	player* p5 = new player();
 	player* p6 = new player();
-	int numPlayers;
+	int num;
+
 
 	cout << "Let us start the game." << endl;
 	cout << "Select number of players (2-6)" << endl;
@@ -89,35 +90,42 @@ void StartGame::SelectPlayers() {
 	switch (num) {
 	case 2:
 		StartGame(p1, p2);
-		numPlayers = 2;
+		SetNumPlayers(2);
 		break;
 	case 3:
 		//creates three players
 		StartGame(p1, p2, p3);
-		numPlayers = 3;
+		SetNumPlayers(3);
 		break;
-		
+
 	case 4:
 		//creates four players
 		StartGame(p1, p2, p3, p4);
-		numPlayers = 4;
+		SetNumPlayers(4);
 		break;
 	case 5:
 		//creates five players
 		StartGame(p1, p2, p3, p4, p5);
-		numPlayers = 5;
+		SetNumPlayers(5);
 		break;
 	case 6:
 		//creates six players
-	
+
 		StartGame(p1, p2, p3, p4, p5, p6);
-		numPlayers = 6;
+		SetNumPlayers(6);
 		break;
 	}
 
-	
+
 }
 
+void StartGame::SetNumPlayers(int num) {
+	numPlayers = num;
+}
+
+int StartGame::GetNumPlayers() {
+	return numPlayers;
+}
 void StartGame::LoadMap() {
 	string chosenMap;
 	string line;
@@ -133,7 +141,7 @@ void StartGame::LoadMap() {
 		count++;
 	}
 
-	Map m(count) ; //create the map object
+	Map m(count); //create the map object
 	m.mapLoader(chosenMap); //loads map here
 }
 StartGame::~StartGame() {
@@ -150,6 +158,6 @@ StartGame::~StartGame() {
 	delete p4;
 	delete p5;
 	delete p6;
-
-
 }
+
+

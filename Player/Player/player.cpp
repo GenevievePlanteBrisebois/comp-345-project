@@ -6,13 +6,14 @@
 #include <cstdlib>
 #include "player.h"
 //includes of .h that are in different solutions
-#include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Cards\Cards_Deck.h"
-#include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Cards\BU.h"
-#include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Cards\Active_Monsters.h"
-#include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Cards\Tokens.h"
-#include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Dice\Dice.h"
-#include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Map Implementation\Map.h"
-#include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Map Implementation\Borough.h"
+#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\Cards_Deck.h"
+#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\BU.h"
+#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\Cards_Deck.h"
+#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\Active_Monsters.h"
+#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\Tokens.h"
+#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Dice\Dice.h"
+#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Map Implementation\Map.h"
+#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Map Implementation\Borough.h"
 
 //starting to write the player methods
 Monsters* player_monster;

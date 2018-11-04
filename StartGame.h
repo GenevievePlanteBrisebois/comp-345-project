@@ -1,5 +1,5 @@
 #pragma once
-class StartGame{
+class StartGame {
 public:
 	void SelectPlayers();
 	//StartGame();
@@ -9,6 +9,7 @@ public:
 	StartGame(player* player1, player* player2, player* player3, player* player4);
 	StartGame(player* player1, player* player2, player* player3, player* player4, player* player5);
 	StartGame(player* player1, player* player2, player* player3, player* player4, player* player5, player* player6);
-	void TwoPlayers();
+	void SetNumPlayers(int num);
+	int GetNumPlayers();
 	void LoadMap();
 };
