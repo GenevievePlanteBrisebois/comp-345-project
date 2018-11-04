@@ -3,14 +3,16 @@
 #include <cstdlib>
 #include "player.h"
 //includes of .h that are in different solutions
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\Cards_Deck.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\BU.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\Cards_Deck.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\Active_Monsters.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\Tokens.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Dice\Dice.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Map Implementation\Map.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Map Implementation\Borough.h"
+
+#include "../comp345-kingsOfNY/Cards/Cards_Deck.h"
+#include "../comp345-kingsOfNY/Cards/BU.h"
+#include "../comp345-kingsOfNY/Cards/Active_Monsters.h"
+#include "../comp345-kingsOfNY/Cards/Tokens.h"
+#include "../comp345-kingsOfNY/Dice/Dice.h"
+#include "../comp345-kingsOfNY/Map Implementation/Map.h"
+#include "../comp345-kingsOfNY/Map Implementation/Borough.h"
+
+
 class player {
 public:
 	player();
@@ -28,7 +30,7 @@ public:
 	void removeToken(Tokens* token);
 
 	void rollDice();
-	void resolveDice(Map m, Active_Monsters * a[], BU* b);
+	void resolveDice(Map m, Active_Monsters * a[], BU* b, Cards_Deck cards, player* player[]);
 
 	void useCard(Cards* a);
 	void buyCard( Cards* a);

@@ -6,14 +6,15 @@
 #include <cstdlib>
 #include "player.h"
 //includes of .h that are in different solutions
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\Cards_Deck.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\BU.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\Cards_Deck.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\Active_Monsters.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Cards\Tokens.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Dice\Dice.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Map Implementation\Map.h"
-#include "C:\Users\leb_b\Github\comp345-kingsOfNY\Map Implementation\Borough.h"
+
+#include "../comp345-kingsOfNY/Cards/Cards_Deck.h"
+#include "../comp345-kingsOfNY/Cards/BU.h"
+#include "../comp345-kingsOfNY/Cards/Active_Monsters.h"
+#include "../comp345-kingsOfNY/Cards/Tokens.h"
+#include "../comp345-kingsOfNY/Dice/Dice.h"
+#include "../comp345-kingsOfNY/Map Implementation/Map.h"
+#include "../comp345-kingsOfNY/Map Implementation/Borough.h"
+
 
 //starting to write the player methods
 Monsters* player_monster;
@@ -94,6 +95,7 @@ Cards* player::getCard(Cards* a) {
 	for (int i = 0; i < 20; i++) {
 		if (player_cards[i]->getName() == name) {
 			return player_cards[i];
+
 			break;
 		}
 	}
@@ -200,7 +202,7 @@ void player::rollDice() {
 /*
 some steps will need to be taken in the driver in order to do all required actions for :
 */
-void player::resolveDice(Map m, Active_Monsters * a[], BU* bu) {
+void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards, player* players[]) {
 
 	//resetting the tracking variables to 0 in order to track the proper variables of the new dice roll
 	energy = 0;
@@ -244,20 +246,138 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu) {
 	//handling of the health points
 	player_monster->heal(heal, player_monster);
 	/*
-	handling of the celebrity points
+	handling of the celebrity points*/ 
+
 	if (celebrity >= 3) {
 		int vp = celebrity - 3;
 		int total = 1 + vp;
 		player_monster->addVictoryPoint(total, player_monster);
 		cout << "You get the Superstar Card" << endl;
-
-
+		Cards* super = cards.getSpecialCards(1);
+		buyCard(super);
+		string player2 = super->getPlayerName();
+		if(player2== "")
+		super->setPlayerName(player_monster->getName());
+		else {
+			super->setPlayerName(player_monster->getName());
+			for (int i = 0; i < 6; i++) {
+				string player2name = players[i]->getMonster()->getName();
+				if (player2name == player2) {
+					players[i]->useCard(super);
+				}
+			}
+		}
 	
 	}
 
-	*/
+	
 	//resolving the ouch points
+	if (ouch == 1) {
+		int count = 0;
+		string area = m.getBorough(position)->getName();
+		//counting the number of units in the borough of the player
+		for (int i = 0; i < 7; i++) {
+			if (bu->get_unit_from_set(i,area) != nullptr)
+				count++;
+		}
+		player_monster->damageHealth(count, player_monster);
+	
+	}
+	else if (ouch == 2) {
+		int count = 0;
+		string area = m.getBorough(position)->getName();
+		//counting the number of units in the borough of the player
+		for (int i = 0; i < 7; i++) {
+			if (bu->get_unit_from_set(i, area) != nullptr)
+				count++;
+		}
+		
+		string player2name;
+		//verify if there are more monsters in the borough
+		for (int i = 0; i < 11; i++) {
+			Borough * maparea = m.getBorough(i);
+			if (maparea->getName() == area && maparea->getPlayerName() != player_monster->getName()) {
+				player2name = maparea->getPlayerName();
+			
+			}else
+				player2name = "";
+			//clean up pointer
+			delete maparea;
+		}
+		//get the second player
 
+		
+		//if there is another player in the area, damage health of both
+		if (player2name != "") {
+			player* player2area;
+			for (int i = 0; i < 6; i++) {
+				if (players[i]->getMonster()->getName() == player2name)
+					player2area = players[i];
+				else
+					player2area = nullptr;
+			}
+			player2area->getMonster()->damageHealth(count, player2area->getMonster());
+			player_monster->damageHealth(count, player_monster);
+			//clean up pointer created for the execution of this block
+			delete player2area;
+		}//if there is no other player in the area damage only self
+		else 
+			player_monster->damageHealth(count, player_monster);
+		
+	}
+	else if (ouch >= 3) {
+		//adding the card to the 
+		player_monster->addVictoryPoint(3, player_monster);
+		cout << "You get the Statue of Liberty Card" << endl;
+		Cards* super = cards.getSpecialCards(0);
+		buyCard(super);
+		string player2 = super->getPlayerName();
+		//case no one had the card previously
+		if (player2 == "")
+			super->setPlayerName(player_monster->getName());
+		//case someone had the card previously. removing vp from previous owner
+		else {
+			super->setPlayerName(player_monster->getName());
+			for (int i = 0; i < 6; i++) {
+				string player2name = players[i]->getMonster()->getName();
+				if (player2name == player2) {
+					players[i]->useCard(super);
+					players[i]->getMonster()->loseVictoryPoint(3, players[i]->getMonster());
+				}
+			}
+		//doing the effect of the ouch on all monsters
+		//doing a for loop to affect each monster one at the time
+			for (int i = 0; i < 11; i++) {
+			//if borough occupied execute else move on
+				if (m.getBorough(i)->getStatus() == true) {
+					player * player1;
+					string player1name = m.getBorough(i)->getPlayerName();
+					string areaName = m.getBorough(i)->getName();
+					int count = 0;
+					//counting the number of units in the borough of the player
+					for (int i = 0; i < 7; i++) {
+						if (bu->get_unit_from_set(i, areaName) != nullptr)
+							count++;
+					}
+					//getting the player
+					for (int i = 0; i < 6; i++) {
+						if (players[i]->getMonster()->getName() == player1name)
+							player1 = players[i];
+					}
+					//doing damage to the player
+					player1->getMonster()->damageHealth(count, player_monster);
+					
+					//clean up the pointer
+					delete player1;
+
+
+				}
+			
+			}
+
+
+		}
+	}
 
 	//resolving the destruction points
 	destruction_points = destruction;
@@ -296,7 +416,7 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu) {
 						player_monster->addVictoryPoint(reward, player_monster);
 				
 				}
-
+				delete building;
 				break;
 
 			}
@@ -323,7 +443,7 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu) {
 				cin >> answer;
 
 				if (answer == "y") {
-					bu->destroy_building(durability, building, b);
+					bu->destroy_unit( unit, b);
 					if (rewardT == "heal") {
 						player_monster->heal(reward, player_monster);
 					}
@@ -334,14 +454,14 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu) {
 						player_monster->addVictoryPoint(reward, player_monster);
 
 				}
-
+				delete unit;
 				break;
 
 			}
 		}
 
-		delete building;
-		delete unit;
+		
+		
 	
 	
 	}
@@ -406,7 +526,7 @@ void player::useCard(Cards* a) {
 	string name = a->getName();
 	for (int i = 0; i < 20; i++) {
 		if (player_cards[i]->getName() == name) {
-			 player_cards[i]== nullptr;
+			 player_cards[i]= nullptr;
 			break;
 		}
 	}

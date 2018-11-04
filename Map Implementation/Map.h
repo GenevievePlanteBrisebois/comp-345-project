@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include "Borough.h"
 
 /*
 	Map class header
@@ -18,6 +19,6 @@ public:
 	void printMap(vector<string> adj[], int N, string nodeList[]);
 	void mapLoader(string filename);
 	void setBorough(int i, bool status, string playerName);
-	Borough* getBorough(int i);
+	Borough *getBorough(int i);
 	~Map();
 };
