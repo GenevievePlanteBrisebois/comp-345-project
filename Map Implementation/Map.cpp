@@ -37,7 +37,7 @@ Borough* Map::getBorough(int i) {
 	return borough[i];
 }
 
-void Map::setBorough(int i, bool status) {
+void Map::setBorough(int i, bool status, string name) {
 	borough[i].setStatus(status);
 }
 

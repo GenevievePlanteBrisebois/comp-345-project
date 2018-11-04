@@ -9,7 +9,7 @@
 #include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Dice\Dice.h"
 #include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Map Implementation\Map.h"
 #include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Map Implementation\Borough.h"
-
+#include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Cards\BU.h"
 class player {
 public:
 	player();
@@ -21,13 +21,13 @@ public:
 	Cards* getCard(Cards* a);
 	Monsters* getMonster();
 	Tokens* getToken(int i);
-
+	Monsters* getPlayer(string name, Active_Monsters * a[]);
 
 	void addToken(Tokens* token);
 	void removeToken(Tokens* token);
 
 	void rollDice();
-	void resolveDice(Map m);
+	void resolveDice(Map m, Active_Monsters * a[], BU* b);
 
 	void useCard(Cards* a);
 	void buyCard( Cards* a);
@@ -37,4 +37,6 @@ public:
 	int getPosition();
 	void setPosition(int i);
 
+	void removeDestructionPoints(int i);
+	int getDestructionPoints();
 };

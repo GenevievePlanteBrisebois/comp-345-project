@@ -7,6 +7,7 @@
 #include "player.h"
 //includes of .h that are in different solutions
 #include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Cards\Cards_Deck.h"
+#include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Cards\BU.h"
 #include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Cards\Active_Monsters.h"
 #include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Cards\Tokens.h"
 #include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Dice\Dice.h"
@@ -18,6 +19,7 @@ Monsters* player_monster;
 Tokens* player_tokens[20];
 Cards* player_cards[10];
 Dice * dices = new Dice[6];
+int destruction_points;
 //variables to be able to keep track of the dices and what to do with the results 
 
 int energy;
@@ -33,7 +35,7 @@ player::player() {
 	player_monster = new Monsters();
 	Tokens* player_tokens[20];
 	Cards* player_cards[10];
-
+	destruction_points = 0;
 	
 }
 
@@ -75,6 +77,14 @@ void player::setPosition(int i) {
 	position = i;
 }
 
+Monsters * player::getPlayer(string name, Active_Monsters * a[]) {
+	for (int i = 0; i < 6; i++) {
+		if (a[i]->getName() == name) {
+			return a[i];
+		}
+	}
+}
+
 int player::getPosition() {
 	return position;
 }
@@ -89,7 +99,19 @@ Cards* player::getCard(Cards* a) {
 
 }
 
+void player::removeDestructionPoints(int i) {
+	int d = destruction_points - i;
+	if (d < 0)
+		cout << "you do not have enough destruction points" << endl;
+	else {
+		destruction_points -= i;
+		cout << "You have " << destruction_points << " destruction points left" << endl;
+	}
+}
 
+int player::getDestructionPoints() {
+	return destruction_points;
+}
 
 Monsters* player::getMonster() {
 	return player_monster;
@@ -175,15 +197,10 @@ void player::rollDice() {
 }
 //it will take in the result of the dice and then it will convert the result in what the player can use
 /*
-faceList[0] = "Energy";
-	faceList[1] = "Attack";
-	faceList[2] = "Destruction";
-	faceList[3] = "Heal";
-	faceList[4] = "Celebrity";
-	faceList[5] = "Ouch!"
-
+some steps will need to be taken in the driver in order to do all required actions for :
 */
-void player::resolveDice() {
+void player::resolveDice(Map m, Active_Monsters * a[], BU* bu) {
+
 	//resetting the tracking variables to 0 in order to track the proper variables of the new dice roll
 	energy = 0;
 	attack = 0;
@@ -191,6 +208,7 @@ void player::resolveDice() {
 	heal = 0;
 	celebrity = 0;
 	ouch =0;
+	destruction_points = 0;
 	//calculating how many of each is present in the dice rolls in order to know what can be done 
 	for (int i = 0; i < 6; i++) {
 		if (dices[i].getDiceFace() == "Energy") {
@@ -220,10 +238,12 @@ void player::resolveDice() {
 	cout << celebrity << " Celebrity" << endl;
 	cout << ouch << " Ouch!" << endl;
 
-
+	//handling of the energy points
 	player_monster->addEnergyPoint(energy, player_monster);
+	//handling of the health points
 	player_monster->heal(heal, player_monster);
 	/*
+	handling of the celebrity points
 	if (celebrity >= 3) {
 		int vp = celebrity - 3;
 		int total = 1 + vp;
@@ -235,21 +255,126 @@ void player::resolveDice() {
 	}
 
 	*/
+	//resolving the ouch points
+
+
+	//resolving the destruction points
+	destruction_points = destruction;
+	while (destruction_points > 0) {
+		string b = m.getBorough(position)->getName();
+		Buildings* building;
+		Units* unit;
+		//checking if the player wants to destroy the building present in his borough
+		for (int i = 0; i < 7; i++) {
+			if (bu->get_building_from_set(i, b) != nullptr && bu->get_building_from_set(i,b)->getDurability()<=destruction_points) {
+				cout << "There is a building in your borough but you do not have enough destruction points to destroy it. " << endl;
+				break;
+			}else if (bu->get_building_from_set(i, b) != nullptr ) {
+				building = bu->get_building_from_set(i, b);
+				string build = building->getType();
+				int durability = building->getDurability();
+				string rewardT = building->getRewardType();
+				int reward = building->getReward();
+				cout << "You have in your burrough the building " << build << endl;
+				cout << "Durability: " << durability <<endl;
+				cout << "Reward:  " << reward << " " << rewardT << endl;
+
+				cout << "Do you wish to destroy the building? y/n" << endl;
+				string answer;
+				cin >> answer;
+
+				if (answer == "y") {
+					bu->destroy_building(durability, building, b);
+					if (rewardT == "heal") {
+						player_monster->heal(reward, player_monster);
+					}
+					else if (rewardT == "energy") {
+						player_monster->addEnergyPoint(reward, player_monster);
+					}
+					else if (rewardT == "victory point")
+						player_monster->addVictoryPoint(reward, player_monster);
+				
+				}
+
+				break;
+
+			}
+		}
+
+		//possible destruction of a unit
+		for (int i = 0; i < 7; i++) {
+			if (bu->get_unit_from_set(i, b) != nullptr && bu->get_unit_from_set(i, b)->getDurability() <= destruction_points) {
+				cout << "There is a unit in your borough but you do not have enough destruction points to destroy it. " << endl;
+				break;
+			}
+			else if (bu->get_unit_from_set(i, b) != nullptr) {
+				unit = bu->get_unit_from_set(i, b);
+				string build = unit->getType();
+				int durability = unit->getDurability();
+				string rewardT = unit->getRewardType();
+				int reward = unit->getReward();
+				cout << "You have in your burrough the building " << build << endl;
+				cout << "Durability: " << durability << endl;
+				cout << "Reward:  " << reward << " " << rewardT << endl;
+
+				cout << "Do you wish to destroy the unit? y/n" << endl;
+				string answer;
+				cin >> answer;
+
+				if (answer == "y") {
+					bu->destroy_building(durability, building, b);
+					if (rewardT == "heal") {
+						player_monster->heal(reward, player_monster);
+					}
+					else if (rewardT == "energy") {
+						player_monster->addEnergyPoint(reward, player_monster);
+					}
+					else if (rewardT == "victory point")
+						player_monster->addVictoryPoint(reward, player_monster);
+
+				}
+
+				break;
+
+			}
+		}
+
+		delete building;
+		delete unit;
+	
+	
+	}
+
 
 	//resolving the attack points
 
 	if (position == 8 || position == 9 || position == 10)
 	{
+		for (int i = 0; i < 8; i++) {
+			Borough* b = m.getBorough(i);
+			string ennemy = b->getPlayerName();
 
+			if (ennemy != "") {
+				a[i]->damageHealth(attack, a[i]);
+			}
+		
+		}
 
 	}
 	else {
-	
+		for (int i = 0; i < 3; i++) {
+			Borough* b = m.getBorough(i + 8);
+			string ennemy = b->getPlayerName();
+
+			if (ennemy != "") {
+				a[i]->damageHealth(attack, a[i]);
+			}
+		}
 	
 	}
 }
 
-//map methods
+
 
 //tokens methods
 //methods to add and remove tokens from the player
@@ -309,20 +434,20 @@ void player::move(string borough, Map m) {
 	if (borough == "Lower Manhattan" && statusLM == false && statusMM == false && statusUM == false) {
 		//setting previous position to empty
 		if (position != NULL) {
-			m.setBorough(position, false);
+			m.setBorough(position, false, "");
 		}
 		//moving to new borough
 		position = 8;
-		m.setBorough(8, true);
+		m.setBorough(8, true, player_monster->getName());
 	}
 	else if (borough == "Mid Manhattan" && position == 8) {
-		m.setBorough(8, false);
-		m.setBorough(9, true);
+		m.setBorough(8, false, "");
+		m.setBorough(9, true, player_monster->getName());
 		position = 9;
 	}
 	else if (borough == "Upper Manhattan" && position == 9) {
-		m.setBorough(9, false);
-		m.setBorough(10, true);
+		m.setBorough(9, false, "");
+		m.setBorough(10, true, player_monster->getName());
 		position = 10;
 
 	}
@@ -335,10 +460,10 @@ void player::move(string borough, Map m) {
 		
 		 if (borough == name && status == false) {
 			 if (position != NULL) {
-				 m.setBorough(position, false);
+				 m.setBorough(position, false, "");
 			 }
 			 position = i;
-			m.setBorough(i, true);
+			m.setBorough(i, true, player_monster->getName());
 			break;
 		
 		}
