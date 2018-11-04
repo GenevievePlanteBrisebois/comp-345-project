@@ -13,12 +13,12 @@ public:
 	BU();
 	~BU();
 
-	void destroy_building(int damage, Buildings* building, int index);
-	void destroy_unit(Units* a);
+	void destroy_building(int damage, Buildings* building, string burrough);
+	void destroy_unit(Units* a, string burrough);
 	void destroy_unit(int i);
 	void build_building_deck();
 	void shuffle();
-	Buildings* get_building_from_set(int i);
-	Units* get_unit_from_set(int i);
+	Buildings* get_building_from_set(int i, string burrough);
+	Units* get_unit_from_set(int i, string burrough);
 
 };
