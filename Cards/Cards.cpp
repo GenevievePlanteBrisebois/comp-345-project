@@ -14,7 +14,7 @@ using namespace std;
 	string card_effect;
 	string card_name;
 	bool status;
-	
+	string playerName;
 
 
 	//destructor
@@ -40,7 +40,12 @@ using namespace std;
 	int Cards::getCost() {
 		return energy_cost;
 	}
-
+	string Cards::getPlayerName() {
+		return playerName;
+	}
+	void Cards::setPlayerName(string name) {
+		playerName = name;
+	}
 	void Cards::setName(string na) {
 		card_name = na;
 	}
@@ -81,13 +86,14 @@ using namespace std;
 Cards::Cards() {
 
 }
-Cards::Cards(std::string name, int cost, string card_ty, string effect, bool status)
+Cards::Cards(std::string name, int cost, string card_ty, string effect, bool status, string nameP)
 {
 	card_name = name;
 	card_type = card_ty;
 	card_effect = effect;
 	energy_cost = cost;
 	status = false;
+	playerName = nameP;
 
 }
 

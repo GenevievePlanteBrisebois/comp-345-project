@@ -199,7 +199,7 @@ void player::rollDice() {
 /*
 some steps will need to be taken in the driver in order to do all required actions for :
 */
-void player::resolveDice(Map m, Active_Monsters * a[], BU* bu) {
+void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck * cards[]) {
 
 	//resetting the tracking variables to 0 in order to track the proper variables of the new dice roll
 	energy = 0;
@@ -243,18 +243,19 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu) {
 	//handling of the health points
 	player_monster->heal(heal, player_monster);
 	/*
-	handling of the celebrity points
+	handling of the celebrity points*/ 
+
 	if (celebrity >= 3) {
 		int vp = celebrity - 3;
 		int total = 1 + vp;
 		player_monster->addVictoryPoint(total, player_monster);
 		cout << "You get the Superstar Card" << endl;
-
+		
 
 	
 	}
 
-	*/
+	
 	//resolving the ouch points
 
 
