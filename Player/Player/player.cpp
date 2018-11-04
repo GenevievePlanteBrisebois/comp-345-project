@@ -17,9 +17,9 @@
 Monsters* player_monster;
 Tokens* player_tokens[20];
 Cards* player_cards[10];
-
+Dice * dices = new Dice[6];
 //variables to be able to keep track of the dices and what to do with the results 
-Dice* dices = new Dice[6];
+
 int energy;
 int attack;
 int destruction;
@@ -34,13 +34,14 @@ player::player() {
 	Tokens* player_tokens[20];
 	Cards* player_cards[10];
 
+	
 }
 
 player::~player(){
 	delete player_monster;
 	delete [] * player_tokens;
 	delete[] * player_cards;
-	delete[] * dices;
+	delete[]  dices;
 }
 
 //setters and getters
@@ -222,9 +223,30 @@ void player::resolveDice() {
 
 	player_monster->addEnergyPoint(energy, player_monster);
 	player_monster->heal(heal, player_monster);
+	/*
+	if (celebrity >= 3) {
+		int vp = celebrity - 3;
+		int total = 1 + vp;
+		player_monster->addVictoryPoint(total, player_monster);
+		cout << "You get the Superstar Card" << endl;
+
+
 	
+	}
+
+	*/
+
+	//resolving the attack points
+
+	if (position == 8 || position == 9 || position == 10)
+	{
 
 
+	}
+	else {
+	
+	
+	}
 }
 
 //map methods

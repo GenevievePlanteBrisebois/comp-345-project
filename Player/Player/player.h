@@ -10,7 +10,7 @@
 #include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Map Implementation\Map.h"
 #include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Map Implementation\Borough.h"
 
-class player:public Map {
+class player {
 public:
 	player();
 	~player();
@@ -27,7 +27,7 @@ public:
 	void removeToken(Tokens* token);
 
 	void rollDice();
-	void resolveDice();
+	void resolveDice(Map m);
 
 	void useCard(Cards* a);
 	void buyCard( Cards* a);
