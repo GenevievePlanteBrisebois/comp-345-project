@@ -17,7 +17,7 @@ using std::string;
 
 int numNodes;
 vector<string> *adjList;
-public:
+
 Borough * borough [11];
 
 //hard code of borough done by Genevieve Plante-Brisebois 40003112
@@ -86,7 +86,7 @@ Map::~Map() {
 
 
 //converts a map text file into a graph data structure
-void Map::mapLoader(string filename, vector<string> adj[]) {
+void Map::mapLoader(string filename) {
 
 	string line;
 	ifstream file(filename);

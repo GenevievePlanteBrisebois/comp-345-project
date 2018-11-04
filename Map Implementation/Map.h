@@ -16,7 +16,7 @@ public:
 	Map();
 	void addEdge(vector<string> adjList[], int src, string dest);
 	void printMap(vector<string> adj[], int N, string nodeList[]);
-	void mapLoader(string filename, vector <string> adj[]);
+	void mapLoader(string filename);
 	void setBorough(int i, bool status, string playerName);
 	Borough* getBorough(int i);
 	~Map();
