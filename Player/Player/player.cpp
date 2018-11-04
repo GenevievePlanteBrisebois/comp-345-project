@@ -10,6 +10,8 @@
 #include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Cards\Active_Monsters.h"
 #include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Cards\Tokens.h"
 #include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Dice\Dice.h"
+#include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Map Implementation\Map.h"
+#include "C:\Users\Genevieve\Documents\SCHOOL\University\fall 2018\comp 345\comp345-kingsOfNY\Map Implementation\Borough.h"
 
 //starting to write the player methods
 Monsters* player_monster;
@@ -17,14 +19,15 @@ Tokens* player_tokens[20];
 Cards* player_cards[10];
 
 //variables to be able to keep track of the dices and what to do with the results 
-Dice * dices = new Dice[6];
+Dice* dices = new Dice[6];
 int energy;
 int attack;
 int destruction;
 int heal;
 int celebrity;
 int ouch;
-
+//variable to store the position of the player. refers to the index in the map borough array
+int position;
 //constructors and destructors
 player::player() {
 	player_monster = new Monsters();
@@ -35,9 +38,9 @@ player::player() {
 
 player::~player(){
 	delete player_monster;
-	delete [] player_tokens;
-	delete[] player_cards;
-	delete[] dices;
+	delete [] * player_tokens;
+	delete[] * player_cards;
+	delete[] * dices;
 }
 
 //setters and getters
@@ -67,6 +70,13 @@ void player::setCard(Cards* a) {
 	}
 }
 
+void player::setPosition(int i) {
+	position = i;
+}
+
+int player::getPosition() {
+	return position;
+}
 Cards* player::getCard(Cards* a) {
 	string name = a->getName();
 	for (int i = 0; i < 20; i++) {
@@ -125,7 +135,7 @@ void player::rollDice() {
 				cin >> answer;
 				if (answer == "y") {
 					int face2 = rand() % 6;
-					dices[j]. rollDice();
+					dices[j]. rollDice(face2);
 				
 				}	
 			}
@@ -211,6 +221,10 @@ void player::resolveDice() {
 
 
 	player_monster->addEnergyPoint(energy, player_monster);
+	player_monster->heal(heal, player_monster);
+	
+
+
 }
 
 //map methods
@@ -264,3 +278,52 @@ void player::buyCard( Cards* a) {
 		this->setCard(a);
 	}
 }
+
+void player::move(string borough, Map m) {
+	bool statusLM = m.getBorough(8)->getStatus();
+	bool statusMM = m.getBorough(9)->getStatus();
+	bool statusUM = m.getBorough(10)->getStatus();
+	//cases to move to or within manhattan
+	if (borough == "Lower Manhattan" && statusLM == false && statusMM == false && statusUM == false) {
+		//setting previous position to empty
+		if (position != NULL) {
+			m.setBorough(position, false);
+		}
+		//moving to new borough
+		position = 8;
+		m.setBorough(8, true);
+	}
+	else if (borough == "Mid Manhattan" && position == 8) {
+		m.setBorough(8, false);
+		m.setBorough(9, true);
+		position = 9;
+	}
+	else if (borough == "Upper Manhattan" && position == 9) {
+		m.setBorough(9, false);
+		m.setBorough(10, true);
+		position = 10;
+
+	}
+
+
+	//other boroughs
+	for (int i = 0; i < 8; i++) {
+		string name = m.getBorough(i)->getName();
+		bool status = m.getBorough(i)->getStatus();
+		
+		 if (borough == name && status == false) {
+			 if (position != NULL) {
+				 m.setBorough(position, false);
+			 }
+			 position = i;
+			m.setBorough(i, true);
+			break;
+		
+		}
+		else
+			cout << "This borough is full. Choose another borough or stay in your current borough" << endl;
+
+	
+	}
+}
+
