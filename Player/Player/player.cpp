@@ -15,6 +15,7 @@
 #include "../comp345-kingsOfNY/Map Implementation/Map.h"
 #include "../comp345-kingsOfNY/Map Implementation/Borough.h"
 
+using namespace std;
 
 //starting to write the player methods
 Monsters* player_monster;
@@ -80,10 +81,10 @@ void player::setPosition(int i) {
 	position = i;
 }
 
-Monsters * player::getPlayer(string name, Active_Monsters * a[]) {
+Monsters * player::getPlayer(string name, Active_Monsters * a) {
 	for (int i = 0; i < 6; i++) {
-		if (a[i]->getName() == name) {
-			return a[i];
+		if (a->getActive(i)->getName() == name) {
+			return a->getActive(i);
 		}
 	}
 }
@@ -351,7 +352,7 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 			for (int i = 0; i < 11; i++) {
 			//if borough occupied execute else move on
 				if (m->getBorough(i)->getStatus() == true) {
-					player * player1;
+					
 					string player1name = m->getBorough(i)->getPlayerName();
 					string areaName = m->getBorough(i)->getName();
 					int count = 0;
@@ -362,14 +363,20 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 					}
 					//getting the player
 					for (int i = 0; i < 6; i++) {
-						if (players[i]->getMonster()->getName() == player1name)
+						if (players[i]->getMonster()->getName() == player1name) {
+							
+							//doing damage to the player
+							player * player1;
 							player1 = players[i];
-					}
-					//doing damage to the player
-					player1->getMonster()->damageHealth(count, player_monster);
-					
+							player1->getMonster()->damageHealth(count, player_monster);
+								
 					//clean up the pointer
 					delete player1;
+					break;
+						}
+					}
+					
+				
 
 
 				}

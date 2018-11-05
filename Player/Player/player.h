@@ -12,6 +12,7 @@
 #include "../comp345-kingsOfNY/Map Implementation/Map.h"
 #include "../comp345-kingsOfNY/Map Implementation/Borough.h"
 
+using namespace std;
 
 class player {
 public:
@@ -24,7 +25,7 @@ public:
 	Cards* getCard(Cards* a);
 	Monsters* getMonster();
 	Tokens* getToken(int i);
-	Monsters* getPlayer(string name, Active_Monsters * a[]);
+	Monsters* getPlayer(string name, Active_Monsters * a);
 
 	void addToken(Tokens* token);
 	void removeToken(Tokens* token);
