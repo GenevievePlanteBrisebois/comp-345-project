@@ -8,3 +8,13 @@ comp 345
 #pragma once
 #include <iostream>
 #include "..\comp345-kingsOfNY\Player\Player\player.h"
+
+
+class BuyCardEngine {
+	
+public:
+	BuyCardEngine();
+	~BuyCardEngine();
+	void buyCard(player* player);
+
+}
