@@ -12,7 +12,7 @@ using namespace std;
 	int monster_health;
 	int monster_victory_point;
 	int energy_point;
-
+	int countAttack;
 
 
 	//making getters and setters for the elements of the monsters
@@ -27,14 +27,18 @@ using namespace std;
 		return monster_victory_point;
 
 	}
-
+	int Monster::getCountAttack() {
+		return countAttack;
+	}
 	int  Monsters::getHealth() {
 		return monster_health;
 	}
 	int Monsters::getEnergy() {
 		return energy_point;
 	}
-
+	void Monsters::setCountAttack(int i) {
+		countAttack = 0;
+	}
 	void  Monsters::setHealth(int health) {
 		monster_health = health;
 	}
@@ -76,6 +80,7 @@ using namespace std;
 			monster_health = 10;
 			monster_victory_point = 0;
 			energy_point = 0;
+			countAttack = 0;
 		}
 		else
 			throw invalid_argument("Name is not a valid Monster Name. Pick from the available names");
@@ -137,6 +142,9 @@ using namespace std;
 
 		if (verifyDeath(pointer) == true)
 			death(pointer);
+		if (this->getName() != pointer->getName()) {
+			countAttack += 1;
+		}
 
 	}
 	//making function to heal

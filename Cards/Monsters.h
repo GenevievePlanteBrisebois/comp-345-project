@@ -13,13 +13,14 @@ public:
 	int getVictoryPoint();
 	int getHealth();
 	int getEnergy();
+	int getCountAttack();
 	bool is_monster_real(string a);
 	void setHealth(int health);
 	void setVictoryPoints(int victory_point);
 	void setEnergy(int e);
 	void addEnergyPoint(int e, Monsters* a);
 	void removeEnergyPoint(int e, Monsters* a);
-
+	void setCountAttack(int i);
 
 	bool verifyVictory(Monsters* a);
 	bool verifyDeath(Monsters* a);

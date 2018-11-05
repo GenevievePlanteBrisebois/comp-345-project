@@ -545,7 +545,7 @@ void player::buyCard( Cards* a) {
 	}
 }
 
-void player::move(string borough, Map m) {
+void player::move(string borough, Map* m) {
 	bool statusLM = m.getBorough(8)->getStatus();
 	bool statusMM = m.getBorough(9)->getStatus();
 	bool statusUM = m.getBorough(10)->getStatus();
