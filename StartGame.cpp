@@ -89,6 +89,9 @@ StartGame::StartGame(player* player1, player* player2, player* player3, player* 
 	players6[6] = new player();
 }
 
+StartGame::StartGame() {
+	//default constructor
+}
 
 void StartGame::SelectPlayers() {
 	player* p1 = new player();
@@ -130,7 +133,7 @@ void StartGame::SelectPlayers() {
 		SetNumPlayers(6);
 		break;
 	}
-
+	SetNumPlayers(num);
 
 }
 
@@ -187,10 +190,10 @@ StartGame::~StartGame() {
 	delete d;
 }
 //create the cards
-void BuildCards() {
+void StartGame::BuildCards() {
 	deck = new Cards_Deck();
 }
-void BuildTokens() {
+void StartGame::BuildTokens() {
 	//build tokens
 	Tokens* token = new Tokens();
 	Tokens* carapace[15];
@@ -214,7 +217,7 @@ void BuildTokens() {
 	}
 }
 
-void BuildBuildings() {
+void StartGame::BuildBuildings() {
 	//build buildings
 	bu = new BU();
 	bu->build_building_deck();
@@ -436,8 +439,3 @@ void SelectOrder(int max) {
 			players6[i] = o[i];
 		}
 	}
-
-
-
-
-
