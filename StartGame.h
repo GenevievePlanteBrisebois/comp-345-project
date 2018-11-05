@@ -1,5 +1,7 @@
 #pragma once
 #include "Player/Player/player.h"
+//by Batoul Yehia 40010912
+//part 1 and 2
 class StartGame {
 public:
 	void SelectPlayers();
