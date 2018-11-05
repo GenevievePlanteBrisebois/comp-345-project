@@ -34,6 +34,7 @@ player* players6[6];
 
 Cards_Deck* deck;
 
+//constructor for two players
 StartGame::StartGame(player* player1, player* player2) {
 	p1 = player1;
 	p2 = player2;
@@ -44,6 +45,7 @@ StartGame::StartGame(player* player1, player* player2) {
 
 }
 
+//constructor for three players
 StartGame::StartGame(player* player1, player* player2, player* player3) {
 	p1 = player1;
 	p2 = player2;
@@ -53,6 +55,7 @@ StartGame::StartGame(player* player1, player* player2, player* player3) {
 
 }
 
+//constructor for four players
 StartGame::StartGame(player* player1, player* player2, player* player3, player* player4) {
 	p1 = player1;
 	p2 = player2;
@@ -62,7 +65,7 @@ StartGame::StartGame(player* player1, player* player2, player* player3, player* 
 	players4[4] = new player();
 }
 
-
+//contructor for five players
 StartGame::StartGame(player* player1, player* player2, player* player3, player* player4, player* player5) {
 	p1 = player1;
 	p2 = player2;
@@ -73,6 +76,8 @@ StartGame::StartGame(player* player1, player* player2, player* player3, player* 
 	players5[5] = new player();
 
 }
+
+//constructor for six players
 StartGame::StartGame(player* player1, player* player2, player* player3, player* player4, player* player5, player* player6) {
 	p1 = player1;
 	p2 = player2;
@@ -83,6 +88,8 @@ StartGame::StartGame(player* player1, player* player2, player* player3, player* 
 
 	players6[6] = new player();
 }
+
+
 void StartGame::SelectPlayers() {
 	player* p1 = new player();
 	player* p2 = new player();
@@ -163,6 +170,12 @@ StartGame::~StartGame() {
 	bu = NULL;
 	d = NULL;
 
+	
+	delete[] players2;
+	delete[] players3;
+	delete[] players4;
+	delete[] players5;
+	delete[] players6;
 	delete p1;
 	delete p2;
 	delete p3;
@@ -208,6 +221,7 @@ void BuildBuildings() {
 	bu->shuffle(); //shuffle them
 }
 
+//function that checks which player rolls the most Attacks
 int SelectFirst() {
 	d = new Dice();
 	string face;
@@ -235,21 +249,22 @@ int SelectFirst() {
 	return max;
 	}
 
+//selects the order of the players based on which player starts
 void SelectOrder(int max) {
 	cout << "Here is now the order of the players: " << endl;
 
 	switch (numPlayers) {
 	case 2:
 		player* order[2];
-		if (max == 1) {
+		if (max == 1) { //if player 1 got the the most attacks, they start first
 			order[0] = p1;
 			order[1] = p2;
 		}
-		if (max == 2) {
+		if (max == 2) { //if player 2 got the most attacks, they start first
 			order[0] = p2;
 			order[1] = p1;
 		}
-		setPlayerOrder2(order);
+		setPlayerOrder2(order); //set the order of the players based on what is given
 		break;
 	case 3:
 		player* order[3];
@@ -394,7 +409,7 @@ void SelectOrder(int max) {
 	}
 }
 
-
+//Different setOrder functions based on the number of players
 	void setPlayerOrder2(player* o[2]) {
 		for (int i = 0; i < 2; i++) {
 			players2[i] = o[i];
