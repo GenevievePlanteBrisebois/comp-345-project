@@ -1,16 +1,4 @@
-/*
-Part 1: Game start
-Provide a group of C++ classes that implements a user interaction mechanism to start the game by allowing
-the player to:
-1) Select a map from a list of files as stored in a directory.
-2) Select the number of players in the game (2-6 players).
-The code should load all the game pieces and use the map loader to load the selected and appropriate map,
-create all the players, assign dice rolling facilities to the players, create a deck of cards, and assign an empty
-hand of cards to each player.
-You must deliver a driver that demonstrates that 1) different valid maps can be loaded and their validity is
-verified (i.e. it is a connected graph, etc.), and invalid maps are rejected without the program crashing; 2)
-the right number of players is created, a deck with the right number of cards is created.
-*/
+//A2 part1 and part2
 
 //Written by Batoul Yehia 40010912
 
