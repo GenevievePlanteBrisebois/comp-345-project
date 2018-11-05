@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include "player.h"
 //includes of .h that are in different solutions
+
 #include "../comp345-kingsOfNY/Cards/Cards_Deck.h"
 #include "../comp345-kingsOfNY/Cards/BU.h"
 #include "../comp345-kingsOfNY/Cards/Active_Monsters.h"
@@ -13,6 +14,7 @@
 #include "../comp345-kingsOfNY/Dice/Dice.h"
 #include "../comp345-kingsOfNY/Map Implementation/Map.h"
 #include "../comp345-kingsOfNY/Map Implementation/Borough.h"
+
 
 //starting to write the player methods
 Monsters* player_monster;
