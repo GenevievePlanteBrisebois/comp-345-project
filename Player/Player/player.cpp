@@ -33,6 +33,7 @@ int ouch;
 //variable to store the position of the player. refers to the index in the map borough array
 int position;
 //constructors and destructors
+
 player::player() {
 	player_monster = new Monsters();
 	Tokens* player_tokens[20];
@@ -202,7 +203,7 @@ void player::rollDice() {
 /*
 some steps will need to be taken in the driver in order to do all required actions for :
 */
-void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards, player* players[]) {
+void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, player* players[]) {
 
 	//resetting the tracking variables to 0 in order to track the proper variables of the new dice roll
 	energy = 0;
@@ -253,7 +254,7 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards
 		int total = 1 + vp;
 		player_monster->addVictoryPoint(total, player_monster);
 		cout << "You get the Superstar Card" << endl;
-		Cards* super = cards.getSpecialCards(1);
+		Cards* super = cards->getSpecialCards(1);
 		buyCard(super);
 		string player2 = super->getPlayerName();
 		if(player2== "")
@@ -274,7 +275,7 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards
 	//resolving the ouch points
 	if (ouch == 1) {
 		int count = 0;
-		string area = m.getBorough(position)->getName();
+		string area = m->getBorough(position)->getName();
 		//counting the number of units in the borough of the player
 		for (int i = 0; i < 7; i++) {
 			if (bu->get_unit_from_set(i,area) != nullptr)
@@ -285,7 +286,7 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards
 	}
 	else if (ouch == 2) {
 		int count = 0;
-		string area = m.getBorough(position)->getName();
+		string area = m->getBorough(position)->getName();
 		//counting the number of units in the borough of the player
 		for (int i = 0; i < 7; i++) {
 			if (bu->get_unit_from_set(i, area) != nullptr)
@@ -295,7 +296,7 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards
 		string player2name;
 		//verify if there are more monsters in the borough
 		for (int i = 0; i < 11; i++) {
-			Borough * maparea = m.getBorough(i);
+			Borough * maparea = m->getBorough(i);
 			if (maparea->getName() == area && maparea->getPlayerName() != player_monster->getName()) {
 				player2name = maparea->getPlayerName();
 			
@@ -329,7 +330,7 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards
 		//adding the card to the 
 		player_monster->addVictoryPoint(3, player_monster);
 		cout << "You get the Statue of Liberty Card" << endl;
-		Cards* super = cards.getSpecialCards(0);
+		Cards* super = cards->getSpecialCards(0);
 		buyCard(super);
 		string player2 = super->getPlayerName();
 		//case no one had the card previously
@@ -349,10 +350,10 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards
 		//doing a for loop to affect each monster one at the time
 			for (int i = 0; i < 11; i++) {
 			//if borough occupied execute else move on
-				if (m.getBorough(i)->getStatus() == true) {
+				if (m->getBorough(i)->getStatus() == true) {
 					player * player1;
-					string player1name = m.getBorough(i)->getPlayerName();
-					string areaName = m.getBorough(i)->getName();
+					string player1name = m->getBorough(i)->getPlayerName();
+					string areaName = m->getBorough(i)->getName();
 					int count = 0;
 					//counting the number of units in the borough of the player
 					for (int i = 0; i < 7; i++) {
@@ -382,7 +383,7 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards
 	//resolving the destruction points
 	destruction_points = destruction;
 	while (destruction_points > 0) {
-		string b = m.getBorough(position)->getName();
+		string b = m->getBorough(position)->getName();
 		Buildings* building;
 		Units* unit;
 		//checking if the player wants to destroy the building present in his borough
@@ -472,7 +473,7 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards
 	if (position == 8 || position == 9 || position == 10)
 	{
 		for (int i = 0; i < 8; i++) {
-			Borough* b = m.getBorough(i);
+			Borough* b = m->getBorough(i);
 			string ennemy = b->getPlayerName();
 
 			if (ennemy != "") {
@@ -484,7 +485,7 @@ void player::resolveDice(Map m, Active_Monsters * a[], BU* bu, Cards_Deck  cards
 	}
 	else {
 		for (int i = 0; i < 3; i++) {
-			Borough* b = m.getBorough(i + 8);
+			Borough* b = m->getBorough(i + 8);
 			string ennemy = b->getPlayerName();
 
 			if (ennemy != "") {
@@ -548,27 +549,27 @@ void player::buyCard( Cards* a) {
 }
 
 void player::move(string borough, Map* m) {
-	bool statusLM = m.getBorough(8)->getStatus();
-	bool statusMM = m.getBorough(9)->getStatus();
-	bool statusUM = m.getBorough(10)->getStatus();
+	bool statusLM = m->getBorough(8)->getStatus();
+	bool statusMM = m->getBorough(9)->getStatus();
+	bool statusUM = m->getBorough(10)->getStatus();
 	//cases to move to or within manhattan
 	if (borough == "Lower Manhattan" && statusLM == false && statusMM == false && statusUM == false) {
 		//setting previous position to empty
 		if (position != NULL) {
-			m.setBorough(position, false, "");
+			m->setBorough(position, false, "");
 		}
 		//moving to new borough
 		position = 8;
-		m.setBorough(8, true, player_monster->getName());
+		m->setBorough(8, true, player_monster->getName());
 	}
 	else if (borough == "Mid Manhattan" && position == 8) {
-		m.setBorough(8, false, "");
-		m.setBorough(9, true, player_monster->getName());
+		m->setBorough(8, false, "");
+		m->setBorough(9, true, player_monster->getName());
 		position = 9;
 	}
 	else if (borough == "Upper Manhattan" && position == 9) {
-		m.setBorough(9, false, "");
-		m.setBorough(10, true, player_monster->getName());
+		m->setBorough(9, false, "");
+		m->setBorough(10, true, player_monster->getName());
 		position = 10;
 
 	}
@@ -576,15 +577,15 @@ void player::move(string borough, Map* m) {
 
 	//other boroughs
 	for (int i = 0; i < 8; i++) {
-		string name = m.getBorough(i)->getName();
-		bool status = m.getBorough(i)->getStatus();
+		string name = m->getBorough(i)->getName();
+		bool status = m->getBorough(i)->getStatus();
 		
 		 if (borough == name && status == false) {
 			 if (position != NULL) {
-				 m.setBorough(position, false, "");
+				 m->setBorough(position, false, "");
 			 }
 			 position = i;
-			m.setBorough(i, true, player_monster->getName());
+			m->setBorough(i, true, player_monster->getName());
 			break;
 		
 		}

@@ -23,6 +23,11 @@ using namespace std;
 		return active;
 	}
 
+	Monsters* Active_Monsters::getActive(int i) {
+		return active_monsters[i];
+
+	}
+
 	//make sure to verify that the monster is not already active first so that it is valid to take that monster
 	//making a method in order to add a monster to the array of active monsters
 	void Active_Monsters::addActive(string name) {

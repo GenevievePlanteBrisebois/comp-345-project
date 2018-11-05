@@ -30,7 +30,7 @@ public:
 	void removeToken(Tokens* token);
 
 	void rollDice();
-	void resolveDice(Map m, Active_Monsters * a[], BU* b, Cards_Deck cards, player* player[]);
+	void resolveDice(Map* m, Monsters * a[], BU* b, Cards_Deck* cards, player* player[]);
 
 	void useCard(Cards* a);
 	void buyCard( Cards* a);
