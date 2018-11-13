@@ -27,7 +27,7 @@ using namespace std;
 		return monster_victory_point;
 
 	}
-	int Monster::getCountAttack() {
+	int Monsters::getCountAttack() {
 		return countAttack;
 	}
 	int  Monsters::getHealth() {
@@ -113,7 +113,7 @@ using namespace std;
 	bool Monsters::verifyVictory(Monsters* a) {
 		bool victory;
 
-		if (a.getVictoryPoint() >= 20)
+		if (a->getVictoryPoint() >= 20)
 			return victory = true;
 		else
 			return victory = false;
@@ -123,7 +123,7 @@ using namespace std;
 
 	bool Monsters::verifyDeath(Monsters* a) {
 		bool dead;
-		if (a.getHealth() <= 0)
+		if (a->getHealth() <= 0)
 			return dead = true;
 		else
 			return dead = false;
@@ -134,11 +134,11 @@ using namespace std;
 
 	//making a function to take away health
 	void Monsters::damageHealth(int i,  Monsters* pointer) {
-		int  health = pointer.getHealth();
+		int  health = pointer->getHealth();
 
 		health = health - i;
 
-		pointer.setHealth(health);
+		pointer->setHealth(health);
 
 		if (verifyDeath(pointer) == true)
 			death(pointer);
@@ -149,37 +149,37 @@ using namespace std;
 	}
 	//making function to heal
 	void Monsters::heal(int i, Monsters* monster) {
-		int health = monster.getHealth();
+		int health = monster->getHealth();
 
 		health = health + i;
 
 		if (health > 10)
 			health = 10;
 
-		monster.setHealth(health);
+		monster->setHealth(health);
 		
 
 	}
 	//making function to add victory points
 	void Monsters::addVictoryPoint(int i, Monsters* monster) {
-		int vp = monster.getVictoryPoint();
+		int vp = monster->getVictoryPoint();
 
 		vp = vp + i;
 
-		monster.setVictoryPoints(vp);
+		monster->setVictoryPoints(vp);
 
 		verifyVictory(monster);
 	}
 	//making function to take away victory points
 	void Monsters::loseVictoryPoint(int i, Monsters* monster) {
-		int vp = monster.getVictoryPoint();
+		int vp = monster->getVictoryPoint();
 
 		vp = vp - i;
 
 		if (vp <= 0)
 			vp = 0;
 
-		monster.setVictoryPoints(vp);
+		monster->setVictoryPoints(vp);
 	}
 	//destructor(monster died)
 	void Monsters::death(Monsters* a) {
