@@ -18,10 +18,10 @@ using std::string;
 int numNodes;
 vector<string> *adjList;
 
-Borough * borough [11];
+//Borough * borough [11];
 
 //hard code of borough done by Genevieve Plante-Brisebois 40003112
-
+/*
 borough[0] = new Borough(false, "Staten Island", "");
 borough[1] = new Borough(false, "Staten Island", "");
 borough[2] = new Borough(false, "Bronx", "");
@@ -33,6 +33,8 @@ borough[7] = new Borough(false, "Brooklyn", "");
 borough[8] = new Borough(false, "Lower Manhattan", "");
 borough[9] = new Borough(false, "Mid Manhattan", "");
 borough[10] = new Borough(false, "Upper Manhattan", "");
+*/
+/*
 Borough* Map::getBorough(int i) {
 	return borough[i];
 }
@@ -40,6 +42,7 @@ Borough* Map::getBorough(int i) {
 void Map::setBorough(int i, bool status, string name) {
 	borough[i].setStatus(status);
 }
+*/
 
 
 //Constructor

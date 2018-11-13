@@ -30,7 +30,7 @@ int main2() {
 	Map m2(count);
 
 	//loads the map into a graph data structure
-	m2.mapLoader("map.txt", adjList);
+	m2.mapLoader("map.txt");
 
 	return 0;
 }
