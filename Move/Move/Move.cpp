@@ -26,9 +26,9 @@ Move::~Move() {
 
 void Move::move(player* player, Map* m) {
 	//verification that manhattan is empty
-	if (m->getBorough(8)->getStatus() == false && m->getBorough(9)->getStatus() == false && m->getBorough(10)->getStatus() == false) {
+	if (m->getBorough(8)->getBoroughStatus() == false && m->getBorough(9)->getBoroughStatus() == false && m->getBorough(10)->getBoroughStatus() == false) {
 		cout << "Manhattan is empty and as such you are moving to Lower Manhattan" << endl;
-		player->move(m->getBorough(8)->getName(), m);
+		player->move(m->getBorough(8)->getBName(), m);
 	}
 	//case player is in manhattan and has been attacked
 	else if (player->getPosition() == 8 && player->getMonster()->getCountAttack()!=0) {
@@ -38,7 +38,7 @@ void Move::move(player* player, Map* m) {
 		int ans;
 		cin >> ans;
 		if (ans=1)
-		player->move(m->getBorough(9)->getName(), m);
+		player->move(m->getBorough(9)->getBName(), m);
 		else {
 			cout << "Your options to move are: \n1- Staten Island \n 2- Bronx \n3-Queens \n4-Brooklyn \n5- Stay" << endl;
 			int answer;
@@ -65,24 +65,24 @@ void Move::move(player* player, Map* m) {
 		int ans;
 		cin >> ans;
 		if (ans = 1)
-		player->move(m->getBorough(10)->getName(), m);
+		player->move(m->getBorough(10)->getBName(), m);
 	}
 	//case the player is in lower manhattan and needs to move to midtown
 	else if (player->getPosition() == 8) {
 
 		cout << "You are moving to Mid Manhattan" << endl;
-		player->move(m->getBorough(9)->getName(), m);
+		player->move(m->getBorough(9)->getBName(), m);
 	}
 	else if (player->getPosition() == 9) {
 		cout << "You are moving to Upper Manhattan" << endl;
-		player->move(m->getBorough(10)->getName(), m);
+		player->move(m->getBorough(10)->getBName(), m);
 	}
 	//case player is already in upper manhattan and gannot go further unless attacked
 	else if (player->getPosition() == 10) {
 		cout << "You do not need to move as you are in Upper Manhattan" << endl;
 	}
 	//case there is someone in manhattan
-	else if (m->getBorough(8)->getStatus() == true || m->getBorough(9)->getStatus() == true || m->getBorough(10)->getStatus() == true) {
+	else if (m->getBorough(8)->getBoroughStatus() == true || m->getBorough(9)->getBoroughStatus() == true || m->getBorough(10)->getBoroughStatus() == true) {
 		player->getMonster()->setCountAttack(0);
 		cout << "There is already a monster in Manhattan. Please choose another borough to move to or stay in your current borough. write the number corresponding to your choice" << endl;
 		cout << "1- Staten Island \n 2- Bronx \n3-Queens \n4-Brooklyn \n5- Stay" << endl;

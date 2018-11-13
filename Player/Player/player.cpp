@@ -276,7 +276,7 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 	//resolving the ouch points
 	if (ouch == 1) {
 		int count = 0;
-		string area = m->getBorough(position)->getName();
+		string area = m->getBorough(position)->getBName();
 		//counting the number of units in the borough of the player
 		for (int i = 0; i < 7; i++) {
 			if (bu->get_unit_from_set(i,area) != nullptr)
@@ -287,7 +287,7 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 	}
 	else if (ouch == 2) {
 		int count = 0;
-		string area = m->getBorough(position)->getName();
+		string area = m->getBorough(position)->getBName();
 		//counting the number of units in the borough of the player
 		for (int i = 0; i < 7; i++) {
 			if (bu->get_unit_from_set(i, area) != nullptr)
@@ -298,7 +298,7 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 		//verify if there are more monsters in the borough
 		for (int i = 0; i < 11; i++) {
 			Borough * maparea = m->getBorough(i);
-			if (maparea->getName() == area && maparea->getPlayerName() != player_monster->getName()) {
+			if (maparea->getBName() == area && maparea->getPlayerName() != player_monster->getName()) {
 				player2name = maparea->getPlayerName();
 			
 			}else
@@ -351,10 +351,10 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 		//doing a for loop to affect each monster one at the time
 			for (int i = 0; i < 11; i++) {
 			//if borough occupied execute else move on
-				if (m->getBorough(i)->getStatus() == true) {
+				if (m->getBorough(i)->getBoroughStatus() == true) {
 					
 					string player1name = m->getBorough(i)->getPlayerName();
-					string areaName = m->getBorough(i)->getName();
+					string areaName = m->getBorough(i)->getBName();
 					int count = 0;
 					//counting the number of units in the borough of the player
 					for (int i = 0; i < 7; i++) {
@@ -390,7 +390,7 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 	//resolving the destruction points
 	destruction_points = destruction;
 	while (destruction_points > 0) {
-		string b = m->getBorough(position)->getName();
+		string b = m->getBorough(position)->getBName();
 		Buildings* building;
 		Units* unit;
 		//checking if the player wants to destroy the building present in his borough
@@ -556,9 +556,9 @@ void player::buyCard( Cards* a) {
 }
 
 void player::move(string borough, Map* m) {
-	bool statusLM = m->getBorough(8)->getStatus();
-	bool statusMM = m->getBorough(9)->getStatus();
-	bool statusUM = m->getBorough(10)->getStatus();
+	bool statusLM = m->getBorough(8)->getBoroughStatus();
+	bool statusMM = m->getBorough(9)->getBoroughStatus();
+	bool statusUM = m->getBorough(10)->getBoroughStatus();
 	//cases to move to or within manhattan
 	if (borough == "Lower Manhattan" && statusLM == false && statusMM == false && statusUM == false) {
 		//setting previous position to empty
@@ -584,8 +584,8 @@ void player::move(string borough, Map* m) {
 
 	//other boroughs
 	for (int i = 0; i < 8; i++) {
-		string name = m->getBorough(i)->getName();
-		bool status = m->getBorough(i)->getStatus();
+		string name = m->getBorough(i)->getBName();
+		bool status = m->getBorough(i)->getBoroughStatus();
 		
 		 if (borough == name && status == false) {
 			 if (position != NULL) {
