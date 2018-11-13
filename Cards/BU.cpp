@@ -300,45 +300,45 @@ BU ::~BU()
 {
 	delete[] * start_set;
 	
-	delete[] * lower_manhattan_buildings[7];
-	delete[] * midtown_buildings[7];
-	delete[] * upper_buildings[7];
-	delete[] * queens_buildings[6];
-	delete[] * staten_buildings[6];
-	delete[] * bronx_buildings[6];
-	delete[] * brooklyn_buildings[6];
+	delete[]  lower_manhattan_buildings[7];
+	delete[]  midtown_buildings[7];
+	delete[]  upper_buildings[7];
+	delete[]  queens_buildings[6];
+	delete[]  staten_buildings[6];
+	delete[]  bronx_buildings[6];
+	delete[]  brooklyn_buildings[6];
 
-	delete[] * lower_manhattan_units[7];
-	delete[] * midtown_units[7];
-	delete[] * upper_units[7];
-	delete[] * queens_units[6];
-	delete[] * staten_units[6];
-	delete[] * bronx_units[6];
-	delete[] * brooklyn_units[6];
+	delete[] lower_manhattan_units[7];
+	delete[] midtown_units[7];
+	delete[] upper_units[7];
+	delete[] queens_units[6];
+	delete[] staten_units[6];
+	delete[] bronx_units[6];
+	delete[] brooklyn_units[6];
 
 
 }
 
 Buildings* BU::get_building_from_set(int i, string borrough) {
-	if (burrough == "Staten Island") {
+	if (borrough == "Staten Island") {
 		return	staten_buildings[i];
 	}
-	else if (burrough == "Lower Manhattan") {
+	else if (borrough == "Lower Manhattan") {
 		return 	lower_manhattan_buildings[i];
 	}
-	else if (burrough == "Bronx") {
+	else if (borrough == "Bronx") {
 		return bronx_buildings[i];
 	}
-	else if (burrough == "Queens") {
+	else if (borrough == "Queens") {
 		return queens_buildings[i];
 	}
-	else if (burrough == "Brooklyn") {
+	else if (borrough == "Brooklyn") {
 		return brooklyn_buildings[i];
 	}
-	else if (burrough == "Mid Manhattan") {
+	else if (borrough == "Mid Manhattan") {
 		return midtown_buildings[i];
 	}
-	else if (burrough == "Upper Manhattan") {
+	else if (borrough == "Upper Manhattan") {
 		return upper_buildings[i] ;
 	}
 
@@ -346,25 +346,25 @@ Buildings* BU::get_building_from_set(int i, string borrough) {
 	
 }
 Units* BU:: get_unit_from_set(int i, string borrough) {
-	if (burrough == "Staten Island") {
+	if (borrough == "Staten Island") {
 		return staten_units[i];
 	}
-	else if (burrough == "Lower Manhattan") {
+	else if (borrough == "Lower Manhattan") {
 		return lower_manhattan_units[i];
 	}
-	else if (burrough == "Bronx") {
+	else if (borrough == "Bronx") {
 		return bronx_units[i];
 	}
-	else if (burrough == "Queens") {
+	else if (borrough == "Queens") {
 		return queens_units[i];
 	}
-	else if (burrough == "Brooklyn") {
+	else if (borrough == "Brooklyn") {
 		return brooklyn_units[i];
 	}
-	else if (burrough == "Mid Manhattan") {
+	else if (borrough == "Mid Manhattan") {
 		return midtown_units[i];
 	}
-	else if (burrough == "Upper Manhattan") {
+	else if (borrough == "Upper Manhattan") {
 		return upper_units[i];
 	}
 
