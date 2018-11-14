@@ -18,7 +18,7 @@ Borough::Borough()
 }
 Borough:: Borough(bool stat, string n, string name){
 	bStatus =stat;
-	name = n; //???
+	bName = n; //???
 	player_name = name;
 }
 Borough::~Borough()
