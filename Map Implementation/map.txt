@@ -1,5 +1,11 @@
-StatenIsland
-Manhattan Bronx
-Bronx Manhattan
-Queens Brooklyn
-Brooklyn Queens
+StatenIsland LowerManhattan Bronx Bronx Queens Queens Brooklyn Brooklyn
+StatenIsland LowerManhattan Bronx Bronx Queens Queens Brooklyn Brooklyn
+Bronx LowerManhattan StatenIsland StatenIsland Queens Queens Brooklyn Brooklyn
+Bronx LowerManhattan StatenIsland StatenIsland Queens Queens Brooklyn Brooklyn
+Queens LowerManhattan StatenIsland StatenIsland Bronx Bronx Brooklyn Brooklyn
+Queens LowerManhattan StatenIsland StatenIsland Bronx Bronx Brooklyn Brooklyn
+Brooklyn LowerManhattan StatenIsland StatenIsland Bronx Bronx Queens Queens
+Brooklyn LowerManhattan StatenIsland StatenIsland Bronx Bronx Queens Queens
+LowerManhattan MidManhattan StatenIsland StatenIsland Bronx Bronx Queens Queens Brooklyn Brooklyn
+MidManhattan UpperManhattan StatenIsland StatenIsland Bronx Bronx Queens Queens Brooklyn Brooklyn
+UpperManhattan StatenIsland StatenIsland Bronx Bronx Queens Queens Brooklyn Brooklyn
