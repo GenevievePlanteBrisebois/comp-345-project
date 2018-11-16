@@ -33,6 +33,14 @@ public:
 	void rollDice();
 	void resolveDice(Map* m, Monsters * a[], BU* b, Cards_Deck* cards, player* player[]);
 
+	void resolveHeal(int heal);
+	void resolveOuch(int ouch, Map* m, player* player[], Cards_Deck* cards, BU* b);
+	void resolveAttack(int attack, Map* m, Monsters * a[]);
+	void resolveEnergy(int energy);
+	void resolveCelebrity(int celeb, Cards_Deck*  cards, player* players[]);
+	void resolveDestruction(int destruction, BU* bu, Map* m);
+
+
 	void useCard(Cards* a);
 	void buyCard( Cards* a);
 

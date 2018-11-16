@@ -204,51 +204,18 @@ void player::rollDice() {
 /*
 some steps will need to be taken in the driver in order to do all required actions for :
 */
-void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, player* players[]) {
 
-	//resetting the tracking variables to 0 in order to track the proper variables of the new dice roll
-	energy = 0;
-	attack = 0;
-	destruction = 0;
-	heal = 0;
-	celebrity = 0;
-	ouch =0;
-	destruction_points = 0;
-	//calculating how many of each is present in the dice rolls in order to know what can be done 
-	for (int i = 0; i < 6; i++) {
-		if (dices[i].getDiceFace() == "Energy") {
-			energy += 1;
-		}else if (dices[i].getDiceFace() == "Attack") {
-			attack += 1;
-		}
-		else if (dices[i].getDiceFace() == "Destruction") {
-			destruction += 1;
-		}
-		else if (dices[i].getDiceFace() == "Heal") {
-			heal += 1;
-		}
-		else if (dices[i].getDiceFace() == "Celebrity") {
-			celebrity += 1;
-		}
-		else if (dices[i].getDiceFace() == "Ouch!") {
-			ouch += 1;
-		}
-	}
+void player::resolveHeal(int heal) {
 
-	cout << "You have a total of :" << endl;
-	cout << energy << " Engergy" << endl;
-	cout << attack << " Attack" << endl;
-	cout << destruction << " Destruction" << endl;
-	cout << heal << " Heal" << endl;
-	cout << celebrity << " Celebrity" << endl;
-	cout << ouch << " Ouch!" << endl;
-
-	//handling of the energy points
-	player_monster->addEnergyPoint(energy, player_monster);
-	//handling of the health points
 	player_monster->heal(heal, player_monster);
-	/*
-	handling of the celebrity points*/ 
+}
+
+void player::resolveEnergy(int energy) {
+	player_monster->addEnergyPoint(energy, player_monster);
+}
+
+void player::resolveCelebrity(int celebrity, Cards_Deck*  cards, player* players[]) {
+
 
 	if (celebrity >= 3) {
 		int vp = celebrity - 3;
@@ -258,8 +225,8 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 		Cards* super = cards->getSpecialCards(1);
 		buyCard(super);
 		string player2 = super->getPlayerName();
-		if(player2== "")
-		super->setPlayerName(player_monster->getName());
+		if (player2 == "")
+			super->setPlayerName(player_monster->getName());
 		else {
 			super->setPlayerName(player_monster->getName());
 			for (int i = 0; i < 6; i++) {
@@ -269,21 +236,22 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 				}
 			}
 		}
-	
-	}
 
-	
-	//resolving the ouch points
+	}
+}
+
+
+void player::resolveOuch(int ouch, Map* m, player* players[], Cards_Deck* cards, BU* bu) {
 	if (ouch == 1) {
 		int count = 0;
 		string area = m->getBorough(position)->getBName();
 		//counting the number of units in the borough of the player
 		for (int i = 0; i < 7; i++) {
-			if (bu->get_unit_from_set(i,area) != nullptr)
+			if (bu->get_unit_from_set(i, area) != nullptr)
 				count++;
 		}
 		player_monster->damageHealth(count, player_monster);
-	
+
 	}
 	else if (ouch == 2) {
 		int count = 0;
@@ -293,22 +261,23 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 			if (bu->get_unit_from_set(i, area) != nullptr)
 				count++;
 		}
-		
+
 		string player2name;
 		//verify if there are more monsters in the borough
 		for (int i = 0; i < 11; i++) {
 			Borough * maparea = m->getBorough(i);
 			if (maparea->getBName() == area && maparea->getPlayerName() != player_monster->getName()) {
 				player2name = maparea->getPlayerName();
-			
-			}else
+
+			}
+			else
 				player2name = "";
 			//clean up pointer
 			delete maparea;
 		}
 		//get the second player
 
-		
+
 		//if there is another player in the area, damage health of both
 		if (player2name != "") {
 			player* player2area;
@@ -323,9 +292,9 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 			//clean up pointer created for the execution of this block
 			delete player2area;
 		}//if there is no other player in the area damage only self
-		else 
+		else
 			player_monster->damageHealth(count, player_monster);
-		
+
 	}
 	else if (ouch >= 3) {
 		//adding the card to the 
@@ -347,12 +316,12 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 					players[i]->getMonster()->loseVictoryPoint(3, players[i]->getMonster());
 				}
 			}
-		//doing the effect of the ouch on all monsters
-		//doing a for loop to affect each monster one at the time
+			//doing the effect of the ouch on all monsters
+			//doing a for loop to affect each monster one at the time
 			for (int i = 0; i < 11; i++) {
-			//if borough occupied execute else move on
+				//if borough occupied execute else move3 on
 				if (m->getBorough(i)->getBoroughStatus() == true) {
-					
+
 					string player1name = m->getBorough(i)->getPlayerName();
 					string areaName = m->getBorough(i)->getBName();
 					int count = 0;
@@ -364,30 +333,34 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 					//getting the player
 					for (int i = 0; i < 6; i++) {
 						if (players[i]->getMonster()->getName() == player1name) {
-							
+
 							//doing damage to the player
 							player * player1;
 							player1 = players[i];
 							player1->getMonster()->damageHealth(count, player_monster);
-								
-					//clean up the pointer
-					delete player1;
-					break;
+
+							//clean up the pointer
+							delete player1;
+							break;
 						}
 					}
-					
-				
+
+
 
 
 				}
-			
+
 			}
 
 
 		}
 	}
+}
 
-	//resolving the destruction points
+
+void player::resolveDestruction(int destruction, BU* bu, Map* m) {
+
+
 	destruction_points = destruction;
 	while (destruction_points > 0) {
 		string b = m->getBorough(position)->getBName();
@@ -395,17 +368,18 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 		Units* unit;
 		//checking if the player wants to destroy the building present in his borough
 		for (int i = 0; i < 7; i++) {
-			if (bu->get_building_from_set(i, b) != nullptr && bu->get_building_from_set(i,b)->getDurability()<=destruction_points) {
+			if (bu->get_building_from_set(i, b) != nullptr && bu->get_building_from_set(i, b)->getDurability() <= destruction_points) {
 				cout << "There is a building in your borough but you do not have enough destruction points to destroy it. " << endl;
 				break;
-			}else if (bu->get_building_from_set(i, b) != nullptr ) {
+			}
+			else if (bu->get_building_from_set(i, b) != nullptr) {
 				building = bu->get_building_from_set(i, b);
 				string build = building->getType();
 				int durability = building->getDurability();
 				string rewardT = building->getRewardType();
 				int reward = building->getReward();
 				cout << "You have in your burrough the building " << build << endl;
-				cout << "Durability: " << durability <<endl;
+				cout << "Durability: " << durability << endl;
 				cout << "Reward:  " << reward << " " << rewardT << endl;
 
 				cout << "Do you wish to destroy the building? y/n" << endl;
@@ -422,7 +396,7 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 					}
 					else if (rewardT == "victory point")
 						player_monster->addVictoryPoint(reward, player_monster);
-				
+
 				}
 				delete building;
 				break;
@@ -451,7 +425,7 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 				cin >> answer;
 
 				if (answer == "y") {
-					bu->destroy_unit( unit, b);
+					bu->destroy_unit(unit, b);
 					if (rewardT == "heal") {
 						player_monster->heal(reward, player_monster);
 					}
@@ -468,14 +442,17 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 			}
 		}
 
-		
-		
-	
-	
+
+
+
+
 	}
 
+}
 
-	//resolving the attack points
+void player::resolveAttack(int attack, Map* m, Monsters * a[]) {
+
+
 
 	if (position == 8 || position == 9 || position == 10)
 	{
@@ -486,7 +463,7 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 			if (ennemy != "") {
 				a[i]->damageHealth(attack, a[i]);
 			}
-		
+
 		}
 
 	}
@@ -499,11 +476,74 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 				a[i]->damageHealth(attack, a[i]);
 			}
 		}
-	
+
 	}
 }
 
 
+
+
+
+
+
+
+
+void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, player* players[]) {
+
+	//resetting the tracking variables to 0 in order to track the proper variables of the new dice roll
+	energy = 0;
+	attack = 0;
+	destruction = 0;
+	heal = 0;
+	celebrity = 0;
+	ouch = 0;
+	destruction_points = 0;
+	//calculating how many of each is present in the dice rolls in order to know what can be done 
+	for (int i = 0; i < 6; i++) {
+		if (dices[i].getDiceFace() == "Energy") {
+			energy += 1;
+		}
+		else if (dices[i].getDiceFace() == "Attack") {
+			attack += 1;
+		}
+		else if (dices[i].getDiceFace() == "Destruction") {
+			destruction += 1;
+		}
+		else if (dices[i].getDiceFace() == "Heal") {
+			heal += 1;
+		}
+		else if (dices[i].getDiceFace() == "Celebrity") {
+			celebrity += 1;
+		}
+		else if (dices[i].getDiceFace() == "Ouch!") {
+			ouch += 1;
+		}
+	}
+
+	cout << "You have a total of :" << endl;
+	cout << energy << " Engergy" << endl;
+	cout << attack << " Attack" << endl;
+	cout << destruction << " Destruction" << endl;
+	cout << heal << " Heal" << endl;
+	cout << celebrity << " Celebrity" << endl;
+	cout << ouch << " Ouch!" << endl;
+
+	//handling of the energy points
+
+
+	resolveEnergy(energy);
+	//handling of the health points
+	resolveHeal(heal);
+	/*
+	handling of the celebrity points*/
+	resolveCelebrity(celebrity, cards, players);
+	//resolving the ouch points
+	resolveOuch(ouch, m, players, cards, bu);
+	//resolving the destruction points
+	resolveDestruction(destruction, bu, m);
+	//resolving the attack points
+	resolveAttack(attack, m, a);
+}
 
 //tokens methods
 //methods to add and remove tokens from the player
