@@ -528,9 +528,9 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 	cout << celebrity << " Celebrity" << endl;
 	cout << ouch << " Ouch!" << endl;
 
+
+
 	//handling of the energy points
-
-
 	resolveEnergy(energy);
 	//handling of the health points
 	resolveHeal(heal);
@@ -543,6 +543,87 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 	resolveDestruction(destruction, bu, m);
 	//resolving the attack points
 	resolveAttack(attack, m, a);
+
+	bool keepGoing = true;
+
+	while (keepGoing = true) {
+		cout << "You have a total of :" << endl;
+		cout << energy << " Engergy" << endl;
+		cout << attack << " Attack" << endl;
+		cout << destruction << " Destruction" << endl;
+		cout << heal << " Heal" << endl;
+		cout << celebrity << " Celebrity" << endl;
+		cout << ouch << " Ouch!" << endl;
+
+
+		cout << "Which resolution do you wish to do? The resolution will stop once you choose to stop or once all actions have been exhausted."<< endl;
+		cout << "1-Heal \n2-Ouch \n3-Attack \n4-Energy \n5-Celebrity \n6-Destruction \n7-Stop \nPlease input the corresponding number" << endl;
+
+		string answer;
+
+		cin >> answer;
+		//verify the status of the points. when all of them reach zero no other action can take place
+		if (energy == 0 && attack == 0 && destruction == 0 && heal == 0 && celebrity == 0 && ouch == 0) {
+			cout << "You have no more dices to resolve. End of dice resolution" << endl;
+		}
+		//case 1 heal
+		else if (answer =="1") {
+			resolveHeal(heal);
+			heal = 0;
+		}
+		//case 2 ouch
+		else if (answer == "2") 
+		{
+			resolveOuch(ouch, m, players, cards, bu);
+			ouch = 0;
+		}
+		//case 3 attack
+		else if (answer == "3") {
+			resolveAttack(attack, m, a);
+			attack = 0;
+		}
+		//case 4 energy
+		else if (answer == "4") {
+			resolveEnergy(energy);
+			energy = 0;
+		}
+		//case 5 celebrity
+		else if (answer == "5") {
+			resolveCelebrity(celebrity, cards, players);
+			celebrity = 0;
+		}
+		//case 6 destruction
+		else if (answer == "6") {
+			resolveDestruction(destruction, bu, m);
+			destruction = 0;
+		}
+		//case 7
+		else if (answer == "7") {
+			keepGoing = false;
+			cout << "Your dice resolution is done" << endl;
+
+		}
+		//if answer is not valid
+		else {
+			cout << "Answer not valid. Please choose the number of the action you wish to take" << endl;
+			keepGoing = true;
+		}
+
+
+
+
+	
+	
+	
+	
+	}
+
+
+
+
+
+
+
 }
 
 //tokens methods
