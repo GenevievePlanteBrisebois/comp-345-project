@@ -32,15 +32,56 @@ BuyCards::~BuyCards() {
 }
 
 void BuyCards::changePossibleBuy(player* player) {
-	bool keepGoing = true;
-	int i = 0;
-	while (keepGoing = true) {
-		//in the case that the array has been gone over we restart the array to 0 so that we can pass trhough it again
-		if (i = 64)
-			i = 0;
-		
+
+	//checking if the player has the amount of energy required to change the cards
+	if (player->getMonster()->getEnergy() >=2) {
+		//spending the energy to change the cards
+		int energy = player->getMonster()->getEnergy();
+		energy -= 2;
+		player->getMonster()->setEnergy(energy);
+		//changing the cards
+		bool keepGoing = true;
+		int i = 0;
+		int counter = 0;
+		int restart = 0;
+		while (keepGoing = true) {
+			//in the case that the array has been gone over we restart the array to 0 so that we can pass trhough it again
+			if (i = 64) {
+				i = 0;
+				restart++;
+			}//all cards have been changed we exit the loop
+			else if (counter = 3) {
+				keepGoing = false;
+			
+			}
+			//case the card is already in the hands of a player
+			else if (getRegularCard(i)->getStatus()==true) {
+				i++;
+			}
+			//case went through the entire array of cards and no more cards are available i.e. restart is at 2 
+			else if(restart == 2){
+				cout << "The cards that you can buy are: \n" << possible_cards[0] ->toString()<< "\n" << possible_cards[1]->toString() << "\n" << possible_cards[2]->toString() << endl;
+				cout << "All other cards are in the possession of other players or have been used." << endl;
+				keepGoing = false;
+
+			}
+			//case where all is right, changing the cards with no problem
+			else {
+				possible_cards[counter] = getRegularCard(i);
+				counter++;
+				i++;
+
+			
+			}
+
+		}
+		//output of the new cards
+		cout<< "The new cards are \n" <<possible_cards[0]->toString()<<"\n"<<possible_cards[1]->toString() << "\n" << possible_cards[2]->toString() << endl;
 
 	}
+	//message in the case the player does not have enough energy to change the cards
+	else
+		cout << "You do not have enough energy to change the cards. Please choose one of the current cards or move on." << endl;
 
 }
 
