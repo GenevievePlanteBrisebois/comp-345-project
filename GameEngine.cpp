@@ -482,36 +482,118 @@ void SelectOrder(int max) {
 
 	//returns false if victory not obtained
 	bool GameEngine::loop(player* p, int turn) {
-		//dice rolling
-		p->rollDice();
-		//dice resolution
-		if (numPlayers == 2)
-			p->resolveDice(m, a, bu, cards, players2);
-		else if(numPlayers ==3)
-			p->resolveDice(m, a, bu, cards, players3);
-		else if (numPlayers == 4)
-			p->resolveDice(m, a, bu, cards, players4);
-		else if (numPlayers == 5)
-			p->resolveDice(m, a, bu, cards, players5);
-		else if (numPlayers == 6)
-			p->resolveDice(m, a, bu, cards, players6);
-		//moving
-		//case first turn
-		if (turn == 1) {
-			//check with batoul for the start game tour placing of the characters on the map.
+		if (verifyDeath(p) == true) {
+		 bool dead = false;
+		 return dead;
 		}
 		else {
-			moveEngine->move(p, m);
-		}
-		//buy cards 
-		cout << "Do you wish to buy a card? y/n" << endl;
-		string answer;
-		if (answer == "y") {
-			buyCards.buyCards(p);
-		}
-		//verification if anyone died or if anyone has won
+			//dice rolling
+			p->rollDice();
+			//dice resolution
+			if (numPlayers == 2)
+				p->resolveDice(m, a, bu, cards, players2);
+			else if (numPlayers == 3)
+				p->resolveDice(m, a, bu, cards, players3);
+			else if (numPlayers == 4)
+				p->resolveDice(m, a, bu, cards, players4);
+			else if (numPlayers == 5)
+				p->resolveDice(m, a, bu, cards, players5);
+			else if (numPlayers == 6)
+				p->resolveDice(m, a, bu, cards, players6);
+			//moving
+			//case first turn
+			if (turn == 1) {
+				//check with batoul for the start game tour placing of the characters on the map.
+			}
+			else {
+				moveEngine->move(p, m);
+			}
+			//buy cards 
+			cout << "Do you wish to buy a card? y/n" << endl;
+			string answer;
+			if (answer == "y") {
+				buyCards.buyCards(p);
+			}
+			//verification if anyone died or if anyone has won
+			if (numPlayers == 2)
+			{
+				for (int i = 0; i < 2; i++) {
+					if (verifyDeath(players2[i]) == true) {
+						players2[i]->getMonster()->setHealth(0);
+						players2[i]->getMonster()->setEnergy(0);
+					}
+					if (verifyVictory(players2[i]) == true) {
+						bool winner = true;
+						cout << "Congratulations You have won" << players2[i]->getMonster()->getName() << endl;
+						return winner;
+					}
+					else
+						return false;
+				}
 
+			}
+			else if (numPlayers == 3) {
+				for (int i = 0; i < 3; i++) {
+					if (verifyDeath(players3[i]) == true) {
+						players3[i]->getMonster()->setHealth(0);
+						players3[i]->getMonster()->setEnergy(0);
+					}
+					if (verifyVictory(players3[i]) == true) {
+						bool winner = true;
+						cout << "Congratulations You have won" << players3[i]->getMonster()->getName() << endl;
+						return winner;
+					}
+					else
+						return false;
+				}
+			}
+			else if (numPlayers == 4) {
+				for (int i = 0; i < 4; i++) {
+					if (verifyDeath(players4[i]) == true) {
+						players4[i]->getMonster()->setHealth(0);
+						players4[i]->getMonster()->setEnergy(0);
+					}
+					if (verifyVictory(players4[i]) == true) {
+						bool winner = true;
+						cout << "Congratulations You have won" << players4[i]->getMonster()->getName() << endl;
+						return winner;
+					}
+					else
+						return false;
+				}
 
+			}
+			else if (numPlayers == 5) {
+				for (int i = 0; i < 5; i++) {
+					if (verifyDeath(players5[i]) == true) {
+						players5[i]->getMonster()->setHealth(0);
+						players5[i]->getMonster()->setEnergy(0);
+					}
+					if (verifyVictory(players5[i]) == true) {
+						bool winner = true;
+						cout << "Congratulations You have won" << players5[i]->getMonster()->getName() << endl;
+						return winner;
+					}
+					else
+						return false;
+				}
+			}
+			else if (numPlayers == 6) {
+				for (int i = 0; i < 6; i++) {
+					if (verifyDeath(players6[i]) == true) {
+						players6[i]->getMonster()->setHealth(0);
+						players6[i]->getMonster()->setEnergy(0);
+					}
+					if (verifyVictory(players6[i]) == true) {
+						bool winner = true;
+						cout << "Congratulations You have won" << players6[i]->getMonster()->getName() << endl;
+						return winner;
+					}
+					else
+						return false;
+				}
+			}
+		}
 	}
 
 	//up to 6 players 
