@@ -9,9 +9,13 @@
 #include "..\comp345-kingsOfNY\Dice\Dice.h"
 #include "..\comp345-kingsOfNY\Map Implementation\Map.h"
 #include "..\comp345-kingsOfNY\Player\Player\player.h"
+#include "Move/Move/Move.h"
+#include "BuyCardEngine/BuyCardEngine/BuyCards.h"
+
+
 
 #include <string>
-#include "StartGame.h"
+#include "GameEngine.h"
 #include <fstream>
 
 using namespace std;
@@ -31,11 +35,15 @@ player* players3[3];
 player* players4[4];
 player* players5[5];
 player* players6[6];
+
+Move* moveEngine = new Move();
+BuyCards* buyCards = new BuyCards();
+
 //player* playerArray[numPlayers];
 
 
 //constructor for two players
-StartGame::StartGame(player* player1, player* player2) {
+GameEngine::GameEngine(player* player1, player* player2) {
 	p1 = player1;
 	p2 = player2;
 
@@ -46,7 +54,7 @@ StartGame::StartGame(player* player1, player* player2) {
 }
 
 //constructor for three players
-StartGame::StartGame(player* player1, player* player2, player* player3) {
+GameEngine::GameEngine(player* player1, player* player2, player* player3) {
 	p1 = player1;
 	p2 = player2;
 	p3 = player3;
@@ -56,7 +64,7 @@ StartGame::StartGame(player* player1, player* player2, player* player3) {
 }
 
 //constructor for four players
-StartGame::StartGame(player* player1, player* player2, player* player3, player* player4) {
+GameEngine::GameEngine(player* player1, player* player2, player* player3, player* player4) {
 	p1 = player1;
 	p2 = player2;
 	p3 = player3;
@@ -66,7 +74,7 @@ StartGame::StartGame(player* player1, player* player2, player* player3, player* 
 }
 
 //contructor for five players
-StartGame::StartGame(player* player1, player* player2, player* player3, player* player4, player* player5) {
+GameEngine::GameEngine(player* player1, player* player2, player* player3, player* player4, player* player5) {
 	p1 = player1;
 	p2 = player2;
 	p3 = player3;
@@ -78,7 +86,7 @@ StartGame::StartGame(player* player1, player* player2, player* player3, player* 
 }
 
 //constructor for six players
-StartGame::StartGame(player* player1, player* player2, player* player3, player* player4, player* player5, player* player6) {
+GameEngine::GameEngine(player* player1, player* player2, player* player3, player* player4, player* player5, player* player6) {
 	p1 = player1;
 	p2 = player2;
 	p3 = player3;
@@ -89,11 +97,11 @@ StartGame::StartGame(player* player1, player* player2, player* player3, player* 
 	players6[6] = new player();
 }
 
-StartGame::StartGame() {
+GameEngine::GameEngine() {
 	//default constructor
 }
 
-void StartGame::SelectPlayers() {
+void GameEngine::SelectPlayers() {
 	player* p1 = new player();
 	player* p2 = new player();
 	player* p3 = new player();
@@ -108,28 +116,28 @@ void StartGame::SelectPlayers() {
 	cin >> num;
 	switch (num) {
 	case 2:
-		StartGame(p1, p2);
+		GameEngine(p1, p2);
 		
 		break;
 	case 3:
 		//creates three players
-		StartGame(p1, p2, p3);
+		GameEngine(p1, p2, p3);
 	
 		break;
 
 	case 4:
 		//creates four players
-		StartGame(p1, p2, p3, p4);
+		GameEngine(p1, p2, p3, p4);
 	
 		break;
 	case 5:
 		//creates five players
-		StartGame(p1, p2, p3, p4, p5);
+		GameEngine(p1, p2, p3, p4, p5);
 
 		break;
 	case 6:
 		//creates six players
-		StartGame(p1, p2, p3, p4, p5, p6);
+		GameEngine(p1, p2, p3, p4, p5, p6);
 		
 		break;
 	}
@@ -137,14 +145,14 @@ void StartGame::SelectPlayers() {
 
 }
 
-void StartGame::SetNumPlayers(int num) {
+void GameEngine::SetNumPlayers(int num) {
 	numPlayers = num;
 }
 
-int StartGame::GetNumPlayers() {
+int GameEngine::GetNumPlayers() {
 	return numPlayers;
 }
-void StartGame::LoadMap() {
+void GameEngine::LoadMap() {
 	string chosenMap;
 	string line;
 	int count=0;
@@ -162,7 +170,7 @@ void StartGame::LoadMap() {
 	Map m(count); //create the map object
 	m.mapLoader(chosenMap); //loads map here
 }
-StartGame::~StartGame() {
+GameEngine::~GameEngine() {
 	p1 = NULL;
 	p2 = NULL;
 	p3 = NULL;
@@ -172,7 +180,8 @@ StartGame::~StartGame() {
 	deck = NULL;
 	bu = NULL;
 	d = NULL;
-
+	moveEngine = NULL;
+	buyCards = NULL;
 	
 	delete[] * players2;
 	delete[] * players3;
@@ -188,12 +197,15 @@ StartGame::~StartGame() {
 	delete deck;
 	delete bu;
 	delete d;
+	delete moveEngine;
+	delete buyCards;
+
 }
 //create the cards
-void StartGame::BuildCards() {
+void GameEngine::BuildCards() {
 	deck = new Cards_Deck();
 }
-void StartGame::BuildTokens() {
+void GameEngine::BuildTokens() {
 	//build tokens
 	Tokens* token = new Tokens();
 	Tokens* carapace[15];
@@ -217,7 +229,7 @@ void StartGame::BuildTokens() {
 	}
 }
 
-void StartGame::BuildBuildings() {
+void GameEngine::BuildBuildings() {
 	//build buildings
 	bu = new BU();
 	bu->build_building_deck();
@@ -438,4 +450,82 @@ void SelectOrder(int max) {
 		for (int i = 0; i < 6; i++) {
 			players6[i] = o[i];
 		}
+	}
+
+	bool GameEngine::verifyVictory(player* player) {
+	int vp=	player->getMonster()->getVictoryPoint();
+	bool victory;
+	if (vp >= 20) {
+		victory = true;
+	}
+	else
+		victory = false;
+	return victory;
+
+	}
+
+	bool GameEngine::verifyDeath(player* players) {
+	
+		bool dead;
+		int health = players->getMonster()->getHealth();
+
+		if (health <= 0)
+			dead = true;
+		else
+			dead = false;
+		return dead;
+	
+	
+	}
+
+
+
+	//returns false if victory not obtained
+	bool GameEngine::loop(player* p, int turn) {
+		//dice rolling
+		p->rollDice();
+		//dice resolution
+		if (numPlayers == 2)
+			p->resolveDice(m, a, bu, cards, players2);
+		else if(numPlayers ==3)
+			p->resolveDice(m, a, bu, cards, players3);
+		else if (numPlayers == 4)
+			p->resolveDice(m, a, bu, cards, players4);
+		else if (numPlayers == 5)
+			p->resolveDice(m, a, bu, cards, players5);
+		else if (numPlayers == 6)
+			p->resolveDice(m, a, bu, cards, players6);
+		//moving
+		//case first turn
+		if (turn == 1) {
+			//check with batoul for the start game tour placing of the characters on the map.
+		}
+		else {
+			moveEngine->move(p, m);
+		}
+		//buy cards 
+		cout << "Do you wish to buy a card? y/n" << endl;
+		string answer;
+		if (answer == "y") {
+			buyCards.buyCards(p);
+		}
+		//verification if anyone died or if anyone has won
+
+
+	}
+
+	//up to 6 players 
+	void GameEngine::mainLoop() {
+	
+		bool keepGoing = true;
+
+		while (keepGoing = true) {
+		
+
+
+		
+		}
+	
+	
+	
 	}
