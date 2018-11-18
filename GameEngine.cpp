@@ -455,9 +455,78 @@ void SelectOrder(int max) {
 	bool GameEngine::verifyVictory(player* player) {
 	int vp=	player->getMonster()->getVictoryPoint();
 	bool victory;
+	bool onlySurvivor;
+	bool dead;
+	int numOfDead = 0;
+	//cases depending on the number of players to see if the player is the only survivor
+	if (numPlayers == 2) {
+		for (int i = 0; i < 2; i++) {
+			dead = verifyDeath(players2[i]);
+			if (dead == true && players2[i] != player) {
+				onlySurvivor = true;
+			}
+			}
+	}
+	else if (numPlayers == 3) {
+		for (int i = 0; i < 3; i++) {
+			dead = verifyDeath(players3[i]);
+			if (dead == true && players3[i] != player) {
+				numOfDead++;
+			}
+		}
+		dead = verifyDeath(player);
+		if (dead == false && numOfDead == 2) {
+			onlySurvivor = true;
+		}
+	
+	}
+	else if (numPlayers == 4) {
+		for (int i = 0; i < 4; i++) {
+			dead = verifyDeath(players4[i]);
+			if (dead == true && players4[i] != player) {
+				numOfDead++;
+			}
+		}
+		dead = verifyDeath(player);
+		if (dead == false && numOfDead == 3) {
+			onlySurvivor = true;
+		}
+
+	}
+	else if (numPlayers == 5) {
+		for (int i = 0; i < 5; i++) {
+			dead = verifyDeath(players5[i]);
+			if (dead == true && players5[i] != player) {
+				numOfDead++;
+			}
+		}
+		dead = verifyDeath(player);
+		if (dead == false && numOfDead == 4) {
+			onlySurvivor = true;
+		}
+
+	}
+	else if (numPlayers == 6) {
+		for (int i = 0; i < 6; i++) {
+			dead = verifyDeath(players6[i]);
+			if (dead == true && players6[i] != player) {
+				numOfDead++;
+			}
+		}
+		dead = verifyDeath(player);
+		if (dead == false && numOfDead == 5) {
+			onlySurvivor = true;
+		}
+
+	}
+
+	//checking the victory criterias, either only survivor either 20 vp
+
 	if (vp >= 20) {
 		victory = true;
 	}
+	else if (onlySurvivor == true)
+		victory = true;
 	else
 		victory = false;
 	return victory;
