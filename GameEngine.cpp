@@ -599,12 +599,66 @@ void SelectOrder(int max) {
 
 	//up to 6 players 
 	void GameEngine::mainLoop() {
-	
+		bool winner;
 		bool keepGoing = true;
-
+		int turn = 1;
 		while (keepGoing = true) {
-		
+			//the different cases of different number of players
+			if (numPlayers == 2) {
+				for (int i = 0; i < 2; i++) {
+					winner = loop(players2[i], turn);
+					if (winner = true) {
+						keepGoing = false; //to stop the while loop and end the game
+						break; //to break the for loop
+					}
+				}
+				
+				turn++;
+			}
+			else if (numPlayers == 3) {
+				for (int i = 0; i < 4; i++) {
+					winner = loop(players3[i], turn);
+					if (winner = true) {
+						keepGoing = false;
+						break;
+					}
+				}
 
+				turn++;
+			}
+			else if (numPlayers == 4) {
+				for (int i = 0; i < 4; i++) {
+					winner = loop(players4[i], turn);
+					if (winner = true) {
+						keepGoing = false;
+						break;
+					}
+				}
+
+				turn++;
+			}
+			else if (numPlayers == 5) {
+				for (int i = 0; i < 5; i++) {
+					winner = loop(players5[i], turn);
+					if (winner = true) {
+						keepGoing = false;
+						break;
+					}
+				}
+
+				turn++;
+			}
+			else if (numPlayers == 6) {
+				for (int i = 0; i < 6; i++) {
+					winner = loop(players6[i], turn);
+					if (winner = true) {
+						keepGoing = false;
+						break;
+					}
+				}
+
+				turn++;
+			}
 
 		
 		}
