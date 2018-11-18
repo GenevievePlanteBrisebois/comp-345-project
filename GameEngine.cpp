@@ -482,6 +482,7 @@ void SelectOrder(int max) {
 
 	//returns false if victory not obtained
 	bool GameEngine::loop(player* p, int turn) {
+		//if the player is dead it will exit the loop right away and move on to the next player. 
 		if (verifyDeath(p) == true) {
 		 bool dead = false;
 		 return dead;
@@ -491,15 +492,15 @@ void SelectOrder(int max) {
 			p->rollDice();
 			//dice resolution
 			if (numPlayers == 2)
-				p->resolveDice(m, a, bu, cards, players2);
+				p->resolveDice(m, a, bu, deck, players2);
 			else if (numPlayers == 3)
-				p->resolveDice(m, a, bu, cards, players3);
+				p->resolveDice(m, a, bu, deck, players3);
 			else if (numPlayers == 4)
-				p->resolveDice(m, a, bu, cards, players4);
+				p->resolveDice(m, a, bu, deck, players4);
 			else if (numPlayers == 5)
-				p->resolveDice(m, a, bu, cards, players5);
+				p->resolveDice(m, a, bu, deck, players5);
 			else if (numPlayers == 6)
-				p->resolveDice(m, a, bu, cards, players6);
+				p->resolveDice(m, a, bu, deck, players6);
 			//moving
 			//case first turn
 			if (turn == 1) {
