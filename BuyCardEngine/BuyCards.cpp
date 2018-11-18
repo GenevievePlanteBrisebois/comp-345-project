@@ -16,6 +16,8 @@ cards to buy and then finally the buying of the cards as in the player class.
 #include <iostream>
 #include "BuyCards.h"
 #include"Player/Player/player.h"
+
+using namespace std;
 //class variable, an array of 3 card names
 Cards* possible_cards[3];
 
@@ -31,10 +33,11 @@ BuyCards::~BuyCards() {
 	delete [] possible_cards;
 }
 
-void BuyCards::changePossibleBuy(player* player) {
-
+bool BuyCards::changePossibleBuy(player* player) {
+	bool result;
 	//checking if the player has the amount of energy required to change the cards
 	if (player->getMonster()->getEnergy() >=2) {
+		result = true;
 		//spending the energy to change the cards
 		int energy = player->getMonster()->getEnergy();
 		energy -= 2;
@@ -80,17 +83,56 @@ void BuyCards::changePossibleBuy(player* player) {
 
 	}
 	//message in the case the player does not have enough energy to change the cards
-	else
+	else{
 		cout << "You do not have enough energy to change the cards. Please choose one of the current cards or move on." << endl;
-
+		result = false;
+	}
+	return result;
+	
 }
 
 void BuyCards::showPossibleBuy() {
+	cout << "The possible cards to buy are \n" << possible_cards[0]->toString() << "\n" << possible_cards[1]->toString() << "\n" << possible_cards[2]->toString() << endl;
 
 }
 
-void BuyCards::buyCards(string cardName, player* player) {
+void BuyCards::buyCards( player* player1) {
+	bool keepGoing = true;
+	while (keepGoing = true) {
+		showPossibleBuy();
+		cout << "Do you wish to:\n 1-Buy one of those cards \n 2-Change the cards" << endl;
+		string answer;
+		cin >> answer;
 
+
+		//case they want to buy the cards
+		if (answer == "1") {
+			cout << "Which card do you wish to buy?\n 1,2 or 3?" << endl;
+			cin >> answer;
+			//making the buying process according to which card has been chosen
+			if (answer == "1") {
+				player1->buyCard(possible_cards[0]);
+			}
+			else if (answer == "2") {
+				player1->buyCard(possible_cards[1]);
+			}
+			else if (answer == "3") {
+				player1->buyCard(possible_cards[2]);
+			}
+
+			keepGoing = false;
+		}
+		else if (answer == "2") {
+		
+			changePossibleBuy(player1);
+			keepGoing = true;
+		}
+		else
+			cout << "Please enter a valid choice" << endl;
+	}
+	
+
+	
 
 
 }
