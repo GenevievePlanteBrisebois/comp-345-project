@@ -452,6 +452,88 @@ void SelectOrder(int max) {
 		}
 	}
 
+	void GameEngine::chooseMonster() {
+		Monsters monsterList;
+		string chosen;
+		Active_Monsters* active = new Active_Monsters();
+		//different cases for different number of players
+		switch (numPlayers) {
+		case 2:
+			for (int i = 0; i < 2; i++) {
+
+				cout << "Monsters to choose from are: " << endl;
+				for (int j = 0; j < 6; j++) {
+					cout << monsterList.getNameFromList[i] << endl;
+				}
+
+				cout << "Player " << i + 1 << "Please pick a monster.";
+				cin >> chosen;
+				//create a new monster with what the player picked
+				Monsters* monsterChosen = new Monsters(chosen);
+				//active.addActive(monsterChosen);
+				players2[i]->setMonster(monsterChosen);
+
+			}
+			break;
+		case 3:
+			for (int i = 0; i < 3; i++) {
+				cout << "Monsters to choose from are: " << endl;
+				for (int j = 0; j < 6; j++) {
+					cout << monsterList.getNameFromList[j] << endl;
+				}
+
+				cout << "Player " << i + 1 << "Please pick a monster.";
+				cin >> chosen;
+				Monsters* monsterChosen = new Monsters(chosen);
+				//active.addActive(monsterChosen);
+				players3[i]->setMonster(monsterChosen);
+			}
+			break;
+		case 4:
+			for (int i = 0; i < 4; i++) {
+				cout << "Monsters to choose from are: " << endl;
+				for (int j = 0; j < 6; j++) {
+					cout << monsterList.getNameFromList[j] << endl;
+				}
+
+				cout << "Player " << i + 1 << "Please pick a monster.";
+				cin >> chosen;
+				Monsters* monsterChosen = new Monsters(chosen);
+				//active.addActive(monsterChosen);
+				players4[i]->setMonster(monsterChosen);
+			}
+			break;
+		case 5:
+			for (int i = 0; i < 5; i++) {
+				cout << "Monsters to choose from are: " << endl;
+				for (int j = 0; j < 6; j++) {
+					cout << monsterList.getNameFromList[j] << endl;
+				}
+
+				cout << "Player " << i + 1 << "Please pick a monster.";
+				cin >> chosen;
+				Monsters* monsterChosen = new Monsters(chosen);
+				//active.addActive(monsterChosen);
+				players5[i]->setMonster(monsterChosen);
+			}
+			break;
+		case 6:
+			for (int i = 0; i < 6; i++) {
+				cout << "Monsters to choose from are: " << endl;
+				for (int j = 0; j < 6; j++) {
+					cout << monsterList.getNameFromList[j] << endl;
+				}
+
+				cout << "Player " << i + 1 << "Please pick a monster.";
+				cin >> chosen;
+				Monsters* monsterChosen = new Monsters(chosen);
+				//active.addActive(monsterChosen);
+				players6[i]->setMonster(monsterChosen);
+			}
+			break;
+		}
+	}
+
 	bool GameEngine::verifyVictory(player* player) {
 	int vp=	player->getMonster()->getVictoryPoint();
 	bool victory;

@@ -14,7 +14,7 @@ using namespace std;
 #pragma once
 
 class BuyCards : public Cards_Deck{
-
+public:
 bool changePossibleBuy(player* player);
 void buyCards( player* player);
 void showPossibleBuy();
