@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include "player.h"
 //includes of .h that are in different solutions
-
+#include "../comp345-kingsOfNY/Observer.h"
 #include "../comp345-kingsOfNY/Cards/Cards_Deck.h"
 #include "../comp345-kingsOfNY/Cards/BU.h"
 #include "../comp345-kingsOfNY/Cards/Active_Monsters.h"
@@ -14,6 +14,7 @@
 #include "../comp345-kingsOfNY/Dice/Dice.h"
 #include "../comp345-kingsOfNY/Map Implementation/Map.h"
 #include "../comp345-kingsOfNY/Map Implementation/Borough.h"
+#include "../comp345-kingsOfNY/Observer.h"
 
 using namespace std;
 
@@ -33,6 +34,9 @@ int celebrity;
 int ouch;
 //variable to store the position of the player. refers to the index in the map borough array
 int position;
+
+//observer
+Observer* ob;
 //constructors and destructors
 
 player::player() {
@@ -40,6 +44,8 @@ player::player() {
 	Tokens* player_tokens[20];
 	Cards* player_cards[10];
 	destruction_points = 0;
+	ob = new Observer();
+
 	
 }
 
@@ -48,6 +54,7 @@ player::~player(){
 	delete [] * player_tokens;
 	delete[] * player_cards;
 	delete[]  dices;
+	delete ob;
 }
 
 //setters and getters
@@ -134,7 +141,7 @@ Tokens* player::getToken(int i) {
 //create six dice and roll them up to three times. 
 
 void player::rollDice() {
-	
+	ob->notifyPlayerAction("Rolling Dice");
 
 	cout << "First Roll of the dices" << endl;
 
@@ -148,6 +155,7 @@ void player::rollDice() {
 	for loops in order to reroll up to two times. 	
 	*/
 	for (int i = 0; i < 2; i++) {
+		ob->notifyPlayerAction("Reroll dice");
 		cout << "Do you wish to reroll? y/n" << endl;
 		string ans;
 		cin >> ans;

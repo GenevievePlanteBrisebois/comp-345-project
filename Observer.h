@@ -1,12 +1,14 @@
 #pragma once
 #include <string>
 using namespace std;
+// By: Batoul Yehia 40010912
 
 class ObserverInterface {
 public:
 
 	int playerNum;
 	int numOfPlayers;
+	virtual void notifyNumberOfPlayers(int) = 0;
 	virtual void notifyPlayerNumber(int) = 0;
 	virtual void notifyPlayerAction(string) = 0;
 	virtual void notifyCurrentBorough(string) = 0;
@@ -15,9 +17,14 @@ public:
 
 class Observer: public ObserverInterface {
 public:
+	int playerNum;
+	int numOfPlayers;
 	void notifyPlayerAction(string) override;
 	void notifyPlayerNumber(int) override;
 	void notifyCurrentBorough(string) override;
+	void notifyNumberOfPlayers(int) override;
+	void setPlayerNum(int playerNumber);
+	void setNumPlayers(int num);
 };
 
 //for part 2
