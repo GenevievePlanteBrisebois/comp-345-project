@@ -453,7 +453,7 @@ void SelectOrder(int max) {
 	}
 
 	void GameEngine::chooseMonster() {
-		Monsters monsterList;
+	
 		string chosen;
 		Active_Monsters* active = new Active_Monsters();
 		//different cases for different number of players
@@ -462,9 +462,7 @@ void SelectOrder(int max) {
 			for (int i = 0; i < 2; i++) {
 
 				cout << "Monsters to choose from are: " << endl;
-				for (int j = 0; j < 6; j++) {
-					cout << monsterList.getNameFromList[i] << endl;
-				}
+				cout << "Mantis \nCaptain Fish \nDragonis \nKong \nSheriff\nRob" << endl;
 
 				cout << "Player " << i + 1 << "Please pick a monster.";
 				cin >> chosen;
@@ -478,9 +476,7 @@ void SelectOrder(int max) {
 		case 3:
 			for (int i = 0; i < 3; i++) {
 				cout << "Monsters to choose from are: " << endl;
-				for (int j = 0; j < 6; j++) {
-					cout << monsterList.getNameFromList[j] << endl;
-				}
+				cout << "Mantis \nCaptain Fish \nDragonis \nKong \nSheriff\nRob" << endl;
 
 				cout << "Player " << i + 1 << "Please pick a monster.";
 				cin >> chosen;
@@ -492,9 +488,7 @@ void SelectOrder(int max) {
 		case 4:
 			for (int i = 0; i < 4; i++) {
 				cout << "Monsters to choose from are: " << endl;
-				for (int j = 0; j < 6; j++) {
-					cout << monsterList.getNameFromList[j] << endl;
-				}
+				cout << "Mantis \nCaptain Fish \nDragonis \nKong \nSheriff\nRob" << endl;
 
 				cout << "Player " << i + 1 << "Please pick a monster.";
 				cin >> chosen;
@@ -506,9 +500,7 @@ void SelectOrder(int max) {
 		case 5:
 			for (int i = 0; i < 5; i++) {
 				cout << "Monsters to choose from are: " << endl;
-				for (int j = 0; j < 6; j++) {
-					cout << monsterList.getNameFromList[j] << endl;
-				}
+				cout << "Mantis \nCaptain Fish \nDragonis \nKong \nSheriff\nRob" << endl;
 
 				cout << "Player " << i + 1 << "Please pick a monster.";
 				cin >> chosen;
@@ -520,9 +512,7 @@ void SelectOrder(int max) {
 		case 6:
 			for (int i = 0; i < 6; i++) {
 				cout << "Monsters to choose from are: " << endl;
-				for (int j = 0; j < 6; j++) {
-					cout << monsterList.getNameFromList[j] << endl;
-				}
+				cout << "Mantis \nCaptain Fish \nDragonis \nKong \nSheriff\nRob" << endl;
 
 				cout << "Player " << i + 1 << "Please pick a monster.";
 				cin >> chosen;

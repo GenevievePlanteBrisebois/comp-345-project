@@ -21,7 +21,10 @@ public:
 
 
 	void mainLoop();
-	bool loop(player* player);
+	bool loop(player* player, int turn);
+	bool verifyVictory(player* player);
+	bool verifyDeath(player* player);
+	void chooseMonster();
 };
 void setPlayerOrder2(player* o[2]);
 void setPlayerOrder3(player* o[3]);
