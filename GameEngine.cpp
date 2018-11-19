@@ -38,6 +38,8 @@ player* players5[5];
 player* players6[6];
 Observer* ob;
 
+Map* m;
+
 Move* moveEngine = new Move();
 BuyCards* buyCards = new BuyCards();
 
@@ -174,8 +176,8 @@ void GameEngine::LoadMap() {
 		count++;
 	}
 
-	Map m(count); //create the map object
-	m.mapLoader(chosenMap); //loads map here
+	m = m(count) //create the map object
+	m->mapLoader(chosenMap); //loads map here
 }
 GameEngine::~GameEngine() {
 	p1 = NULL;
@@ -856,24 +858,29 @@ void SelectOrder(int max) {
 	
 	}
 
-	player getPlayer2(int index) {
+	player GameEngine::getPlayer2(int index) {
 		return players2[index];
 	
 	}
-	player getPlayer3(int index) {
+	player GameEngine::getPlayer3(int index) {
 		return players3[index];
 
 	}
-	player getPlayer4(int index) {
+	player GameEngine::getPlayer4(int index) {
 		return players4[index];
 
 	}
-	player getPlayer5(int index) {
+	player GameEngine::getPlayer5(int index) {
 		return players5[index];
 
 	}
-	player getPlayer6(int index) {
+	player GameEngine::getPlayer6(int index) {
 		return players6[index];
 
 	}
 	
+	string GameEngine::getBorough(int position) {
+	Borough* b=	m->getBorough(position);
+	string name = b->getBName();
+	
+	}
