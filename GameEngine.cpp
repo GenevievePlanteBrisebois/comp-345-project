@@ -834,3 +834,25 @@ void SelectOrder(int max) {
 	
 	
 	}
+
+	player getPlayer2(int index) {
+		return players2[index];
+	
+	}
+	player getPlayer3(int index) {
+		return players3[index];
+
+	}
+	player getPlayer4(int index) {
+		return players4[index];
+
+	}
+	player getPlayer5(int index) {
+		return players5[index];
+
+	}
+	player getPlayer6(int index) {
+		return players6[index];
+
+	}
+	
