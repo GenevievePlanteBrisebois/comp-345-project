@@ -12,7 +12,7 @@ int main() {
 	s.BuildCards();
 	s.BuildBuildings();
 	s.BuildTokens();
-
+	s.mainLoop();
 
 	return 0;
 }
