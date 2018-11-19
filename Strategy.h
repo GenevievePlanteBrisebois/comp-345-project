@@ -16,6 +16,8 @@ public:
 //aggressive player
 class Aggressive : public StrategyInterface {
 public:
+	Aggressive();
+	~Aggressive();
 	void rollDice() override;
 	void resolveDice() override;
 	void move() override;
