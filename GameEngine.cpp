@@ -11,6 +11,7 @@
 #include "..\comp345-kingsOfNY\Player\Player\player.h"
 #include "Move/Move/Move.h"
 #include "BuyCardEngine/BuyCardEngine/BuyCards.h"
+#include "..\comp345-kingsOfNY\Observer.h"
 
 
 
@@ -35,6 +36,7 @@ player* players3[3];
 player* players4[4];
 player* players5[5];
 player* players6[6];
+Observer* ob;
 
 Move* moveEngine = new Move();
 BuyCards* buyCards = new BuyCards();
@@ -49,7 +51,7 @@ GameEngine::GameEngine(player* player1, player* player2) {
 
 	//create an array of players
 	players2[2] = new player();
-
+	ob = new Observer();
 
 }
 
@@ -60,6 +62,7 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3) {
 	p3 = player3;
 
 	players3[3] = new player();
+	ob = new Observer();
 
 }
 
@@ -71,6 +74,7 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3, player
 	p4 = player4;
 
 	players4[4] = new player();
+	ob = new Observer();
 }
 
 //contructor for five players
@@ -82,6 +86,7 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3, player
 	p5 = player5;
 
 	players5[5] = new player();
+	ob = new Observer();
 
 }
 
@@ -95,6 +100,7 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3, player
 	p6 = player6;
 
 	players6[6] = new player();
+	ob = new Observer();
 }
 
 GameEngine::GameEngine() {
@@ -142,6 +148,7 @@ void GameEngine::SelectPlayers() {
 		break;
 	}
 	SetNumPlayers(num);
+	ob->notifyNumberOfPlayers(num);
 
 }
 
@@ -158,9 +165,9 @@ void GameEngine::LoadMap() {
 	int count=0;
 
 	cout << "Please select one of the following map files: " << endl;
-	//idk somehow shows directory
+	
 	cin >> chosenMap;
-
+	//pick map.txt
 	//read in the file to get number of lines
 	ifstream file(chosenMap);
 	while (getline(file, line)) {
@@ -182,7 +189,7 @@ GameEngine::~GameEngine() {
 	d = NULL;
 	moveEngine = NULL;
 	buyCards = NULL;
-	
+	ob = NULL;
 	delete[] * players2;
 	delete[] * players3;
 	delete[] * players4;
@@ -199,6 +206,7 @@ GameEngine::~GameEngine() {
 	delete d;
 	delete moveEngine;
 	delete buyCards;
+	delete ob;
 
 }
 //create the cards
@@ -460,7 +468,8 @@ void SelectOrder(int max) {
 		switch (numPlayers) {
 		case 2:
 			for (int i = 0; i < 2; i++) {
-
+				ob->notifyPlayerAction("Choosing monsters");
+				ob->notifyPlayerNumber(i);
 				cout << "Monsters to choose from are: " << endl;
 				cout << "Mantis \nCaptain Fish \nDragonis \nKong \nSheriff\nRob" << endl;
 
@@ -475,6 +484,8 @@ void SelectOrder(int max) {
 			break;
 		case 3:
 			for (int i = 0; i < 3; i++) {
+				ob->notifyPlayerAction("Choosing monsters");
+				ob->notifyPlayerNumber(i);
 				cout << "Monsters to choose from are: " << endl;
 				cout << "Mantis \nCaptain Fish \nDragonis \nKong \nSheriff\nRob" << endl;
 
@@ -487,6 +498,8 @@ void SelectOrder(int max) {
 			break;
 		case 4:
 			for (int i = 0; i < 4; i++) {
+				ob->notifyPlayerAction("Choosing monsters");
+				ob->notifyPlayerNumber(i);
 				cout << "Monsters to choose from are: " << endl;
 				cout << "Mantis \nCaptain Fish \nDragonis \nKong \nSheriff\nRob" << endl;
 
@@ -499,6 +512,8 @@ void SelectOrder(int max) {
 			break;
 		case 5:
 			for (int i = 0; i < 5; i++) {
+				ob->notifyPlayerAction("Choosing monsters");
+				ob->notifyPlayerNumber(i);
 				cout << "Monsters to choose from are: " << endl;
 				cout << "Mantis \nCaptain Fish \nDragonis \nKong \nSheriff\nRob" << endl;
 
@@ -511,6 +526,8 @@ void SelectOrder(int max) {
 			break;
 		case 6:
 			for (int i = 0; i < 6; i++) {
+				ob->notifyPlayerAction("Choosing monsters");
+				ob->notifyPlayerNumber(i);
 				cout << "Monsters to choose from are: " << endl;
 				cout << "Mantis \nCaptain Fish \nDragonis \nKong \nSheriff\nRob" << endl;
 
@@ -709,6 +726,7 @@ void SelectOrder(int max) {
 					}
 					if (verifyVictory(players3[i]) == true) {
 						bool winner = true;
+						ob->notifyPlayerAction("Winning");
 						cout << "Congratulations You have won" << players3[i]->getMonster()->getName() << endl;
 						return winner;
 					}
@@ -724,6 +742,7 @@ void SelectOrder(int max) {
 					}
 					if (verifyVictory(players4[i]) == true) {
 						bool winner = true;
+						ob->notifyPlayerAction("Winning");
 						cout << "Congratulations You have won" << players4[i]->getMonster()->getName() << endl;
 						return winner;
 					}
@@ -740,6 +759,7 @@ void SelectOrder(int max) {
 					}
 					if (verifyVictory(players5[i]) == true) {
 						bool winner = true;
+						ob->notifyPlayerAction("Winning");
 						cout << "Congratulations You have won" << players5[i]->getMonster()->getName() << endl;
 						return winner;
 					}
@@ -755,6 +775,7 @@ void SelectOrder(int max) {
 					}
 					if (verifyVictory(players6[i]) == true) {
 						bool winner = true;
+						ob->notifyPlayerAction("Winning");
 						cout << "Congratulations You have won" << players6[i]->getMonster()->getName() << endl;
 						return winner;
 					}

@@ -15,7 +15,7 @@ void Observer::setPlayerNum(int playerNumber) {
 }
 
 void Observer::notifyPlayerAction(string action) {
-	cout << "The player is " << action << endl;
+	cout << "Player Action: " << action << endl;
 }
 
 void Observer::notifyCurrentBorough(string b) {

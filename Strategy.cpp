@@ -20,10 +20,10 @@ Aggressive::~Aggressive() {
 }
 
 //Rolling the dice for aggressive: 
-//check if attack appears 4 times.
+//check if attack/destruction appears 4 times.
 //If not, then reroll.
 void Aggressive::rollDice() {
-	ob->notifyPlayerAction("Aggressive Bot: Rolling Dice");
+	ob->notifyPlayerAction("Aggressive Player: Rolling Dice");
 	int count = 0;
 	cout << "First Roll of the dices" << endl;
 
@@ -41,12 +41,12 @@ void Aggressive::rollDice() {
 		cout << "Do you wish to reroll?" << endl;
 		
 		for (int i = 0; i < 6; i++) {
-			if (dices[i].getDiceFace == "Attack") {
+			if (dices[i].getDiceFace() == "Attack" || dices[i].getDiceFace() == "Destruction"){
 				count++;
 			}
 		}
 		if (count >= 4) {
-			//if the bot has 4 or more attacks it won't reroll
+			//if the bot has 4 or more attacks/destruction it won't reroll
 			break;
 		}
 		
@@ -55,9 +55,9 @@ void Aggressive::rollDice() {
 
 			for (int j = 0; j < 6; j++) {
 				cout << "Do you wish to reroll dice " << j << " y/n ?";
-				string answer;
-				cin >> answer;
-				if (dices[j].getDiceFace == "Attack") {
+				//string answer;
+				//cin >> answer;
+				if (dices[j].getDiceFace == "Attack" || dices[j].getDiceFace()=="Destruction") {
 					break;
 				}
 				else {
@@ -93,32 +93,32 @@ void Aggressive::rollDice() {
 }
 
 void Aggressive::resolveDice() {
-
+	ob->notifyPlayerAction("Aggressive player resolving Dice");
 }
 
 void Aggressive::move() {
-
+	ob->notifyPlayerAction("Aggressive player moving");
 }
 
 void Aggressive::buyCards() {
-
+	ob->notifyPlayerAction("Aggressive player buying cards");
 }
 
 
 void Moderate::rollDice() {
-
+	ob->notifyPlayerAction("Moderate player rolling dice");
 }
 
 void Moderate::resolveDice() {
-
+	ob->notifyPlayerAction("Moderate player resolving dice");
 }
 
 void Moderate::move() {
-
+	ob->notifyPlayerAction("Moderate player moving");
 }
 
 void Moderate::buyCards() {
-
+	ob->notifyPlayerAction("Moderate player buying cards");
 }
 
 
