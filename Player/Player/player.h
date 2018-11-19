@@ -44,8 +44,8 @@ public:
 	void useCard(Cards* a);
 	void buyCard( Cards* a);
 
-	void move(string borough, Map* m);	
-	
+	bool move1(string borough, Map* m);	
+	void move(string borough, Map* m);
 	int getPosition();
 	void setPosition(int i);
 

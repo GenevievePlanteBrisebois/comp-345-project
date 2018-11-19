@@ -684,6 +684,64 @@ void player::buyCard( Cards* a) {
 	}
 }
 
+bool player::move1(string borough, Map* m) {
+	bool statusLM = m->getBorough(8)->getBoroughStatus();
+	bool statusMM = m->getBorough(9)->getBoroughStatus();
+	bool statusUM = m->getBorough(10)->getBoroughStatus();
+	bool isMoveSuccess;
+	//cases to move to or within manhattan
+	if (borough == "Lower Manhattan" && statusLM == false && statusMM == false && statusUM == false) {
+		//setting previous position to empty
+		if (position != NULL) {
+			m->setBorough(position, false, "");
+		}
+		//moving to new borough
+		position = 8;
+		m->setBorough(8, true, player_monster->getName());
+		isMoveSuccess = true;
+	}
+	else if (borough == "Mid Manhattan" && position == 8) {
+		m->setBorough(8, false, "");
+		m->setBorough(9, true, player_monster->getName());
+		position = 9;
+		isMoveSuccess = true;
+	}
+	else if (borough == "Upper Manhattan" && position == 9) {
+		m->setBorough(9, false, "");
+		m->setBorough(10, true, player_monster->getName());
+		position = 10;
+		isMoveSuccess = true;
+
+	}
+
+
+	//other boroughs
+	for (int i = 0; i < 8; i++) {
+		string name = m->getBorough(i)->getBName();
+		bool status = m->getBorough(i)->getBoroughStatus();
+		
+		 if (borough == name && status == false) {
+			 if (position != NULL) {
+				 m->setBorough(position, false, "");
+			 }
+			 position = i;
+			m->setBorough(i, true, player_monster->getName());
+			isMoveSuccess = true;
+			break;
+		
+		}
+		 else {
+		cout << "This borough is full. Choose another borough or stay in your current borough" << endl;
+		isMoveSuccess = false;
+
+		 }
+			
+	
+	}
+
+	return isMoveSuccess;
+}
+
 void player::move(string borough, Map* m) {
 	bool statusLM = m->getBorough(8)->getBoroughStatus();
 	bool statusMM = m->getBorough(9)->getBoroughStatus();
@@ -697,6 +755,7 @@ void player::move(string borough, Map* m) {
 		//moving to new borough
 		position = 8;
 		m->setBorough(8, true, player_monster->getName());
+		
 	}
 	else if (borough == "Mid Manhattan" && position == 8) {
 		m->setBorough(8, false, "");
@@ -715,20 +774,24 @@ void player::move(string borough, Map* m) {
 	for (int i = 0; i < 8; i++) {
 		string name = m->getBorough(i)->getBName();
 		bool status = m->getBorough(i)->getBoroughStatus();
-		
-		 if (borough == name && status == false) {
-			 if (position != NULL) {
-				 m->setBorough(position, false, "");
-			 }
-			 position = i;
+
+		if (borough == name && status == false) {
+			if (position != NULL) {
+				m->setBorough(position, false, "");
+			}
+			position = i;
 			m->setBorough(i, true, player_monster->getName());
+			
 			break;
-		
+
 		}
-		else
+		else {
 			cout << "This borough is full. Choose another borough or stay in your current borough" << endl;
+			
 
-	
+		}
+
+
 	}
-}
 
+}

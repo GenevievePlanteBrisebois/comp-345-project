@@ -556,6 +556,14 @@ void SelectOrder(int max) {
 		 bool dead = false;
 		 return dead;
 		}
+		//place the players on the map if it is the first turn. 
+		else if (turn == 1) {
+			//make a while loop to make sure the player is placed on the map and then use the move1(string borough, Map* m) function to move the player
+			//the move1()  function will allow to move the player in a borough and will return false if the move was failed. 
+			cout << "It is now time to place your monsters on the map before we start playing. You ca place yourself anywhere on the map but on the island of Manhattan" << endl;
+			cout << "There are four boroughs in which you can go" << endl;
+			cout<< "Please choose one of the following borroughs. Input the number. If the borough is full you will be asked again t"
+		}
 		else {
 			//dice rolling
 			p->rollDice();
@@ -571,13 +579,9 @@ void SelectOrder(int max) {
 			else if (numPlayers == 6)
 				p->resolveDice(m, a, bu, deck, players6);
 			//moving
-			//case first turn
-			if (turn == 1) {
-				//check with batoul for the start game tour placing of the characters on the map.
-			}
-			else {
+			
 				moveEngine->move(p, m);
-			}
+			
 			//buy cards 
 			cout << "Do you wish to buy a card? y/n" << endl;
 			string answer;
@@ -675,14 +679,14 @@ void SelectOrder(int max) {
 			//the different cases of different number of players
 			if (numPlayers == 2) {
 				for (int i = 0; i < 2; i++) {
-					winner = loop(players2[i], turn);
+					winner = loop(players2[i], turn);//ake the loop for one players turn
 					if (winner = true) {
 						keepGoing = false; //to stop the while loop and end the game
 						break; //to break the for loop
 					}
 				}
 				
-				turn++;
+				turn++;//increment the turn. will also allow to track things if ever we want to keep track of it. 
 			}
 			else if (numPlayers == 3) {
 				for (int i = 0; i < 4; i++) {
