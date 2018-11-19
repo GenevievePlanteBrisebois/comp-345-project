@@ -1,14 +1,19 @@
 #pragma once
+#include <iostream>
 #include <string>
+#include "Player/Player/player.h"
+#include "Move/Move/Move.h"
+#include "BuyCardEngine/BuyCardEngine/BuyCards.h"
 
 using namespace std;
 class StrategyInterface {
 public:
-	virtual void rollDice();
-	virtual void resolveDice();
-	virtual void move();
-	virtual void buyCards();
+	virtual void rollDice() = 0;
+	virtual void resolveDice() = 0;
+	virtual void move() = 0;
+	virtual void buyCards() = 0;
 };
+//aggressive player
 class Aggressive : public StrategyInterface {
 public:
 	void rollDice() override;
@@ -16,7 +21,7 @@ public:
 	void move() override;
 	void buyCards() override;
 };
-
+//moderate player
 class Moderate : public StrategyInterface {
 	void rollDice() override;
 	void resolveDice() override;
