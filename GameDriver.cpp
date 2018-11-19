@@ -7,10 +7,12 @@ int main() {
 	GameEngine s;
 
 	s.SelectPlayers();
+	s.chooseMonster();
 	s.LoadMap();
 	s.BuildCards();
 	s.BuildBuildings();
 	s.BuildTokens();
+
 
 	return 0;
 }
