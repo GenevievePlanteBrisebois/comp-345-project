@@ -634,7 +634,30 @@ void SelectOrder(int max) {
 			//the move1()  function will allow to move the player in a borough and will return false if the move was failed. 
 			cout << "It is now time to place your monsters on the map before we start playing. You ca place yourself anywhere on the map but on the island of Manhattan" << endl;
 			cout << "There are four boroughs in which you can go" << endl;
-			cout<< "Please choose one of the following borroughs. Input the number. If the borough is full you will be asked again t"
+			cout << "Please choose one of the following borroughs. Input the number. \n1-Staten Island \n2-Bronx \n3-Queens \n4-Brooklyn" << endl;
+			
+			bool loop = false;
+			while (loop == false) {
+				string answer;
+			cin >> answer;
+
+
+			if (answer == "1") {
+				loop=p->move1("StatenIsland", m);
+			}
+			else if (answer == "2") {
+				loop = p->move1("Bronx", m);
+			}
+			else if (answer == "3") {
+				loop = p->move1("Queens", m);
+			
+			}
+			else if (answer == "4") {
+				loop = p->move1("Brooklyn", m);
+			}
+			
+			}
+
 		}
 		else {
 			//dice rolling
