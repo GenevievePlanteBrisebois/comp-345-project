@@ -12,7 +12,7 @@
 #include "Move/Move/Move.h"
 #include "BuyCardEngine/BuyCardEngine/BuyCards.h"
 #include "..\comp345-kingsOfNY\Observer.h"
-
+#include "StatsObserver.h"
 
 
 #include <string>
@@ -37,6 +37,7 @@ player* players4[4];
 player* players5[5];
 player* players6[6];
 Observer* ob;
+StatsObserver* statOb = new StatsObserver();
 
 Map* m;
 
@@ -192,6 +193,7 @@ GameEngine::~GameEngine() {
 	moveEngine = NULL;
 	buyCards = NULL;
 	ob = NULL;
+	statOb = NULL;
 	delete[] * players2;
 	delete[] * players3;
 	delete[] * players4;
@@ -209,7 +211,7 @@ GameEngine::~GameEngine() {
 	delete moveEngine;
 	delete buyCards;
 	delete ob;
-
+	delete statOb;
 }
 //create the cards
 void GameEngine::BuildCards() {
@@ -679,6 +681,7 @@ void SelectOrder(int max) {
 
 		}
 		else {
+			statOb->displayStats();
 			//dice rolling
 			p->rollDice();
 			//dice resolution
@@ -692,6 +695,7 @@ void SelectOrder(int max) {
 				p->resolveDice(m, a, bu, deck, players5);
 			else if (numPlayers == 6)
 				p->resolveDice(m, a, bu, deck, players6);
+			statOb->displayStats();
 			//moving
 			
 				moveEngine->move(p, m);
