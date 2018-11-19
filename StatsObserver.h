@@ -10,6 +10,6 @@ class StatsObserver {
 	StatsObserver();
 	~StatsObserver();
 
-
+	void displayStats();
 
 };

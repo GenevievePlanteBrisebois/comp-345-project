@@ -25,6 +25,14 @@ public:
 	bool verifyVictory(player* player);
 	bool verifyDeath(player* player);
 	void chooseMonster();
+
+	player getPlayer2(int index);
+	player getPlayer3(int index);
+	player getPlayer4(int index);
+	player getPlayer5(int index);
+	player getPlayer6(int index);
+
+	string getBorough(int position);
 };
 void setPlayerOrder2(player* o[2]);
 void setPlayerOrder3(player* o[3]);
@@ -32,9 +40,5 @@ void setPlayerOrder4(player* o[4]);
 void setPlayerOrder5(player* o[5]);
 void setPlayerOrder6(player* o[6]);
 
-player getPlayer2(int index);
-player getPlayer3(int index);
-player getPlayer4(int index);
-player getPlayer5(int index);
-player getPlayer6(int index);
+
 
