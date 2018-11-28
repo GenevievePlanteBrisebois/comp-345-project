@@ -98,6 +98,7 @@ void Move::move(player* player, Map* m) {
 		int answer;
 		cin >> answer;
 
+		
 		if (answer == 1) {
 			ob->notifyPlayerAction("Moving to Staten Island");
 			player->move("Staten Island", m);

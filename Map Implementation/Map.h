@@ -10,7 +10,7 @@
 	ID: 40010912
 */
 using namespace std;
-class Map
+class Map : public Borough
 {
 public:
 	Map(int V);
@@ -20,5 +20,6 @@ public:
 	void mapLoader(string filename);
 	void setBorough(int i, bool status, string playerName);
 	Borough *getBorough(int i);
+	void setBorough(int i, bool status);
 	~Map();
 };

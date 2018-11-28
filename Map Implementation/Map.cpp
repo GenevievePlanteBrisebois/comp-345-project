@@ -18,32 +18,7 @@ using std::string;
 int numNodes;
 vector<string> *adjList;
 
-//Borough * borough [11];
-
-//hard code of borough done by Genevieve Plante-Brisebois 40003112
-/*
-borough[0] = new Borough(false, "Staten Island", "");
-borough[1] = new Borough(false, "Staten Island", "");
-borough[2] = new Borough(false, "Bronx", "");
-borough[3] = new Borough(false, "Bronx", "");
-borough[4] = new Borough(false, "Queens", "");
-borough[5] = new Borough(false, "Queens", "");
-borough[6] = new Borough(false, "Brooklyn", "");
-borough[7] = new Borough(false, "Brooklyn", "");
-borough[8] = new Borough(false, "Lower Manhattan", "");
-borough[9] = new Borough(false, "Mid Manhattan", "");
-borough[10] = new Borough(false, "Upper Manhattan", "");
-*/
-/*
-Borough* Map::getBorough(int i) {
-	return borough[i];
-}
-
-void Map::setBorough(int i, bool status, string name) {
-	borough[i].setStatus(status);
-}
-*/
-
+Borough* borough [11];
 
 //Constructor
 //creation of map requires the number of nodes existing in the map.
@@ -51,8 +26,30 @@ Map::Map(int nodes)
 {
 	numNodes = nodes;
 	adjList = new vector<string>[nodes];
+
+	//hard code of borough done by Genevieve Plante-Brisebois 40003112
+
+	borough[0] = new Borough(false, "Staten Island", "");
+	borough[1] = new Borough(false, "Staten Island", "");
+	borough[2] = new Borough(false, "Bronx", "");
+	borough[3] = new Borough(false, "Bronx", "");
+	borough[4] = new Borough(false, "Queens", "");
+	borough[5] = new Borough(false, "Queens", "");
+	borough[6] = new Borough(false, "Brooklyn", "");
+	borough[7] = new Borough(false, "Brooklyn", "");
+	borough[8] = new Borough(false, "Lower Manhattan", "");
+	borough[9] = new Borough(false, "Mid Manhattan", "");
+	borough[10] = new Borough(false, "Upper Manhattan", "");
 }
 
+
+Borough* Map::getBorough(int i) {
+	return borough[i];
+}
+
+void Map::setBorough(int i, bool status) {
+	borough[i]->setBoroughStatus(status);
+}
 //Default constructor
 Map::Map() {
 }

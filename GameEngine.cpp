@@ -177,7 +177,7 @@ void GameEngine::LoadMap() {
 		count++;
 	}
 
-	m = m(count) //create the map object
+	m = new Map(11); //create the map object
 	m->mapLoader(chosenMap); //loads map here
 }
 GameEngine::~GameEngine() {
@@ -862,23 +862,23 @@ void SelectOrder(int max) {
 	
 	}
 
-	player GameEngine::getPlayer2(int index) {
+	player* GameEngine::getPlayer2(int index) {
 		return players2[index];
 	
 	}
-	player GameEngine::getPlayer3(int index) {
+	player* GameEngine::getPlayer3(int index) {
 		return players3[index];
 
 	}
-	player GameEngine::getPlayer4(int index) {
+	player* GameEngine::getPlayer4(int index) {
 		return players4[index];
 
 	}
-	player GameEngine::getPlayer5(int index) {
+	player* GameEngine::getPlayer5(int index) {
 		return players5[index];
 
 	}
-	player GameEngine::getPlayer6(int index) {
+	player* GameEngine::getPlayer6(int index) {
 		return players6[index];
 
 	}
