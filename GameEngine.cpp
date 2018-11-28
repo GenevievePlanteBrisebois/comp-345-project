@@ -892,7 +892,8 @@ void SelectOrder(int max) {
 	}
 	
 	string GameEngine::getBorough(int position) {
-	Borough* b=	m->getBorough(position);
-	string name = b->getBName();
+		Borough* b=	m->getBorough(position);
+		string name = b->getBName();
+		return name;
 	
 	}

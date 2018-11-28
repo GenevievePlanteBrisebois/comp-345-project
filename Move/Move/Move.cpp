@@ -16,15 +16,15 @@ comp 345 fall 2018
 #include "../comp345-kingsOfNY/Map Implementation/Borough.h"
 #include "../comp345-kingsOfNY/Observer.h"
 
-Observer* ob;
+Observer* moveOb;
 Move::Move() {
-	ob = new Observer();
+	moveOb = new Observer();
 
 }
 
 Move::~Move() {
-	delete ob;
-	ob = NULL;
+	delete moveOb;
+	moveOb = NULL;
 }
 
 
@@ -33,7 +33,7 @@ void Move::move(player* player, Map* m) {
 	if (m->getBorough(8)->getBoroughStatus() == false && m->getBorough(9)->getBoroughStatus() == false && m->getBorough(10)->getBoroughStatus() == false) {
 		cout << "Manhattan is empty and as such you are moving to Lower Manhattan" << endl;
 		player->move(m->getBorough(8)->getBName(), m);
-		ob->notifyPlayerAction("Player moving to Manhattan");
+		moveOb->notifyPlayerAction("Player moving to Manhattan");
 	}
 	//case player is in manhattan and has been attacked
 	else if (player->getPosition() == 8 && player->getMonster()->getCountAttack()!=0) {
@@ -50,19 +50,19 @@ void Move::move(player* player, Map* m) {
 			cin >> answer;
 
 			if (answer == 1) {
-				ob->notifyPlayerAction("Moving to Staten Island");
+				moveOb->notifyPlayerAction("Moving to Staten Island");
 				player->move("Staten Island", m);
 			}
 			else if (answer == 2) {
-				ob->notifyPlayerAction("Moving to Bronx");
+				moveOb->notifyPlayerAction("Moving to Bronx");
 				player->move("Bronx", m);
 			}
 			else if (answer == 3) {
-				ob->notifyPlayerAction("Moving to Queens");
+				moveOb->notifyPlayerAction("Moving to Queens");
 				player->move("Queens", m);
 			}
 			else if (answer == 4) {
-				ob->notifyPlayerAction("Moving to Brooklyn");
+				moveOb->notifyPlayerAction("Moving to Brooklyn");
 				player->move("Brooklyn", m);
 			}
 		}
@@ -100,19 +100,19 @@ void Move::move(player* player, Map* m) {
 
 		
 		if (answer == 1) {
-			ob->notifyPlayerAction("Moving to Staten Island");
+			moveOb->notifyPlayerAction("Moving to Staten Island");
 			player->move("Staten Island", m);
 		}
 		else if (answer == 2) {
-			ob->notifyPlayerAction("Moving to Bronx");
+			moveOb->notifyPlayerAction("Moving to Bronx");
 			player->move("Bronx", m);
 		}
 		else if (answer == 3) {
-			ob->notifyPlayerAction("Moving to Queens");
+			moveOb->notifyPlayerAction("Moving to Queens");
 			player->move("Queens", m);
 		}
 		else if (answer == 4) {
-			ob->notifyPlayerAction("Moving to Brooklyn");
+			moveOb->notifyPlayerAction("Moving to Brooklyn");
 			player->move("Brooklyn", m);
 		}
 		else if (answer == 5) {
