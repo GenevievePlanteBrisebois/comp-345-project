@@ -9,7 +9,7 @@ COMP 345 fall 2018
 #include "StatsObserver.h"
 GameEngine s;
 
-int numPlayers;
+int stats_numPlayers;
 player* stats_p1;
 player* stats_p2;
 player* stats_p3;
@@ -31,10 +31,10 @@ StatsObserver::~StatsObserver() {
 
 
 void StatsObserver::displayStats() {
-	numPlayers = s.GetNumPlayers();
+	stats_numPlayers = s.GetNumPlayers();
 	
 	//get the stats for the number of players
-	if (numPlayers == 2) {
+	if (stats_numPlayers == 2) {
 		stats_p1 = s.getPlayer2(0);
 		stats_p2 = s.getPlayer2(1);
 		string location1;
@@ -50,7 +50,7 @@ void StatsObserver::displayStats() {
 		cout << "Player 2 :" << stats_p2->getMonster()->getName() << " has " << stats_p2->getMonster()->getHealth() << " and " << stats_p2->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location2 << endl;
 
 	}
-	else if (numPlayers == 3) {
+	else if (stats_numPlayers == 3) {
 		stats_p1 = s.getPlayer3(0);
 		stats_p2 = s.getPlayer3(1);
 		stats_p3 = s.getPlayer3(2);
@@ -70,7 +70,7 @@ void StatsObserver::displayStats() {
 		cout << "Player 3 :" << stats_p3->getMonster()->getName() << " has " << stats_p3->getMonster()->getHealth() << " and " << stats_p3->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location3 << endl;
 
 	}
-	else if (numPlayers == 4) {
+	else if (stats_numPlayers == 4) {
 		stats_p1 = s.getPlayer4(0);
 		stats_p2 = s.getPlayer4(1);
 		stats_p3 = s.getPlayer4(2);
@@ -94,7 +94,7 @@ void StatsObserver::displayStats() {
 		cout << "Player 4 :" << stats_p4->getMonster()->getName() << " has " << stats_p4->getMonster()->getHealth() << " and " << stats_p4->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location4 << endl;
 
 	}
-	else if (numPlayers == 5) {
+	else if (stats_numPlayers == 5) {
 		stats_p1 = s.getPlayer5(0);
 		stats_p2 = s.getPlayer5(1);
 		stats_p3 = s.getPlayer5(2);
@@ -122,7 +122,7 @@ void StatsObserver::displayStats() {
 		cout << "Player 5 :" << stats_p5->getMonster()->getName() << " has " << stats_p5->getMonster()->getHealth() << " and " << stats_p5->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location5 << endl;
 
 	}
-	else if (numPlayers == 6) {
+	else if (stats_numPlayers == 6) {
 		stats_p1 = s.getPlayer6(0);
 		stats_p2 = s.getPlayer6(1);
 		stats_p3 = s.getPlayer6(2);
