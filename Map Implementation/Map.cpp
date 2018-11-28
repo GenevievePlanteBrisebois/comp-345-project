@@ -47,8 +47,9 @@ Borough* Map::getBorough(int i) {
 	return borough[i];
 }
 
-void Map::setBorough(int i, bool status) {
+void Map::setBorough(int i, bool status, string playerName) {
 	borough[i]->setBoroughStatus(status);
+	borough[i]->setPlayerName(playerName);
 }
 //Default constructor
 Map::Map() {

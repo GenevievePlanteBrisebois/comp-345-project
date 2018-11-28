@@ -20,6 +20,6 @@ public:
 	void mapLoader(string filename);
 	void setBorough(int i, bool status, string playerName);
 	Borough *getBorough(int i);
-	void setBorough(int i, bool status);
+	//void setBorough(int i, bool status);
 	~Map();
 };
