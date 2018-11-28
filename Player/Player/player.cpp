@@ -50,6 +50,8 @@ player::player() {
 }
 
 player::~player(){
+	player_monster = NULL;
+	player_ob = NULL;
 	delete player_monster;
 	delete [] * player_tokens;
 	delete[] * player_cards;
