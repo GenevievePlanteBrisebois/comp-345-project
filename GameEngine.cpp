@@ -12,8 +12,7 @@
 #include "Move/Move/Move.h"
 #include "BuyCardEngine/BuyCardEngine/BuyCards.h"
 #include "..\comp345-kingsOfNY\Observer.h"
-#include "StatsObserver.h"
-
+#include "..\comp345-kingsOfNY\StatsObserver.h"
 
 #include <string>
 #include "GameEngine.h"
@@ -704,7 +703,7 @@ void SelectOrder(int max) {
 			cout << "Do you wish to buy a card? y/n" << endl;
 			string answer;
 			if (answer == "y") {
-				buyCards.buyCards(p);
+				buyCards->buyCards(p);
 			}
 			//verification if anyone died or if anyone has won
 			if (numPlayers == 2)
