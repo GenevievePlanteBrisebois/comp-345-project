@@ -691,19 +691,24 @@ void SelectOrder(int max) {
 
 
 			if (answer == "1") {
-				loop=p->move1("StatenIsland", m);
+				loop = p->move1("StatenIsland", m);
+				return false;
 			}
 			else if (answer == "2") {
 				loop = p->move1("Bronx", m);
+				return false;
+
 			}
 			else if (answer == "3") {
 				loop = p->move1("Queens", m);
-			
+				return false;
 			}
 			else if (answer == "4") {
 				loop = p->move1("Brooklyn", m);
+				return false;
 			}
-			
+			else
+				cout << "Please choose a valid option" << endl;
 			}
 
 		}
