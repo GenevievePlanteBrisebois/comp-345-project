@@ -49,6 +49,7 @@ BuyCards* buyCards = new BuyCards();
 
 //constructor for two players
 GameEngine::GameEngine(player* player1, player* player2) {
+
 	p1 = player1;
 	p2 = player2;
 
@@ -60,6 +61,7 @@ GameEngine::GameEngine(player* player1, player* player2) {
 
 //constructor for three players
 GameEngine::GameEngine(player* player1, player* player2, player* player3) {
+
 	p1 = player1;
 	p2 = player2;
 	p3 = player3;
@@ -71,6 +73,8 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3) {
 
 //constructor for four players
 GameEngine::GameEngine(player* player1, player* player2, player* player3, player* player4) {
+
+	
 	p1 = player1;
 	p2 = player2;
 	p3 = player3;
@@ -82,6 +86,8 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3, player
 
 //contructor for five players
 GameEngine::GameEngine(player* player1, player* player2, player* player3, player* player4, player* player5) {
+
+	
 	p1 = player1;
 	p2 = player2;
 	p3 = player3;
@@ -95,6 +101,7 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3, player
 
 //constructor for six players
 GameEngine::GameEngine(player* player1, player* player2, player* player3, player* player4, player* player5, player* player6) {
+	
 	p1 = player1;
 	p2 = player2;
 	p3 = player3;
@@ -112,40 +119,52 @@ GameEngine::GameEngine() {
 
 
 void GameEngine::SelectPlayers() {
-	player* p1 = new player();
-	player* p2 = new player();
-	player* p3 = new player();
-	player* p4 = new player();
-	player* p5 = new player();
-	player* p6 = new player();
-	int num;
+	p1 = new player();
+	p2 = new player();
+	p3 = new player();
+	p4 = new player();
+	p5 = new player();
+	p6 = new player();
 
+	int num;
 
 	cout << "Let us start the game." << endl;
 	cout << "Select number of players (2-6)" << endl;
 	cin >> num;
 	switch (num) {
 	case 2:
+	
+	
+
 		GameEngine(p1, p2);
 		
 		break;
 	case 3:
+	
+
 		//creates three players
 		GameEngine(p1, p2, p3);
 	
 		break;
 
 	case 4:
+	
+
 		//creates four players
 		GameEngine(p1, p2, p3, p4);
 	
 		break;
 	case 5:
+	
+	
+
 		//creates five players
 		GameEngine(p1, p2, p3, p4, p5);
 
 		break;
 	case 6:
+	
+
 		//creates six players
 		GameEngine(p1, p2, p3, p4, p5, p6);
 		
