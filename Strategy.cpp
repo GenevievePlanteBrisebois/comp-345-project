@@ -57,7 +57,7 @@ void Aggressive::rollDice() {
 				cout << "Do you wish to reroll dice " << j << " y/n ?";
 				//string answer;
 				//cin >> answer;
-				if (dices[j].getDiceFace == "Attack" || dices[j].getDiceFace()=="Destruction") {
+				if (dices[j].getDiceFace() == "Attack" || dices[j].getDiceFace()=="Destruction") {
 					break;
 				}
 				else {
