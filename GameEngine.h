@@ -19,7 +19,6 @@ public:
 	void BuildBuildings();
 	void BuildTokens();
 
-
 	void mainLoop();
 	bool loop(player* player, int turn);
 	bool verifyVictory(player* player);

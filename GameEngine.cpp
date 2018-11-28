@@ -37,6 +37,7 @@ player* players5[5];
 player* players6[6];
 Observer* ob;
 StatsObserver* statOb = new StatsObserver();
+Monsters* a[6];
 
 Map* m;
 
@@ -108,6 +109,7 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3, player
 GameEngine::GameEngine() {
 	//default constructor
 }
+
 
 void GameEngine::SelectPlayers() {
 	player* p1 = new player();
@@ -193,6 +195,8 @@ GameEngine::~GameEngine() {
 	buyCards = NULL;
 	ob = NULL;
 	statOb = NULL;
+	
+	delete[]  * a;
 	delete[] * players2;
 	delete[] * players3;
 	delete[] * players4;
@@ -482,6 +486,7 @@ void SelectOrder(int max) {
 				Monsters* monsterChosen = new Monsters(chosen);
 				//active.addActive(monsterChosen);
 				players2[i]->setMonster(monsterChosen);
+				a[i] = monsterChosen;
 
 			}
 			break;
@@ -497,6 +502,7 @@ void SelectOrder(int max) {
 				Monsters* monsterChosen = new Monsters(chosen);
 				//active.addActive(monsterChosen);
 				players3[i]->setMonster(monsterChosen);
+				a[i] = monsterChosen;
 			}
 			break;
 		case 4:
@@ -511,6 +517,7 @@ void SelectOrder(int max) {
 				Monsters* monsterChosen = new Monsters(chosen);
 				//active.addActive(monsterChosen);
 				players4[i]->setMonster(monsterChosen);
+				a[i] = monsterChosen;
 			}
 			break;
 		case 5:
@@ -525,6 +532,7 @@ void SelectOrder(int max) {
 				Monsters* monsterChosen = new Monsters(chosen);
 				//active.addActive(monsterChosen);
 				players5[i]->setMonster(monsterChosen);
+				a[i] = monsterChosen;
 			}
 			break;
 		case 6:
@@ -539,6 +547,7 @@ void SelectOrder(int max) {
 				Monsters* monsterChosen = new Monsters(chosen);
 				//active.addActive(monsterChosen);
 				players6[i]->setMonster(monsterChosen);
+				a[i] = monsterChosen;
 			}
 			break;
 		}
