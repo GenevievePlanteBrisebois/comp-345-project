@@ -8,40 +8,40 @@
 #include "../comp345-kingsOfNY/Observer.h"
 
 using namespace std;
-Dice* dices = new Dice[6];
-Observer* ob;
+Dice* strat_dices = new Dice[6];
+Observer* strat_ob;
 
 Aggressive::Aggressive() {
-	ob = new Observer();
+	strat_ob = new Observer();
 }
 Aggressive::~Aggressive() {
-	delete ob;
-	ob = NULL;
+	delete strat_ob;
+	strat_ob = NULL;
 }
 
 //Rolling the dice for aggressive: 
 //check if attack/destruction appears 4 times.
 //If not, then reroll.
 void Aggressive::rollDice() {
-	ob->notifyPlayerAction("Aggressive Player: Rolling Dice");
+	strat_ob->notifyPlayerAction("Aggressive Player: Rolling Dice");
 	int count = 0;
 	cout << "First Roll of the dices" << endl;
 
 	for (int i = 0; i < 6; i++) {
 		int face = rand() % 5;
 		cout << "Dice " << i << ":  " << endl;
-		dices[i].rollDice(face);
+		strat_dices[i].rollDice(face);
 	}
 
 	/*
 	for loops in order to reroll up to two times.
 	*/
 	for (int i = 0; i < 2; i++) {
-		ob->notifyPlayerAction("Aggressive Bot: Rerolling dice");
+		strat_ob->notifyPlayerAction("Aggressive Bot: Rerolling dice");
 		cout << "Do you wish to reroll?" << endl;
 		
 		for (int i = 0; i < 6; i++) {
-			if (dices[i].getDiceFace() == "Attack" || dices[i].getDiceFace() == "Destruction"){
+			if (strat_dices[i].getDiceFace() == "Attack" || strat_dices[i].getDiceFace() == "Destruction"){
 				count++;
 			}
 		}
@@ -57,12 +57,12 @@ void Aggressive::rollDice() {
 				cout << "Do you wish to reroll dice " << j << " y/n ?";
 				//string answer;
 				//cin >> answer;
-				if (dices[j].getDiceFace() == "Attack" || dices[j].getDiceFace()=="Destruction") {
+				if (strat_dices[j].getDiceFace() == "Attack" || strat_dices[j].getDiceFace()=="Destruction") {
 					break;
 				}
 				else {
 					int face2 = rand() % 5;
-					dices[j].rollDice(face2);
+					strat_dices[j].rollDice(face2);
 				}
 			}
 
@@ -71,7 +71,7 @@ void Aggressive::rollDice() {
 				cout << "After final rolling of the dices these are your dices:" << endl;
 
 				for (int j = 0; j < 6; j++) {
-					cout << dices[j].getDiceFace() << endl;
+					cout << strat_dices[j].getDiceFace() << endl;
 				}
 
 			}
@@ -81,7 +81,7 @@ void Aggressive::rollDice() {
 				cout << "After rolling for a second time these are your dices:" << endl;
 
 				for (int j = 0; j < 6; j++) {
-					cout << dices[j].getDiceFace() << endl;
+					cout << strat_dices[j].getDiceFace() << endl;
 				}
 				cout << "You can still reroll your dices one time. " << endl;
 			}
@@ -93,32 +93,32 @@ void Aggressive::rollDice() {
 }
 
 void Aggressive::resolveDice() {
-	ob->notifyPlayerAction("Aggressive player resolving Dice");
+	strat_ob->notifyPlayerAction("Aggressive player resolving Dice");
 }
 
 void Aggressive::move() {
-	ob->notifyPlayerAction("Aggressive player moving");
+	strat_ob->notifyPlayerAction("Aggressive player moving");
 }
 
 void Aggressive::buyCards() {
-	ob->notifyPlayerAction("Aggressive player buying cards");
+	strat_ob->notifyPlayerAction("Aggressive player buying cards");
 }
 
 
 void Moderate::rollDice() {
-	ob->notifyPlayerAction("Moderate player rolling dice");
+	strat_ob->notifyPlayerAction("Moderate player rolling dice");
 }
 
 void Moderate::resolveDice() {
-	ob->notifyPlayerAction("Moderate player resolving dice");
+	strat_ob->notifyPlayerAction("Moderate player resolving dice");
 }
 
 void Moderate::move() {
-	ob->notifyPlayerAction("Moderate player moving");
+	strat_ob->notifyPlayerAction("Moderate player moving");
 }
 
 void Moderate::buyCards() {
-	ob->notifyPlayerAction("Moderate player buying cards");
+	strat_ob->notifyPlayerAction("Moderate player buying cards");
 }
 
 
