@@ -4,7 +4,7 @@
 using namespace std;
 
 int playerNum; 
-int numPlayers;
+int numberOfPlayers;
 void Observer::notifyPlayerNumber(int num) {
 	cout << "Player Number: " << num << endl;
 	setPlayerNum(num);
@@ -27,6 +27,6 @@ void Observer::notifyNumberOfPlayers(int i) {
 }
 
 void Observer::setNumPlayers(int num) {
-	numPlayers = num;
+	numberOfPlayers = num;
 }
 
