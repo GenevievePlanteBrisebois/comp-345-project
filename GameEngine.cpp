@@ -54,8 +54,12 @@ GameEngine::GameEngine(player* player1, player* player2) {
 	p2 = player2;
 
 	//create an array of players
-	players2[2] = new player();
+	//players2[2] = new player();
 	ob = new Observer();
+
+	//players2[0] = p1;
+	//players2[1] = p2;
+	numPlayers = 2;
 
 }
 
@@ -171,7 +175,7 @@ void GameEngine::SelectPlayers() {
 		break;
 	}
 	SetNumPlayers(num);
-	ob->notifyNumberOfPlayers(num);
+	//ob->notifyNumberOfPlayers(num);
 
 }
 
@@ -188,7 +192,7 @@ void GameEngine::LoadMap() {
 	int count=0;
 
 	cout << "Please select one of the following map files: " << endl;
-	
+	cout << "map.txt" << endl;
 	cin >> chosenMap;
 	//pick map.txt
 	//read in the file to get number of lines
@@ -494,8 +498,8 @@ void SelectOrder(int max) {
 		switch (numPlayers) {
 		case 2:
 			for (int i = 0; i < 2; i++) {
-				ob->notifyPlayerAction("Choosing monsters");
-				ob->notifyPlayerNumber(i);
+				//ob->notifyPlayerAction("Choosing monsters");
+				//ob->notifyPlayerNumber(i);
 				cout << "Monsters to choose from are: " << endl;
 				cout << "Mantis \nCaptain Fish \nDragonis \nKong \nSheriff\nRob" << endl;
 

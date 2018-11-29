@@ -163,25 +163,32 @@ Units* brooklyn_units[6];
 
 	//suffle method for to mix the buildings before we put them on the board
 	void BU::shuffle() {
-		Buildings* temp[45];
+		Buildings* temp[45] ;
 		bool shuffle = true;
 		bool innerLoop = true;
 		int k = 0;
 		int i;
-		bool occupied, complete;
+		bool occupied=false;
+		bool complete=true;
+		//putting all temp to null
+		for (int i = 0; i < 45; i++){
+			temp[i] = NULL;
+		}
 		//make a temporary array that will store the suffled values
 		while (shuffle = true) {
-			i = rand() % 44;
-			for (int j = 0; j < 45; j++) {
-				if (temp[j] != nullptr) {
+			
+			while (k < 45) {
+				i = rand() % 44;
+				if (temp[i] != NULL) {
 					occupied = true;
 				}
 				else
 					occupied = false;
-			}
-			if (occupied == false) {
-				temp[i] = start_set[k];
-				k = k + 1;
+				if (occupied == false) {
+					temp[i] = start_set[k];
+					k = k + 1;
+				}
+
 			}
 
 			//verify if the whole temp array has been filled
@@ -194,6 +201,8 @@ Units* brooklyn_units[6];
 				complete = true;
 				shuffle = false;
 			}
+			//resetting complete to true so that if it goes back to verification it has a chance of being true;
+			complete = true;
 
 		}
 		//replace the order of the cards in the regular deck by the cards in the temp 
