@@ -175,10 +175,10 @@ Units* brooklyn_units[6];
 			temp[i] = NULL;
 		}
 		//make a temporary array that will store the suffled values
-		while (shuffle = true) {
+		while (shuffle == true) {
 			
 			while (k < 45) {
-				i = rand() % 44;
+				i = rand() % 45;
 				if (temp[i] != NULL) {
 					occupied = true;
 				}
@@ -210,7 +210,7 @@ Units* brooklyn_units[6];
 			start_set[j] = temp[j];
 		}
 
-		delete[] * temp;
+		
 		
 		//loops each of the length of each array. it will divie up the shuffled array of buildings per area. 
 		//guarentees that each game will have a different repartition of their content.the burrough of manhattan have 7
@@ -252,8 +252,7 @@ Units* brooklyn_units[6];
 			j++;
 		}
 
-
-
+		
 
 	}
 	//method to build the deck of the buildings. the deck is not divided yet in the different borrough. the shuffle method is going to divide up the buildings

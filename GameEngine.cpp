@@ -70,7 +70,7 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3) {
 	p2 = player2;
 	p3 = player3;
 
-	players3[3] = new player();
+	//players3[3] = new player();
 	ob = new Observer();
 
 }
@@ -84,7 +84,7 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3, player
 	p3 = player3;
 	p4 = player4;
 
-	players4[4] = new player();
+	//players4[4] = new player();
 	ob = new Observer();
 }
 
@@ -98,7 +98,7 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3, player
 	p4 = player4;
 	p5 = player5;
 
-	players5[5] = new player();
+	//players5[5] = new player();
 	ob = new Observer();
 
 }
@@ -113,7 +113,7 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3, player
 	p5 = player5;
 	p6 = player6;
 
-	players6[6] = new player();
+	//players6[6] = new player();
 	ob = new Observer();
 }
 
