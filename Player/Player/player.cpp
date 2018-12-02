@@ -45,6 +45,7 @@ player::player() {
 	Cards* player_cards[10];
 	destruction_points = 0;
 	player_ob = new Observer();
+	position = NULL;
 
 	
 }
@@ -690,7 +691,7 @@ bool player::move1(string borough, Map* m) {
 	bool statusLM = m->getBorough(8)->getBoroughStatus();
 	bool statusMM = m->getBorough(9)->getBoroughStatus();
 	bool statusUM = m->getBorough(10)->getBoroughStatus();
-	bool isMoveSuccess;
+	bool isMoveSuccess=NULL;
 	//cases to move to or within manhattan
 	if (borough == "Lower Manhattan" && statusLM == false && statusMM == false && statusUM == false) {
 		//setting previous position to empty
@@ -719,7 +720,9 @@ bool player::move1(string borough, Map* m) {
 
 	//other boroughs
 	for (int i = 0; i < 8; i++) {
-		string name = m->getBorough(i)->getBName();
+		Borough * b = m->getBorough(i);
+		string name = b->getBName();
+		//string name = m->getBorough(i)->getBName();
 		bool status = m->getBorough(i)->getBoroughStatus();
 		
 		 if (borough == name && status == false) {
@@ -732,13 +735,17 @@ bool player::move1(string borough, Map* m) {
 			break;
 		
 		}
-		 else {
+		 else if(borough== name && status == true){
 		cout << "This borough is full. Choose another borough or stay in your current borough" << endl;
 		isMoveSuccess = false;
 
 		 }
 			
 	
+	}
+
+	if (isMoveSuccess == NULL) {
+		isMoveSuccess = false;
 	}
 
 	return isMoveSuccess;

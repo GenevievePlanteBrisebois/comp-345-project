@@ -187,22 +187,22 @@ int GameEngine::GetNumPlayers() {
 	return numPlayers;
 }
 void GameEngine::LoadMap() {
-	string chosenMap;
-	string line;
-	int count=0;
+	//string chosenMap;
+	//string line;
+	//int count=0;
 
-	cout << "Please select one of the following map files: " << endl;
-	cout << "map.txt" << endl;
-	cin >> chosenMap;
+	//cout << "Please select one of the following map files: " << endl;
+	//cout << "map.txt" << endl;
+	//cin >> chosenMap;
 	//pick map.txt
 	//read in the file to get number of lines
-	ifstream file(chosenMap);
-	while (getline(file, line)) {
-		count++;
-	}
+	//ifstream file(chosenMap);
+	//while (getline(file, line)) {
+		//count++;
+	//}
 
 	m = new Map(11); //create the map object
-	m->mapLoader(chosenMap); //loads map here
+	//m->mapLoader(chosenMap); //loads map here
 }
 GameEngine::~GameEngine() {
 	p1 = NULL;

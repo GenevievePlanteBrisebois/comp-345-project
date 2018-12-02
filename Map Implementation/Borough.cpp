@@ -57,5 +57,6 @@ return bStatus;
 }
 
 string Borough:: getBName(){
+	bName = bName;
 return bName;
 }

@@ -8,7 +8,7 @@ int main() {
 
 	s.SelectPlayers();
 	s.chooseMonster();
-	//s.LoadMap();
+	s.LoadMap();
 	s.BuildCards();
 	s.BuildBuildings();
 	s.BuildTokens();
