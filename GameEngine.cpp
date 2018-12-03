@@ -14,7 +14,7 @@
 #include "..\comp345-kingsOfNY\Observer.h"
 #include "..\comp345-kingsOfNY\StatsObserver.h"
 #include "..\comp345-kingsOfNY\PlayerObserver.h"
-
+#include "..\comp345-kingsOfNY\CardsObserver.h"
 #include <string>
 #include "GameEngine.h"
 #include <fstream>
@@ -40,7 +40,7 @@ player* players6[6];
 StatsObserver* statOb = new StatsObserver();
 Monsters* a[6];
 PlayerObserver* ob; 
-
+CardsObserver* card_ob = new CardsObserver();
 
 Map* m;
 
@@ -57,10 +57,7 @@ GameEngine::GameEngine(player* player1, player* player2) {
 	p2 = player2;
 
 	//create an array of players
-	//players2[2] = new player();
 	
-	//players2[0] = p1;
-	//players2[1] = p2;
 	numPlayers = 2;
 	ob = new PlayerObserver();
 
@@ -150,11 +147,7 @@ void GameEngine::SelectPlayers() {
 	cin >> num;
 	switch (num) {
 	case 2:
-	
-	
-
 		game=GameEngine(p1, p2);
-		
 		break;
 	case 3:
 	
@@ -217,6 +210,8 @@ GameEngine::~GameEngine() {
 	buyCards = NULL;
 	ob = NULL;
 	statOb = NULL;
+	card_ob = NULL;
+
 	
 	delete[]  * a;
 	delete[] * players2;
@@ -237,6 +232,7 @@ GameEngine::~GameEngine() {
 	delete buyCards;
 	delete ob;
 	delete statOb;
+	delete card_ob;
 }
 //create the cards
 void GameEngine::BuildCards() {

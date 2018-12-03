@@ -1,14 +1,14 @@
 #include "CardsObserver.h"
 #include <iostream>
 
-void CardsObserver::CardUsed(string card) {
+void CardsObserver::notifyCardUsed(string card) {
 	cout << "You bought: " << card << endl;
 }
 
-void  CardsObserver::CardEffect(string effect) {
+void  CardsObserver::notifyCardEffect(string effect) {
 	cout << effect << endl;
 }
 
-void CardsObserver::CardBought(string cardbought) {
-
+void CardsObserver::notifyCardBought(string cardbought) {
+	cout << "You bought: " << cardbought;
 }

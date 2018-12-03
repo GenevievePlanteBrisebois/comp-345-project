@@ -15,7 +15,7 @@
 #include "../comp345-kingsOfNY/Map Implementation/Map.h"
 #include "../comp345-kingsOfNY/Map Implementation/Borough.h"
 #include "../comp345-kingsOfNY/Observer.h"
-
+#include "../comp345-kingsOfNY/CardsObserver.h"
 #include "..\comp345-kingsOfNY\PlayerObserver.h"
 
 
@@ -45,6 +45,7 @@ PlayerObserver* player_ob;
 //Observer* player_ob;
 DiceObserver *dice_ob;
 //constructors and destructors
+CardsObserver* cards_obser = new CardsObserver();
 
 player::player() {
 	player_monster = new Monsters();
@@ -679,7 +680,7 @@ void player::useCard(Cards* a) {
 			break;
 		}
 	}
-
+	cards_obser->notifyCardUsed(name);
 
 }
 
