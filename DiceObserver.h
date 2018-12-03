@@ -22,7 +22,7 @@ public:
 	~DiceObserver();
 
 	void roll_cout(string face, int i);
-
+	void roll_order(string face);
 };
 
 

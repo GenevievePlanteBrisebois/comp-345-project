@@ -8,6 +8,8 @@ int main() {
 
 	s.SelectPlayers();
 	s.chooseMonster();
+	int first = s.SelectFirst();
+	s.SelectOrder(first);
 	s.LoadMap();
 	s.BuildCards();
 	s.BuildBuildings();

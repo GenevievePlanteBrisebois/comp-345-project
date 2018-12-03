@@ -32,6 +32,10 @@ public:
 	player* getPlayer6(int index);
 
 	string getBorough(int position);
+
+
+	int SelectFirst();
+	void SelectOrder(int max);
 };
 void setPlayerOrder2(player* o[2]);
 void setPlayerOrder3(player* o[3]);
