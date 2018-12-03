@@ -28,10 +28,11 @@ Dice::Dice()
 
 
 
-void Dice::rollDice(int faceNum) {
+string Dice::rollDice(int faceNum) {
 
-	cout << "You rolled: " << faceList[faceNum] << endl;
+	
 	setDiceFace(faceList[faceNum]);
+	return faceList[faceNum];
 
 }
 

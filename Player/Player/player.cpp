@@ -15,7 +15,7 @@
 #include "../comp345-kingsOfNY/Map Implementation/Map.h"
 #include "../comp345-kingsOfNY/Map Implementation/Borough.h"
 #include "../comp345-kingsOfNY/Observer.h"
-
+#include "../comp345-kingsOfNY/DiceObserver.h"
 using namespace std;
 
 //starting to write the player methods
@@ -37,6 +37,7 @@ int position;
 
 //observer
 Observer* player_ob;
+DiceObserver *dice_ob;
 //constructors and destructors
 
 player::player() {
@@ -147,11 +148,14 @@ void player::rollDice() {
 	player_ob->notifyPlayerAction("Rolling Dice");
 
 	cout << "First Roll of the dices" << endl;
-
+	string face_d;
 	for (int i = 0; i < 6; i++) {
+		
 		int face = rand() % 6;
-		cout << "Dice "<< i <<":  "<< endl;
-		dices[i].rollDice(face);
+		face_d=dices[i].rollDice(face);
+		//call to observer to cout the information
+		dice_ob->roll_cout(face_d, i);
+
 	}
 
 	/*
@@ -174,8 +178,9 @@ void player::rollDice() {
 				cin >> answer;
 				if (answer == "y") {
 					int face2 = rand() % 6;
-					dices[j]. rollDice(face2);
-				
+					face_d = dices[i].rollDice(face2);
+					//call to observer to cout the information
+					dice_ob->roll_cout(face_d, i);
 				}	
 			}
 
