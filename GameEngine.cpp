@@ -579,7 +579,7 @@ void SelectOrder(int max) {
 	bool GameEngine::verifyVictory(player* player) {
 	int vp=	player->getMonster()->getVictoryPoint();
 	bool victory;
-	bool onlySurvivor;
+	bool onlySurvivor=false;
 	bool dead;
 	int numOfDead = 0;
 	//cases depending on the number of players to see if the player is the only survivor
