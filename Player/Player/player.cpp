@@ -42,14 +42,12 @@ int position;
 //observer
 
 PlayerObserver* player_ob;
-Observer* player_ob;
+//Observer* player_ob;
 DiceObserver *dice_ob;
 //constructors and destructors
 
 player::player() {
 	player_monster = new Monsters();
-	Tokens* player_tokens[20];
-	Cards* player_cards[10];
 	destruction_points = 0;
 	player_ob = new PlayerObserver();
 	position = NULL;
@@ -111,7 +109,7 @@ int player::getPosition() {
 }
 Cards* player::getCard(Cards* a) {
 	string name = a->getName();
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < 10; i++) {
 		if (player_cards[i]->getName() == name) {
 			return player_cards[i];
 
@@ -568,7 +566,7 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 
 	bool keepGoing = true;
 
-	while (keepGoing = true) {
+	while (keepGoing == true) {
 		cout << "You have a total of :" << endl;
 		cout << energy << " Engergy" << endl;
 		cout << attack << " Attack" << endl;
