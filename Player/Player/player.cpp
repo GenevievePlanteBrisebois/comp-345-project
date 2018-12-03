@@ -15,6 +15,7 @@
 #include "../comp345-kingsOfNY/Map Implementation/Map.h"
 #include "../comp345-kingsOfNY/Map Implementation/Borough.h"
 #include "../comp345-kingsOfNY/Observer.h"
+#include "..\comp345-kingsOfNY\PlayerObserver.h"
 
 using namespace std;
 
@@ -36,7 +37,7 @@ int ouch;
 int position;
 
 //observer
-Observer* player_ob;
+PlayerObserver* player_ob;
 //constructors and destructors
 
 player::player() {
@@ -44,7 +45,7 @@ player::player() {
 	Tokens* player_tokens[20];
 	Cards* player_cards[10];
 	destruction_points = 0;
-	player_ob = new Observer();
+	player_ob = new PlayerObserver();
 	position = NULL;
 
 	
@@ -693,7 +694,7 @@ bool player::move1(string borough, Map* m) {
 	bool statusUM = m->getBorough(10)->getBoroughStatus();
 	bool isMoveSuccess=NULL;
 	//cases to move to or within manhattan
-	if (borough == "Lower Manhattan" && statusLM == false && statusMM == false && statusUM == false) {
+	if (borough == "LowerManhattan" && statusLM == false && statusMM == false && statusUM == false) {
 		//setting previous position to empty
 		if (position != NULL) {
 			m->setBorough(position, false, "");
@@ -703,13 +704,13 @@ bool player::move1(string borough, Map* m) {
 		m->setBorough(8, true, player_monster->getName());
 		isMoveSuccess = true;
 	}
-	else if (borough == "Mid Manhattan" && position == 8) {
+	else if (borough == "MidManhattan" && position == 8) {
 		m->setBorough(8, false, "");
 		m->setBorough(9, true, player_monster->getName());
 		position = 9;
 		isMoveSuccess = true;
 	}
-	else if (borough == "Upper Manhattan" && position == 9) {
+	else if (borough == "UpperManhattan" && position == 9) {
 		m->setBorough(9, false, "");
 		m->setBorough(10, true, player_monster->getName());
 		position = 10;
@@ -756,7 +757,7 @@ void player::move(string borough, Map* m) {
 	bool statusMM = m->getBorough(9)->getBoroughStatus();
 	bool statusUM = m->getBorough(10)->getBoroughStatus();
 	//cases to move to or within manhattan
-	if (borough == "Lower Manhattan" && statusLM == false && statusMM == false && statusUM == false) {
+	if (borough == "LowerManhattan" && statusLM == false && statusMM == false && statusUM == false) {
 		//setting previous position to empty
 		if (position != NULL) {
 			m->setBorough(position, false, "");
@@ -766,12 +767,12 @@ void player::move(string borough, Map* m) {
 		m->setBorough(8, true, player_monster->getName());
 		
 	}
-	else if (borough == "Mid Manhattan" && position == 8) {
+	else if (borough == "MidManhattan" && position == 8) {
 		m->setBorough(8, false, "");
 		m->setBorough(9, true, player_monster->getName());
 		position = 9;
 	}
-	else if (borough == "Upper Manhattan" && position == 9) {
+	else if (borough == "UpperManhattan" && position == 9) {
 		m->setBorough(9, false, "");
 		m->setBorough(10, true, player_monster->getName());
 		position = 10;
