@@ -46,8 +46,8 @@ void StatsObserver::displayStats() {
 		location2 = s.getBorough(stats_p2->getPosition());
 
 
-		cout << "Player 1 :" << stats_p1->getMonster()->getName() << " has " << stats_p1->getMonster()->getHealth() << " and " << stats_p1->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location1 << endl;
-		cout << "Player 2 :" << stats_p2->getMonster()->getName() << " has " << stats_p2->getMonster()->getHealth() << " and " << stats_p2->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location2 << endl;
+		cout << "Player 1 :" << stats_p1->getMonster()->getName() << " has " << stats_p1->getMonster()->getHealth() << " health and " << stats_p1->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location1 << endl;
+		cout << "Player 2 :" << stats_p2->getMonster()->getName() << " has " << stats_p2->getMonster()->getHealth() << " health and " << stats_p2->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location2 << endl;
 
 	}
 	else if (stats_numPlayers == 3) {
@@ -65,9 +65,9 @@ void StatsObserver::displayStats() {
 		location3 = s.getBorough(stats_p3->getPosition());
 
 
-		cout << "Player 1 :" << stats_p1->getMonster()->getName() << " has " << stats_p1->getMonster()->getHealth() << " and " << stats_p1->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location1 << endl;
-		cout << "Player 2 :" << stats_p2->getMonster()->getName() << " has " << stats_p2->getMonster()->getHealth() << " and " << stats_p2->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location2 << endl;
-		cout << "Player 3 :" << stats_p3->getMonster()->getName() << " has " << stats_p3->getMonster()->getHealth() << " and " << stats_p3->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location3 << endl;
+		cout << "Player 1 :" << stats_p1->getMonster()->getName() << " has " << stats_p1->getMonster()->getHealth() << " health  and " << stats_p1->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location1 << endl;
+		cout << "Player 2 :" << stats_p2->getMonster()->getName() << " has " << stats_p2->getMonster()->getHealth() << " health  and " << stats_p2->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location2 << endl;
+		cout << "Player 3 :" << stats_p3->getMonster()->getName() << " has " << stats_p3->getMonster()->getHealth() << " health  and " << stats_p3->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location3 << endl;
 
 	}
 	else if (stats_numPlayers == 4) {
@@ -88,10 +88,10 @@ void StatsObserver::displayStats() {
 		location4 = s.getBorough(stats_p4->getPosition());
 
 
-		cout << "Player 1 :" << stats_p1->getMonster()->getName() << " has " << stats_p1->getMonster()->getHealth() << " and " << stats_p1->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location1 << endl;
-		cout << "Player 2 :" << stats_p2->getMonster()->getName() << " has " << stats_p2->getMonster()->getHealth() << " and " << stats_p2->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location2 << endl;
-		cout << "Player 3 :" << stats_p3->getMonster()->getName() << " has " << stats_p3->getMonster()->getHealth() << " and " << stats_p3->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location3 << endl;
-		cout << "Player 4 :" << stats_p4->getMonster()->getName() << " has " << stats_p4->getMonster()->getHealth() << " and " << stats_p4->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location4 << endl;
+		cout << "Player 1 :" << stats_p1->getMonster()->getName() << " has " << stats_p1->getMonster()->getHealth() << " health  and " << stats_p1->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location1 << endl;
+		cout << "Player 2 :" << stats_p2->getMonster()->getName() << " has " << stats_p2->getMonster()->getHealth() << " health  and " << stats_p2->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location2 << endl;
+		cout << "Player 3 :" << stats_p3->getMonster()->getName() << " has " << stats_p3->getMonster()->getHealth() << " health  and " << stats_p3->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location3 << endl;
+		cout << "Player 4 :" << stats_p4->getMonster()->getName() << " has " << stats_p4->getMonster()->getHealth() << " health  and " << stats_p4->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location4 << endl;
 
 	}
 	else if (stats_numPlayers == 5) {
@@ -115,11 +115,11 @@ void StatsObserver::displayStats() {
 		location5 = s.getBorough(stats_p5->getPosition());
 
 
-		cout << "Player 1 :" << stats_p1->getMonster()->getName() << " has " << stats_p1->getMonster()->getHealth() << " and " << stats_p1->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location1 << endl;
-		cout << "Player 2 :" << stats_p2->getMonster()->getName() << " has " << stats_p2->getMonster()->getHealth() << " and " << stats_p2->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location2 << endl;
-		cout << "Player 3 :" << stats_p3->getMonster()->getName() << " has " << stats_p3->getMonster()->getHealth() << " and " << stats_p3->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location3 << endl;
-		cout << "Player 4 :" << stats_p4->getMonster()->getName() << " has " << stats_p4->getMonster()->getHealth() << " and " << stats_p4->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location4 << endl;
-		cout << "Player 5 :" << stats_p5->getMonster()->getName() << " has " << stats_p5->getMonster()->getHealth() << " and " << stats_p5->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location5 << endl;
+		cout << "Player 1 :" << stats_p1->getMonster()->getName() << " has " << stats_p1->getMonster()->getHealth() << " health  and " << stats_p1->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location1 << endl;
+		cout << "Player 2 :" << stats_p2->getMonster()->getName() << " has " << stats_p2->getMonster()->getHealth() << " health  and " << stats_p2->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location2 << endl;
+		cout << "Player 3 :" << stats_p3->getMonster()->getName() << " has " << stats_p3->getMonster()->getHealth() << " health  and " << stats_p3->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location3 << endl;
+		cout << "Player 4 :" << stats_p4->getMonster()->getName() << " has " << stats_p4->getMonster()->getHealth() << " health  and " << stats_p4->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location4 << endl;
+		cout << "Player 5 :" << stats_p5->getMonster()->getName() << " has " << stats_p5->getMonster()->getHealth() << " health  and " << stats_p5->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location5 << endl;
 
 	}
 	else if (stats_numPlayers == 6) {
@@ -145,12 +145,12 @@ void StatsObserver::displayStats() {
 		location5 = s.getBorough(stats_p5->getPosition());
 		location6 = s.getBorough(stats_p6->getPosition());
 
-		cout << "Player 1 :" << stats_p1->getMonster()->getName() << " has " << stats_p1->getMonster()->getHealth() << " and " << stats_p1->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location1 << endl;
-		cout << "Player 2 :" << stats_p2->getMonster()->getName() << " has " << stats_p2->getMonster()->getHealth() << " and " << stats_p2->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location2 << endl;
-		cout << "Player 3 :" << stats_p3->getMonster()->getName() << " has " << stats_p3->getMonster()->getHealth() << " and " << stats_p3->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location3 << endl;
-		cout << "Player 4 :" << stats_p4->getMonster()->getName() << " has " << stats_p4->getMonster()->getHealth() << " and " << stats_p4->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location4 << endl;
-		cout << "Player 5 :" << stats_p5->getMonster()->getName() << " has " << stats_p5->getMonster()->getHealth() << " and " << stats_p5->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location5 << endl;
-		cout << "Player 6 :" << stats_p6->getMonster()->getName() << " has " << stats_p6->getMonster()->getHealth() << " and " << stats_p6->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location6 << endl;
+		cout << "Player 1 :" << stats_p1->getMonster()->getName() << " has " << stats_p1->getMonster()->getHealth() << " health  and " << stats_p1->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location1 << endl;
+		cout << "Player 2 :" << stats_p2->getMonster()->getName() << " has " << stats_p2->getMonster()->getHealth() << " health  and " << stats_p2->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location2 << endl;
+		cout << "Player 3 :" << stats_p3->getMonster()->getName() << " has " << stats_p3->getMonster()->getHealth() << " health  and " << stats_p3->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location3 << endl;
+		cout << "Player 4 :" << stats_p4->getMonster()->getName() << " has " << stats_p4->getMonster()->getHealth() << " health  and " << stats_p4->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location4 << endl;
+		cout << "Player 5 :" << stats_p5->getMonster()->getName() << " has " << stats_p5->getMonster()->getHealth() << " health  and " << stats_p5->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location5 << endl;
+		cout << "Player 6 :" << stats_p6->getMonster()->getName() << " has " << stats_p6->getMonster()->getHealth() << " health  and " << stats_p6->getMonster()->getVictoryPoint() << "VictoryPoints. Located in " << location6 << endl;
 
 	
 	}

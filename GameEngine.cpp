@@ -14,6 +14,7 @@
 #include "..\comp345-kingsOfNY\Observer.h"
 #include "..\comp345-kingsOfNY\StatsObserver.h"
 #include "..\comp345-kingsOfNY\PlayerObserver.h"
+#include "DiceObserver.h"
 
 #include <string>
 #include "GameEngine.h"
@@ -40,7 +41,7 @@ player* players6[6];
 StatsObserver* statOb = new StatsObserver();
 Monsters* a[6];
 PlayerObserver* ob; 
-
+DiceObserver *dice_ob1;
 
 Map* m;
 
@@ -272,9 +273,9 @@ void GameEngine::BuildBuildings() {
 	bu->build_building_deck();
 	bu->shuffle(); //shuffle them
 }
-
+//use select first and then use the result of that in the select order function
 //function that checks which player rolls the most Attacks
-int SelectFirst() {
+int GameEngine:: SelectFirst() {
 	d = new Dice();
 	string face;
 	int temp1 = 0;
@@ -285,6 +286,7 @@ int SelectFirst() {
 		cout << "Player " << (i + 1) << "dice: ";
 		for (int j = 0; j < 8; j++) { //roll dice 8 times
 			roll = d->rollDice(rand() % 5);
+			dice_ob1->roll_order(roll);
 			face = d->getDiceFace();
 			if (face == "Attack") {
 				count++;
@@ -303,7 +305,7 @@ int SelectFirst() {
 	}
 
 //selects the order of the players based on which player starts
-void SelectOrder(int max) {
+void GameEngine::SelectOrder(int max) {
 	cout << "Here is now the order of the players: " << endl;
 
 	switch (numPlayers) {
@@ -497,6 +499,8 @@ void SelectOrder(int max) {
 		//different cases for different number of players
 		switch (numPlayers) {
 		case 2:
+			players2[0] = p1;
+			players2[1] = p2;
 			for (int i = 0; i < 2; i++) {
 				//ob->notifyPlayerAction("Choosing monsters");
 				//ob->notifyPlayerNumber(i);
@@ -508,12 +512,16 @@ void SelectOrder(int max) {
 				//create a new monster with what the player picked
 				Monsters* monsterChosen = new Monsters(chosen);
 				//active.addActive(monsterChosen);
+				
 				players2[i]->setMonster(monsterChosen);
 				a[i] = monsterChosen;
 
 			}
 			break;
 		case 3:
+			players3[0] = p1;
+			players3[1] = p2; 
+			players3[2] = p3;
 			for (int i = 0; i < 3; i++) {
 				ob->notifyPlayerAction("Choosing monsters");
 				ob->notifyPlayerNumber(i);
@@ -529,6 +537,11 @@ void SelectOrder(int max) {
 			}
 			break;
 		case 4:
+
+			players4[0] = p1;
+			players4[1] = p2;
+			players4[2] = p3;
+			players4[3] = p4;
 			for (int i = 0; i < 4; i++) {
 				ob->notifyPlayerAction("Choosing monsters");
 				ob->notifyPlayerNumber(i);
@@ -544,6 +557,13 @@ void SelectOrder(int max) {
 			}
 			break;
 		case 5:
+			players5[0] = p1;
+			players5[1] = p2;
+			players5[2] = p3;
+			players5[3] = p4;
+			players5[4] = p5;
+		
+
 			for (int i = 0; i < 5; i++) {
 				ob->notifyPlayerAction("Choosing monsters");
 				ob->notifyPlayerNumber(i);
@@ -559,6 +579,13 @@ void SelectOrder(int max) {
 			}
 			break;
 		case 6:
+			players6[0] = p1;
+			players6[1] = p2;
+			players6[2] = p3;
+			players6[3] = p4;
+			players6[4] = p5; 
+			players6[5] = p6;
+
 			for (int i = 0; i < 6; i++) {
 				ob->notifyPlayerAction("Choosing monsters");
 				ob->notifyPlayerNumber(i);

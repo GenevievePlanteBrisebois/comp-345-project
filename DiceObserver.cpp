@@ -31,3 +31,8 @@ void DiceObserver::roll_cout(string face, int i) {
 	cout << "Rolling dice: " << i << endl;
 	cout << "You have rolled: " << face << endl;
 }
+
+void DiceObserver::roll_order(string face) {
+
+	cout << face << endl;
+}
