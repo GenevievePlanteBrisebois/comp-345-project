@@ -11,7 +11,7 @@ private:
 public:
 	Dice();
 	~Dice();
-	void rollDice(int faceNum);
+	string rollDice(int faceNum);
 	void setDiceFace(string chosenFace);
 	string getDiceFace();
 };

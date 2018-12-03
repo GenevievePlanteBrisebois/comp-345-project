@@ -674,9 +674,12 @@ void SelectOrder(int max) {
 
 	//returns false if victory not obtained
 	bool GameEngine::loop(player* p, int turn) {
+		cout << "It is the player " << p->getMonster()->getName() << " playing his turn. " << endl;
 		//if the player is dead it will exit the loop right away and move on to the next player. 
 		if (verifyDeath(p) == true) {
 		 bool dead = false;
+		 
+		 cout << "Sorry you are dead. Going to the next player" << endl;
 		 return dead;
 		}
 		//place the players on the map if it is the first turn. 
