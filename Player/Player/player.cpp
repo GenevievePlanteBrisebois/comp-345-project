@@ -562,7 +562,7 @@ void player::resolveDice(Map* m, Monsters * a[], BU* bu, Cards_Deck*  cards, pla
 
 	bool keepGoing = true;
 
-	while (keepGoing = true) {
+	while (keepGoing == true) {
 		cout << "You have a total of :" << endl;
 		cout << energy << " Engergy" << endl;
 		cout << attack << " Attack" << endl;

@@ -129,7 +129,7 @@ void GameEngine::SelectPlayers() {
 	p4 = new player();
 	p5 = new player();
 	p6 = new player();
-
+	GameEngine game;
 	int num;
 
 	cout << "Let us start the game." << endl;
@@ -140,14 +140,14 @@ void GameEngine::SelectPlayers() {
 	
 	
 
-		GameEngine(p1, p2);
+		game=GameEngine(p1, p2);
 		
 		break;
 	case 3:
 	
 
 		//creates three players
-		GameEngine(p1, p2, p3);
+		game=GameEngine(p1, p2, p3);
 	
 		break;
 
@@ -155,7 +155,7 @@ void GameEngine::SelectPlayers() {
 	
 
 		//creates four players
-		GameEngine(p1, p2, p3, p4);
+		game=GameEngine(p1, p2, p3, p4);
 	
 		break;
 	case 5:
@@ -163,14 +163,14 @@ void GameEngine::SelectPlayers() {
 	
 
 		//creates five players
-		GameEngine(p1, p2, p3, p4, p5);
+		game=GameEngine(p1, p2, p3, p4, p5);
 
 		break;
 	case 6:
 	
 
 		//creates six players
-		GameEngine(p1, p2, p3, p4, p5, p6);
+		game=GameEngine(p1, p2, p3, p4, p5, p6);
 		
 		break;
 	}
@@ -281,10 +281,11 @@ int SelectFirst() {
 	int temp1 = 0;
 	int max = 0;
 	int count = 0;
+	string roll;
 	for (int i = 0; i < numPlayers; i++) {
 		cout << "Player " << (i + 1) << "dice: ";
 		for (int j = 0; j < 8; j++) { //roll dice 8 times
-			d->rollDice(rand() % 5);
+			roll = d->rollDice(rand() % 5);
 			face = d->getDiceFace();
 			if (face == "Attack") {
 				count++;
@@ -836,12 +837,12 @@ void SelectOrder(int max) {
 		bool winner;
 		bool keepGoing = true;
 		int turn = 1;
-		while (keepGoing = true) {
+		while (keepGoing == true) {
 			//the different cases of different number of players
 			if (numPlayers == 2) {
 				for (int i = 0; i < 2; i++) {
 					winner = loop(players2[i], turn);//ake the loop for one players turn
-					if (winner = true) {
+					if (winner == true) {
 						keepGoing = false; //to stop the while loop and end the game
 						break; //to break the for loop
 					}
@@ -850,9 +851,11 @@ void SelectOrder(int max) {
 				turn++;//increment the turn. will also allow to track things if ever we want to keep track of it. 
 			}
 			else if (numPlayers == 3) {
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < 3; i++) {
+
 					winner = loop(players3[i], turn);
-					if (winner = true) {
+
+					if (winner == true) {
 						keepGoing = false;
 						break;
 					}
@@ -863,7 +866,7 @@ void SelectOrder(int max) {
 			else if (numPlayers == 4) {
 				for (int i = 0; i < 4; i++) {
 					winner = loop(players4[i], turn);
-					if (winner = true) {
+					if (winner == true) {
 						keepGoing = false;
 						break;
 					}
@@ -874,7 +877,7 @@ void SelectOrder(int max) {
 			else if (numPlayers == 5) {
 				for (int i = 0; i < 5; i++) {
 					winner = loop(players5[i], turn);
-					if (winner = true) {
+					if (winner == true) {
 						keepGoing = false;
 						break;
 					}
@@ -885,7 +888,7 @@ void SelectOrder(int max) {
 			else if (numPlayers == 6) {
 				for (int i = 0; i < 6; i++) {
 					winner = loop(players6[i], turn);
-					if (winner = true) {
+					if (winner == true) {
 						keepGoing = false;
 						break;
 					}
