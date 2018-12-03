@@ -59,11 +59,13 @@ player::player() {
 player::~player(){
 	player_monster = NULL;
 	player_ob = NULL;
-	delete player_monster;
+	cards_obser = NULL;
+	delete player_monster;	
 	delete [] * player_tokens;
 	delete[] * player_cards;
 	delete[]  dices;
 	delete player_ob;
+	delete cards_obser;
 }
 
 //setters and getters
@@ -323,6 +325,8 @@ void player::resolveOuch(int ouch, Map* m, player* players[], Cards_Deck* cards,
 		cout << "You get the Statue of Liberty Card" << endl;
 		Cards* super = cards->getSpecialCards(0);
 		buyCard(super);
+		cards_obser->notifyCardBought(super->getName());
+		cards_obser->notifyCardEffect(super->getEffect());
 		string player2 = super->getPlayerName();
 		//case no one had the card previously
 		if (player2 == "")
@@ -681,6 +685,7 @@ void player::useCard(Cards* a) {
 		}
 	}
 	cards_obser->notifyCardUsed(name);
+	cards_obser->notifyCardEffect(a->getEffect());
 
 }
 
@@ -693,6 +698,8 @@ void player::buyCard( Cards* a) {
 	else {
 		int energy_left = current_energy - cost;
 		cout << "You have bought card " << a->getName() << "for the cost of " << cost << " energy. You have " << energy_left << " energy left" << endl;
+		cards_obser->notifyCardBought(a->getName());
+		cards_obser->notifyCardEffect(a->getEffect());
 		this->setCard(a);
 	}
 }
