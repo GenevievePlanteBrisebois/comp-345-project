@@ -6,13 +6,14 @@
 #include "Strategy.h"
 #include "../comp345-kingsOfNY/Dice/Dice.h"
 #include "../comp345-kingsOfNY/Observer.h"
+#include "PlayerObserver.h"
 
 using namespace std;
 Dice* strat_dices = new Dice[6];
-Observer* strat_ob;
+PlayerObserver* strat_ob;
 
 Aggressive::Aggressive() {
-	strat_ob = new Observer();
+	strat_ob = new PlayerObserver();
 }
 Aggressive::~Aggressive() {
 	delete strat_ob;

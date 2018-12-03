@@ -15,10 +15,11 @@ comp 345 fall 2018
 #include "../comp345-kingsOfNY/Map Implementation/Map.h"
 #include "../comp345-kingsOfNY/Map Implementation/Borough.h"
 #include "../comp345-kingsOfNY/Observer.h"
+#include "../comp345-kingsOfNY/PlayerObserver.h"
 
-Observer* moveOb;
+PlayerObserver* moveOb;
 Move::Move() {
-	moveOb = new Observer();
+	moveOb = new PlayerObserver();
 
 }
 

@@ -13,6 +13,7 @@
 #include "BuyCardEngine/BuyCardEngine/BuyCards.h"
 #include "..\comp345-kingsOfNY\Observer.h"
 #include "..\comp345-kingsOfNY\StatsObserver.h"
+#include "..\comp345-kingsOfNY\PlayerObserver.h"
 
 #include <string>
 #include "GameEngine.h"
@@ -35,9 +36,11 @@ player* players3[3];
 player* players4[4];
 player* players5[5];
 player* players6[6];
-Observer* ob;
+//Observer* ob;
 StatsObserver* statOb = new StatsObserver();
 Monsters* a[6];
+PlayerObserver* ob; 
+
 
 Map* m;
 
@@ -55,11 +58,11 @@ GameEngine::GameEngine(player* player1, player* player2) {
 
 	//create an array of players
 	//players2[2] = new player();
-	ob = new Observer();
-
+	
 	//players2[0] = p1;
 	//players2[1] = p2;
 	numPlayers = 2;
+	ob = new PlayerObserver();
 
 }
 
@@ -71,7 +74,9 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3) {
 	p3 = player3;
 
 	//players3[3] = new player();
-	ob = new Observer();
+	numPlayers = 3;
+	ob = new PlayerObserver();
+
 
 }
 
@@ -83,9 +88,11 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3, player
 	p2 = player2;
 	p3 = player3;
 	p4 = player4;
-
+	numPlayers = 4;
 	//players4[4] = new player();
-	ob = new Observer();
+	//ob = new Observer();
+	ob = new PlayerObserver();
+
 }
 
 //contructor for five players
@@ -97,9 +104,12 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3, player
 	p3 = player3;
 	p4 = player4;
 	p5 = player5;
+	numPlayers = 5;
+	ob = new PlayerObserver();
+
 
 	//players5[5] = new player();
-	ob = new Observer();
+	//ob = new Observer();
 
 }
 
@@ -113,8 +123,11 @@ GameEngine::GameEngine(player* player1, player* player2, player* player3, player
 	p5 = player5;
 	p6 = player6;
 
+	numPlayers = 6;
+	ob = new PlayerObserver();
+
 	//players6[6] = new player();
-	ob = new Observer();
+	//ob = new Observer();
 }
 
 GameEngine::GameEngine() {
@@ -187,22 +200,8 @@ int GameEngine::GetNumPlayers() {
 	return numPlayers;
 }
 void GameEngine::LoadMap() {
-	//string chosenMap;
-	//string line;
-	//int count=0;
-
-	//cout << "Please select one of the following map files: " << endl;
-	//cout << "map.txt" << endl;
-	//cin >> chosenMap;
-	//pick map.txt
-	//read in the file to get number of lines
-	//ifstream file(chosenMap);
-	//while (getline(file, line)) {
-		//count++;
-	//}
-
 	m = new Map(11); //create the map object
-	//m->mapLoader(chosenMap); //loads map here
+	
 }
 GameEngine::~GameEngine() {
 	p1 = NULL;
@@ -502,9 +501,9 @@ void SelectOrder(int max) {
 				//ob->notifyPlayerAction("Choosing monsters");
 				//ob->notifyPlayerNumber(i);
 				cout << "Monsters to choose from are: " << endl;
-				cout << "Mantis \nCaptain Fish \nDragonis \nKong \nSheriff\nRob" << endl;
+				cout << "Mantis \tCaptain Fish \tDragonis \tKong \tSheriff\tRob\n" << endl;
 
-				cout << "Player " << i + 1 << "Please pick a monster.";
+				cout << "Player " << i + 1 << " Please pick a monster." << endl;
 				cin >> chosen;
 				//create a new monster with what the player picked
 				Monsters* monsterChosen = new Monsters(chosen);
